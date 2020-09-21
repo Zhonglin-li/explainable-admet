@@ -1,0 +1,39 @@
+<div class="container-fluid" class="text-center">
+    <div class="row nav">
+      <div class="col-md-2 navPic">
+        <img src="./assets/img/admeLogo.png" alt="" srcset="" />ADMET
+      </div>
+      <div class="col-md-10 navOpts">
+        <div class="row">
+          <a
+            class="col-md-3 navOpt1"
+            [attr.class1]="{ active: activeDom == 1 }"
+            (click)="addUnderline(1)"
+            [routerLink]="['/admet/home']"
+           
+          >
+            <i class="homeIcon"></i>Home
+          </a>
+          <a
+            class="col-md-4 navOpt2"
+            [attr.class1]="{ active: activeDom == 2 }"
+            (click)="addUnderline(2)"
+            [routerLink]="['/admet/prediction']"
+           
+          >
+            <i class="researchIcon"></i>ADMET Prediction
+          </a>
+  
+          <a
+            class="col-md-3 navOpt3"
+            [attr.class1]="{ active: activeDom == 3 }"
+            (click)="addUnderline(3)"
+            [routerLink]="['/admet/search']"
+           
+          >
+            <i class="searchIcon"></i>Search
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>

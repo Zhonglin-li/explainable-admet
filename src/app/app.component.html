@@ -1,0 +1,67 @@
+
+
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <app-jsme [elementId]="'structure-search'"
+                [width]="'95%'"
+                [height]="'400px'"
+                [showDemo]="true"
+      >loading JSME widget
+      </app-jsme>
+    </div>
+    <div class="col-md-2 content-center">
+      <button mat-raised-button color="accent" (click)="getJsmeSmiles()">
+        Get Smiles
+      </button>
+      <button mat-icon-button (click)="getJsmeSmiles()" color="warn">
+          <mat-icon>trending_flat</mat-icon>  
+      </button>
+    </div>
+    <div class="col-md-5">
+      <h5>SMILES:</h5>
+      <textarea class="smile-container" [value]="jsmeSmiles" #smiles></textarea>
+</div>  -->
+
+<!-- <div nz-row nzType="flex" nzJustify="center" nzAlign="middle">
+  <div nz-col nzSpan="9" >
+    <div style="float: right;">
+      jsme 插件
+      <app-jsme
+        [elementId]="'structure-search'"
+        #applet
+        [width]="'350px'"
+        [height]="'320px'"
+        [showDemo]="true"
+        [option]=""
+        >loading JSME widget
+      </app-jsme>
+      <button
+        nz-button
+        class="smile-button"
+        nzType="primary"
+        (click)="getJsmeSmiles()"
+      >
+        Get Smile
+      </button>
+      <br />
+      <textarea
+        rows="4"
+        nz-input
+        class="smile-textarea"
+        [value]="jsmeSmiles"
+        #textarea
+      ></textarea>
+    </div>
+  </div> -->
+
+<!-- <div id="jsme_container"></div>
+
+  <button type="button" onclick="alert(jsmeApplet.smiles())">Show SMILES</button>  -->
+
+<!-- <span>{{filter.mode|json}}</span> -->
+<!-- (ngModelChange)="changeMode(filter.mode)" -->
+<!-- <router-outlet></router-outlet>-->
+<!-- <button nz-button nzType="primary">Primary</button> -->
+<router-outlet></router-outlet>
+<!-- [(ngModel)]="item.mode" (onchange)='changeMode()' -->

@@ -1,0 +1,318 @@
+<div class="container" style="background-color: white; color: rgb(79, 5, 153)">
+  <br />
+  <form>
+    <div class="form-group row">
+      <!-- class="col-md-4 control-label1" -->
+      <label
+        for="searchSelect"
+        class="col-sm-3 col-form-label col-form-label-lg offset-1"
+        style="font-size: 23px"
+        >retrieval method:</label
+      >
+
+      <div class="col-sm-5">
+        <select
+          class="form-control form-control-lg"
+          id="searchSelect"
+          name="searchMode"
+          [(ngModel)]="search.mode"
+          style="color: rgb(79, 5, 153)"
+        >
+          <option [value]="item" *ngFor="let item of search.modes">
+            {{ item }}
+          </option>
+        </select>
+      </div>
+      <!-- <small id="searchModeHelp"  class="form-text text-muted col-sm-10 offset-1"
+      style="font-size: 17px;">Before calculation, users should prepare a valid SMILES or *.sdf file
+        in case of errors. Users can use ChemSAR to do this.</small
+      > -->
+    </div>
+    <!-- 搜索部分 -->
+    <!--  Property -->
+    <br/>
+    <br/>
+
+    <div
+      [style.display]="search.mode == 'Property' ? 'block' : 'none'"
+    >
+      <div class="form-group row">
+        <div class="col-sm-3 offset-1">
+          <select
+            class="form-control form-control-lg"
+            id="PropertySearch"
+            name="PropertySearchMode"
+            [(ngModel)]="acSearch.mode"
+            style="color: rgb(79, 5, 153)"
+          >
+            <option [value]="item" *ngFor="let item of acSearch.modes">
+              {{ item }}
+            </option>
+          </select>
+        </div>
+
+        <div
+          class="col-sm-5"
+          
+          [style.display]="acSearch.mode == item ? 'block' : 'none'" *ngFor="let item of acSearch.modes"
+        >
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            style="color: rgb(79, 5, 153)"
+            placeholder="Example:O=C([O-])C(C)c1ccc(cc1)CC(C)C"
+            name={{acSearch.mode}}
+          />
+          <small
+          id="acSearch1Help"
+          class="form-text text-muted col-sm-10 " style="font-size: 17px;"
+          >Please Write Correct SMILES in {{acSearch.mode}}</small
+        >
+        </div>
+        
+        <!-- <small
+          id="fliterform1Help"
+          class="form-text text-muted col-sm-10 offset-1"
+          style="font-size: 17px;"
+          >Some invalid descriptor values (e.g., NaN, infinity or a value too
+          large) will lead to errors.</small
+        > -->
+        <!-- <div
+          class="col-sm-7"
+          [style.display]="acSearch.mode == 'CAS RN' ? 'block' : 'none'"
+        >
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            style="color: rgb(79, 5, 153)"
+            placeholder="Example:15687-27-1"
+          />
+          <small
+          id="acSearch2Help"
+          class="form-text text-muted col-sm-10 " style="font-size: 17px;"
+          >e.g., ibuprofen</small
+        >
+        </div>
+        
+        <div
+          class="col-sm-7"
+          [style.display]="acSearch.mode == 'IUPAC Name' ? 'block' : 'none'"
+        >
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            style="color: rgb(79, 5, 153)"
+            placeholder="Example:2-[4-(2-methylpropyl)phenyl]propanoate"
+          />
+          <small
+          id="acSearch3Help"
+          class="form-text text-muted col-sm-10 " style="font-size: 17px;"
+          >e.g., ibuprofen</small
+        >
+        </div> -->
+        
+      </div>
+    </div>
+    <!-- range Property -->
+    <!--<div [style.display]="search.mode == 'Range Property' ? 'block' : 'none'">
+      <div class="form-group row">
+        <div class="col-sm-3 offset-1">
+          <select
+            class="form-control form-control-lg"
+            id="rangeSearch"
+            name="rangeSearchMode"
+            [(ngModel)]="raSearch.mode"
+            style="color: rgb(79, 5, 153)"
+          >
+            <option [value]="item" *ngFor="let item of raSearch.modes">
+              {{ item }}
+            </option>
+          </select>
+        </div>
+
+        <div
+          class="col-sm-5"
+          [style.display]="
+            raSearch.mode == 'Molecular Weight' ? 'block' : 'none'
+          "
+        >
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            style="color: rgb(79, 5, 153)"
+            placeholder="100:200"
+          />
+          <small
+          id="raSearch1Help"
+          class="form-text text-muted col-sm-10 " style="font-size: 17px;"
+          >Limit: 1:1500</small
+        >
+        </div>
+        <small
+        id="fliterform1Help"
+        class="form-text text-muted col-sm-10 offset-1"
+        style="font-size: 17px;"
+        >Some invalid descriptor values (e.g., NaN, infinity or a value too
+        large) will lead to errors.</small
+      >
+        <div
+          class="col-sm-5"
+          [style.display]="raSearch.mode == 'ALOGP' ? 'block' : 'none'"
+        >
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            style="color: rgb(79, 5, 153)"
+            placeholder="0.07:5"
+          />
+          <small
+          id="raSearch2Help"
+          class="form-text text-muted col-sm-10 " style="font-size: 17px;"
+          >Limit: -15:15</small
+        >
+        </div>
+        <div
+          class="col-sm-5"
+          [style.display]="raSearch.mode == 'HBA' ? 'block' : 'none'"
+        >
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            style="color: rgb(79, 5, 153)"
+            placeholder="0:5"
+          />
+          <small
+          id="raSearch3Help"
+          class="form-text text-muted col-sm-10 " style="font-size: 17px;"
+          >Limit: 0:20</small
+        >
+        </div>
+        <div
+          class="col-sm-5"
+          [style.display]="raSearch.mode == 'HBD' ? 'block' : 'none'"
+        >
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            style="color: rgb(79, 5, 153)"
+            placeholder="0:3"
+          />
+          <small
+          id="raSearch3Help"
+          class="form-text text-muted col-sm-10 " style="font-size: 17px;"
+          >Limit: 0:20</small
+        >
+        </div>
+      </div>
+    </div> -->
+
+    <div [style.display]="search.mode == 'Similarity' ? 'block' : 'none'">
+      <div class="form-group row">
+        <label
+          for="smilesOfSimilarity"
+          class="col-sm-3 col-form-label col-form-label-lg offset-1"
+          style="font-size: 23px;"
+          >SMILES:</label
+        >
+        <div class="col-sm-5">
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            id="smilesOfSimilarity"
+            style="color:rgb(79, 5, 153)"
+            placeholder="CC(C)CC1=CC=C(C=C1)C(C)C(O)=O"
+          />
+        </div>
+        <small
+          id="Similarity1Help"
+          class="form-text text-muted col-sm-10 offset-4" style="font-size: 17px;"
+          >e.g., ibuprofen</small
+        >
+      </div>
+
+      <div class="form-group row">
+        <!-- class="col-md-4 control-label1" -->
+        <label
+          for="selectFingerprinterOfSimilarity"
+          class="col-sm-3 col-form-label col-form-label-lg offset-1"
+          style="font-size: 23px;"
+          >Select fingerprinter
+          :</label
+        >
+  
+        <div class="col-sm-5">
+          <select
+            class="form-control form-control-lg"
+            id="selectFingerprinterOfSimilarity"
+            name="selectFingerprinter"
+            
+            style="color:rgb(79, 5, 153);"
+          >
+            <option [value]="item" *ngFor="let item of fingerprinter.modes">{{
+              item
+            }}</option>
+          </select>
+        </div> 
+      </div>
+
+
+
+      <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-3 pt-0 offset-1" style="font-size: 23px;">Select similarity metric:
+          </legend>
+          <div class="col-sm-5">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+              <label class="form-check-label" for="gridRadios1">
+                Tanimoto
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+              <label class="form-check-label" for="gridRadios2">
+                Dice
+              </label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+
+
+      <div class="form-group row">
+        <label
+          for="similarityOfSimilarity"
+          class="col-sm-3 col-form-label col-form-label-lg offset-1"
+          style="font-size: 23px;"
+          >Similarity:</label
+        >
+        <div class="col-sm-5">
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            id="similarityOfSimilarity"
+            style="color:rgb(79, 5, 153)"
+            placeholder="Example:0.7"
+          />
+        </div>
+        <small
+          id="Similarity2Help"
+          class="form-text text-muted col-sm-10 offset-4" style="font-size: 17px;"
+          >e.g., 0.7; Limit: 0.2-1.0</small
+        >
+      </div>  
+      </div>
+      <br>
+      <div class="form-group row">
+        <button type="submit" style="color:rgb(79, 5, 153)" class="btn btn-outline-primary col-sm-1 offset-4">
+          Submit
+        </button>
+        <button type="reset" style="color:rgb(79, 5, 153)" class="btn btn-outline-primary col-sm-1 offset-2">
+          Reset
+        </button>
+      </div>
+    
+    
+  </form>
+</div>

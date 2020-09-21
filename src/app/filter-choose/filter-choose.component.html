@@ -1,0 +1,702 @@
+<!-- 筛选部分 -->
+<!-- text-center -->
+<!-- 用户选择部分 -->
+<!-- style="font-size: 20px; background-color: rgb(191, 197, 195); color: azure;" -->
+<div
+  class="container"
+  style="background-color: white; color: rgb(79, 5, 153)"
+  [style.height]="
+    filter.mode == 'By Drawing Molecule from Editor' ? '600px' : '300px'
+  "
+>
+  <br />
+  <!-- (submit) = "signup()" -->
+  <form method="POST" enctype="multipart/form-data" (submit) = "signup()">
+    <div class="form-group row">
+      <!-- class="col-md-4 control-label1" -->
+      <label
+        for="exampleSelect1"
+        class="col-sm-3 col-form-label col-form-label-lg offset-1"
+        style="font-size: 23px"
+        >Select the Data Source:</label
+      >
+
+      <div class="col-sm-5">
+        <select
+          class="form-control form-control-lg"
+          id="exampleSelect1"
+          name="queryMode"
+          [(ngModel)]="filter.mode"
+          style="color: rgb(79, 5, 153)"
+          
+        >
+          <option [value]="item" *ngFor="let item of filter.modes">
+            {{ item }}
+          </option>
+        </select>
+      </div>
+      <small
+        id="queryModeHelp"
+        class="form-text text-muted col-sm-10 offset-1"
+        style="font-size: 17px"
+        >Before calculation, users should prepare a valid SMILES or *.sdf file
+        in case of errors. Users can use ChemSAR to do this.</small
+      >
+    </div>
+    <br />
+
+    <!-- 用户上传Smile结构部分 -->
+    <div
+      [style.display]="filter.mode == 'By Inputting SMILES' ? 'block' : 'none'"
+    >
+      <div class="form-group row">
+        <label
+          for="fliterform1"
+          class="col-sm-2 col-form-label col-form-label-lg offset-1"
+          style="font-size: 23px"
+          >Smiles:</label
+        >
+        <div class="col-sm-7">
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            id="fliterform1"
+            style="color: rgb(79, 5, 153)"
+            name="smiles"
+            placeholder="CC1=CN=C(C(=C1OC)C)CS(=O)C2=NC3=C(N2)C=C(C=C3)OC"
+            [(ngModel)]="inputData.Smiles"
+          />
+        </div>
+        <small
+          id="fliterform1Help"
+          class="form-text text-muted col-sm-10 offset-1"
+          style="font-size: 17px"
+          >Some invalid descriptor values (e.g., NaN, infinity or a value too
+          large) will lead to errors.</small
+        >
+      </div>
+    </div>
+
+    <!-- 用户上传文件部分 -->
+    <div
+      [style.display]="filter.mode == 'By Uploading Files' ? 'block' : 'none'"
+    >
+      <div class="form-group row">
+        <label
+          for="fliterform2"
+          class="col-sm-2 col-form-label col-form-label-lg offset-1"
+          style="font-size: 20px"
+          >Choose file(*.sdf):</label
+        >
+        <div class="col-sm-5 offset-1">
+          <input #SmilesFile
+            type="file"
+            class="form-control-file form-control-lg"
+            id="fliterform2"
+            accept=".sdf"
+            (change) = "inputFile($event.target.files)"
+          
+          />
+        </div>
+        <small
+          id="fliter2formHelp"
+          class="form-text text-muted col-sm-10 offset-1"
+          style="font-size: 17px"
+          >Make sure you have chosen the right input and output formats,or the
+          result will show the text of uploaded file itself.</small
+        >
+      </div>
+    </div>
+    <!-- 画结构部分 -->
+    <div
+      [style.display]="
+        filter.mode == 'By Drawing Molecule from Editor' ? 'block' : 'none'
+      "
+    >
+      <div class="form-group row">
+        <div
+          class="col-sm-3 align-self-center justify-content-center"
+          style="font-size: 23px"
+        >
+          Drawing Molecule from Editor:
+        </div>
+
+        <div class="col-sm-9">
+          <div class="row">
+            <div class="col-sm-7 offset-1" id="filtform3">
+              <app-jsme
+               
+                [elementId]="'structure-search'"
+                [width]="'380px'"
+                [height]="'300px'"
+                [showDemo]="true"
+                >loading JSME widget
+              </app-jsme>
+              <div class="row">
+                <div class="col-sm-4 offset-3">
+                  <button style="font-size: 18px" (click)="getJsmeSmiles()">
+                    Get Smiles
+                  </button>
+                </div>
+              </div>
+
+              <!-- <button mat-icon-button (click)="getJsmeSmiles()" color="warn">
+                <mat-icon>trending_flat</mat-icon> 
+            </button> -->
+            </div>
+            <div class="col-sm-4 align-self-center">
+              <h5 style="color: rgb(79, 5, 153)" style="font-size: 23px">
+                SMILES:
+              </h5>
+              <textarea
+                name="jsme"
+                class="smile-container"
+                #smiles
+                [(ngModel)]="inputData.Smiles"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <button
+        type="submit"
+        style="color: rgb(79, 5, 153)"
+        class="btn btn-outline-primary col-sm-1 offset-4"
+      >
+        Submit
+      </button>
+      <!-- (click)="postData()" -->
+      <button
+        type="reset"
+        style="color: rgb(79, 5, 153)"
+        class="btn btn-outline-primary col-sm-1 offset-2"
+        
+      >
+        Reset
+      </button>
+    </div>
+
+
+    <div class="bd-example">
+      <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+              <button
+                class="btn btn-link btn-block text-left collapsedata"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
+              >
+                Physicochemical Property
+              </button>
+            </h2>
+          </div>
+          <div
+            id="collapseOne"
+            class="collapse"
+            aria-labelledby="headingOne"
+            data-parent="#accordionExample"
+          >
+            <div class="card-body collapsedata">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="Solubility" value="LogS (Solubility)" [(ngModel)]="inputData.Property" checked>
+                <label class="form-check-label" for="Solubility">
+                  LogS (Solubility)
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="LogD" value="LogD (Distribution Coefficient D at PH=7.4)" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for="LogD">
+                  LogD (Distribution Coefficient D at PH=7.4)
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="LogP" value="LogP (Distribution Coefficient P)" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for="LogP">
+                  LogP (Distribution Coefficient P)
+                </label>
+              </div>
+             
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+              <button
+                class="btn btn-link btn-block text-left collapsed collapsedata"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
+              >
+                Absorption
+              </button>
+            </h2>
+          </div>
+          <div
+            id="collapseTwo"
+            class="collapse"
+            aria-labelledby="headingTwo"
+            data-parent="#accordionExample"
+          >
+            <div class="card-body collapsedata">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="LogPapp" value="LogPapp (Caco-2 Permeability)" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for="LogPapp">
+                  LogPapp (Caco-2 Permeability)
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="Pgp" value="Pgp-inhibitor" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for="Pgp">
+                  Pgp-inhibitor
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="HIA" value="HIA (Human Intestinal Absorption)" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for="HIA">
+                  HIA (Human Intestinal Absorption)
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+              <button
+                class="btn btn-link btn-block text-left collapsed collapsedata"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
+              >
+                Distribution
+              </button>
+            </h2>
+          </div>
+          <div
+            id="collapseThree"
+            class="collapse"
+            aria-labelledby="headingThree"
+            data-parent="#accordionExample"
+          >
+            <div class="card-body collapsedata">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="PPB" value="PPB (Plasma Protein Binding)" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for="PPB">
+                  PPB (Plasma Protein Binding)
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="BBB" value="BBB (Blood–Brain Barrier)" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for="BBB">
+                  BBB (Blood–Brain Barrier)
+                </label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingFour">
+            <h2 class="mb-0">
+              <button
+                class="btn btn-link btn-block text-left collapsed collapsedata"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseFour"
+                aria-expanded="false"
+                aria-controls="collapseFour"
+              >
+                Metabolism
+              </button>
+            </h2>
+          </div>
+          <div
+            id="collapseFour"
+            class="collapse"
+            aria-labelledby="headingFour"
+            data-parent="#accordionExample"
+          >
+            <div class="card-body collapsedata">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="CYP450_1A2" value="CYP450 1A2 inhibitor" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for="CYP450_1A2">
+                  CYP450 1A2 inhibitor
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="CYP450_3A4_inhibitor" value="CYP450 3A4 inhibitor" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for="CYP450_3A4_inhibitor">
+                  CYP450 3A4 inhibitor
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="CYP450_3A4_substrate" value="CYP450 3A4 substrate" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for="CYP450_3A4_substrate">
+                  CYP450 3A4 substrate
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="CYP450_2C9_inhibitor" value="CYP450 2C9 inhibitor" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for="CYP450_2C9_inhibitor">
+                  CYP450 2C9 inhibitor
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="CYP450_2C9_substrate" value="CYP450 2C9 substrate" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for="CYP450_2C9_substrate">
+                  CYP450 2C9 substrate
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="CYP450_2C19_inhibitor" value="CYP450 2C19 inhibitor" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for="CYP450_2C19_inhibitor">
+                  CYP450 2C19 inhibitor
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="CYP450_2D6_inhibitor" value="CYP450 2D6 inhibitor" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for="CYP450_2D6_inhibitor">
+                  CYP450 2D6 inhibitor
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="CYP450_2D6_substrate" value="CYP450 2D6 substrate" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for="CYP450_2D6_substrate">
+                  CYP450 2D6 substrate
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingFive">
+            <h2 class="mb-0">
+              <button
+                class="btn btn-link btn-block text-left collapsed collapsedata"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseFive"
+                aria-expanded="false"
+                aria-controls="collapseFive"
+              >
+                Excretion
+              </button>
+            </h2>
+          </div>
+          <div
+            id="collapseFive"
+            class="collapse"
+            aria-labelledby="headingFive"
+            data-parent="#accordionExample"
+          >
+            <div class="card-body collapsedata">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="Half Life" value="T 1/2 (Half Life)" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for="Half Life">
+                  T 1/2 (Half Life)
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="Clearance" value="CL (Clearance)" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for="Clearance">
+                  CL (Clearance)
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingSix">
+            <h2 class="mb-0">
+              <button
+                class="btn btn-link btn-block text-left collapsed collapsedata"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseSix"
+                aria-expanded="false"
+                aria-controls="collapseSix"
+              >
+                Toxicity
+              </button>
+            </h2>
+          </div>
+          <div
+            id="collapseSix"
+            class="collapse"
+            aria-labelledby="headingSix"
+            data-parent="#accordionExample"
+          >
+            <div class="card-body collapsedata">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="hERG" value="hERG (hERG Blockers)" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for="hERG">
+                  hERG (hERG Blockers)
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="H-HT" value="H-HT (Human Hepatotoxicity)" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for="H-HT">
+                  H-HT (Human Hepatotoxicity)
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="Ames" value="Ames (Ames Mutagenicity)" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for="Ames">
+                  Ames (Ames Mutagenicity)
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id=" DILI" value="DILI (Drug Induced Liver Injury)" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for=" DILI">
+                  DILI (Drug Induced Liver Injury)
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Property" id="FDAMDD" value="FDAMDD (Maximum Recommended Daily Dose)" [(ngModel)]="inputData.Property">
+                <label class="form-check-label" for="FDAMDD">
+                  FDAMDD (Maximum Recommended Daily Dose)
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- 折叠信息部分 -->
+<!-- <form method="POST" >
+  <div class="bd-example">
+    <div class="accordion" id="accordionExample">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link btn-block text-left collapsedata"
+              type="button"
+              data-toggle="collapse"
+              data-target="#collapseOne"
+              aria-expanded="true"
+              aria-controls="collapseOne"
+            >
+              Physicochemical Property
+            </button>
+          </h2>
+        </div>
+        <div
+          id="collapseOne"
+          class="collapse"
+          aria-labelledby="headingOne"
+          data-parent="#accordionExample"
+        >
+          <div class="card-body collapsedata">
+            <select
+            class="form-control form-control-lg"
+            id="Physicochemical Property"
+            name="SelectedProperty"
+            [(ngModel)]="physicochemical.mode"
+            style="color: rgb(79, 5, 153)"
+          >
+            <option [value]="item" *ngFor="let item of physicochemical.modes">
+              {{ item }}
+            </option>
+          </select> 
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingTwo">
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link btn-block text-left collapsed collapsedata"
+              type="button"
+              data-toggle="collapse"
+              data-target="#collapseTwo"
+              aria-expanded="false"
+              aria-controls="collapseTwo"
+            >
+              Absorption
+            </button>
+          </h2>
+        </div>
+        <div
+          id="collapseTwo"
+          class="collapse"
+          aria-labelledby="headingTwo"
+          data-parent="#accordionExample"
+        >
+          <div class="card-body collapsedata">
+            <select
+            class="form-control form-control-lg"
+            id="Absorption"
+            name="SelectedProperty"
+            [(ngModel)]="absorption.mode"
+            style="color: rgb(79, 5, 153)"
+          >
+            <option [value]="item" *ngFor="let item of absorption.modes">
+              {{ item }}
+            </option>
+        
+          </select> 
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingThree">
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link btn-block text-left collapsed collapsedata"
+              type="button"
+              data-toggle="collapse"
+              data-target="#collapseThree"
+              aria-expanded="false"
+              aria-controls="collapseThree"
+            >
+              Distribution
+            </button>
+          </h2>
+        </div>
+        <div
+          id="collapseThree"
+          class="collapse"
+          aria-labelledby="headingThree"
+          data-parent="#accordionExample"
+        >
+          <div class="card-body collapsedata">
+            <select
+            class="form-control form-control-lg"
+            id="Distribution"
+            name="SelectedProperty"
+            [(ngModel)]="distribution.mode"
+            style="color: rgb(79, 5, 153)"
+          >
+            <option [value]="item" *ngFor="let item of distribution.modes">
+              {{ item }}
+            </option>
+          </select>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingFour">
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link btn-block text-left collapsed collapsedata"
+              type="button"
+              data-toggle="collapse"
+              data-target="#collapseFour"
+              aria-expanded="false"
+              aria-controls="collapseFour"
+            >
+              Metabolism
+            </button>
+          </h2>
+        </div>
+        <div
+          id="collapseFour"
+          class="collapse"
+          aria-labelledby="headingFour"
+          data-parent="#accordionExample"
+        >
+          <div class="card-body collapsedata">
+            <select
+            class="form-control form-control-lg"
+            id="Metabolism"
+            name="SelectedProperty"
+            [(ngModel)]="metabolism.mode"
+            style="color: rgb(79, 5, 153)"
+          >
+            <option [value]="item" *ngFor="let item of metabolism.modes">
+              {{ item }}
+            </option>
+          </select>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingFive">
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link btn-block text-left collapsed collapsedata"
+              type="button"
+              data-toggle="collapse"
+              data-target="#collapseFive"
+              aria-expanded="false"
+              aria-controls="collapseFive"
+            >
+              Excretion
+            </button>
+          </h2>
+        </div>
+        <div
+          id="collapseFive"
+          class="collapse"
+          aria-labelledby="headingFive"
+          data-parent="#accordionExample"
+        >
+          <div class="card-body collapsedata">
+            <select
+            class="form-control form-control-lg"
+            id="Excretion"
+            name="SelectedProperty"
+            [(ngModel)]="excretion.mode"
+            style="color: rgb(79, 5, 153)"
+          >
+            <option [value]="item" *ngFor="let item of excretion.modes">
+              {{ item }}
+            </option>
+          </select>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingSix">
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link btn-block text-left collapsed collapsedata"
+              type="button"
+              data-toggle="collapse"
+              data-target="#collapseSix"
+              aria-expanded="false"
+              aria-controls="collapseSix"
+            >
+              Toxicity
+            </button>
+          </h2>
+        </div>
+        <div
+          id="collapseSix"
+          class="collapse"
+          aria-labelledby="headingSix"
+          data-parent="#accordionExample"
+        >
+          <div class="card-body collapsedata">
+            <select
+            class="form-control form-control-lg"
+            id="Toxicity"
+            name="SelectedProperty"
+            [(ngModel)]="toxicity.mode"
+            style="color: rgb(79, 5, 153)"
+          >
+            <option [value]="item" *ngFor="let item of toxicity.modes">
+              {{ item }}
+            </option>
+          </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form> -->
