@@ -25,6 +25,7 @@
     "datatables.net": "^1.10.22",
     "datatables.net-bs4": "^1.10.22",
     "datatables.net-dt": "^1.10.22",
+    "element-angular": "^0.7.6",
     "jquery": "^3.5.1",
     "ng-zorro-antd": "^9.3.0",
     "ng2-file-upload": "^1.4.0",
