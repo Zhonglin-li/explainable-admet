@@ -1,4 +1,21 @@
 /* 折叠 */
+#divContainer{
+  background-color: white; 
+  color: rgb(79, 5, 153); 
+  margin-top: 25px;
+  
+}
 .collapsedata{
     color:rgb(79, 5, 153);
-  }
+    
+}
+.breadcrumb{
+  font-size: 18px;
+  background-color:rgb(199, 202, 204);
+}
+.ng-valid[required], .ng-valid.required {
+  border-left: 3px solid #42a948;
+}
+.ng-invalid:not(form) {
+  border-left: 3px solid #a94442;
+}

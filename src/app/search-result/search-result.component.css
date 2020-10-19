@@ -5,12 +5,9 @@ p{
 .breadcrumb{
     font-size: 18px;
     background-color:rgb(199, 202, 204);
-}
+  }
 #divContainer{
-    background-color: white; 
-    color: rgb(79, 5, 153);
-    margin-top: 25px;
+background-color: white; 
+color: rgb(79, 5, 153); 
+margin-top: 25px;
 }
-/* td{
-    font-size: 20px;
-} */

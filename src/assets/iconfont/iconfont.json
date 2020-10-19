@@ -1,0 +1,37 @@
+{
+  "id": "2113859",
+  "name": "zorro",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "15521863",
+      "name": "Email",
+      "font_class": "Email",
+      "unicode": "eb6c",
+      "unicode_decimal": 60268
+    },
+    {
+      "icon_id": "929492",
+      "name": "institution",
+      "font_class": "institution",
+      "unicode": "e74b",
+      "unicode_decimal": 59211
+    },
+    {
+      "icon_id": "1058090",
+      "name": "Address fill",
+      "font_class": "addressfill",
+      "unicode": "e659",
+      "unicode_decimal": 58969
+    },
+    {
+      "icon_id": "11291810",
+      "name": "zip-code",
+      "font_class": "zip-code",
+      "unicode": "e6ad",
+      "unicode_decimal": 59053
+    }
+  ]
+}

@@ -7,5 +7,8 @@
     -o-background-size: cover;
     background-size: cover;
   }
+#carouselExampleIndicators{
+  margin-top: 15px;
+}
   
  

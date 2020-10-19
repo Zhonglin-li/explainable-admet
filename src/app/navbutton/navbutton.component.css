@@ -1,0 +1,12 @@
+/* nav{
+    height: 18px;
+} */
+#navButton{
+    height:15px;
+    background-color: rgba(0, 0, 0, 0.596);
+}
+#description{
+    display: inline-block;
+    margin: 0 auto;
+    text-align: center;
+}

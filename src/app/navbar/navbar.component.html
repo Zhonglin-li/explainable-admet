@@ -1,7 +1,50 @@
-<div class="container-fluid" class="text-center">
+<!-- <nav class="navbar sticky-top navbar-light bg-light">
+  <a class="navbar-brand" >Sticky top</a>
+</nav> -->
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light " id="nav">
+  <div class="container">
+    <span><img src="../../assets/img/admetgcn.png" alt="admetGcn" id="homeImg"></span>
+    <a class="navbar-brand" href="/admetgcn/home"><span>DMETGCN</span></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" 
+        href="/admetgcn/home">
+        <span>Home</span>
+        <span class="sr-only">(current)</span></a>
+      </li>&nbsp;
+      <li class="nav-item">
+        <a class="nav-link" 
+        href="/admetgcn/prediction">
+        <span>Prediction</span></a>
+      </li>&nbsp;
+      <li class="nav-item">
+        <a class="nav-link " href="/admetgcn/search"><span>Search</span></a>
+      </li>&nbsp;
+      <li class="nav-item">
+        <a class="nav-link" href="/admetgcn/models"><span>Document</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/admetgcn/contact"><span>Contact</span></a>
+      </li>
+    </ul>
+    <span class="navbar-text">
+      CADD GROUP
+    </span>
+  </div>
+</div>
+  
+</nav>
+
+
+<!-- <div class="container-fluid" class="text-center" id="navTop">
     <div class="row nav">
       <div class="col-md-2 navPic">
-        <img src="./assets/img/admeLogo.png" alt="" srcset="" />ADMET
+        <img src="./assets/img/admeLogo.png" alt="" srcset="" />ADMETGCN
       </div>
       <div class="col-md-10 navOpts">
         <div class="row">
@@ -9,7 +52,7 @@
             class="col-md-3 navOpt1"
             [attr.class1]="{ active: activeDom == 1 }"
             (click)="addUnderline(1)"
-            [routerLink]="['/admet/home']"
+            [routerLink]="['/admetgcn/home']"
            
           >
             <i class="homeIcon"></i>Home
@@ -18,17 +61,17 @@
             class="col-md-4 navOpt2"
             [attr.class1]="{ active: activeDom == 2 }"
             (click)="addUnderline(2)"
-            [routerLink]="['/admet/prediction']"
+            [routerLink]="['/admetgcn/prediction']"
            
           >
-            <i class="researchIcon"></i>ADMET Prediction
+            <i class="researchIcon"></i>Prediction
           </a>
   
           <a
             class="col-md-3 navOpt3"
             [attr.class1]="{ active: activeDom == 3 }"
             (click)="addUnderline(3)"
-            [routerLink]="['/admet/search']"
+            [routerLink]="['/admetgcn/search']"
            
           >
             <i class="searchIcon"></i>Search
@@ -37,3 +80,7 @@
       </div>
     </div>
   </div>
+  <nav class="navbar fixed-bottom navbar-light bg-light">
+    <a class="navbar-brand" href="#">Fixed bottom</a>
+  </nav> -->
+  

@@ -1,0 +1,37 @@
+/* body {
+    position: relative;
+  } */
+.breadcrumb{
+  font-size: 18px;
+  background-color:rgb(199, 202, 204);
+}
+#divContainer{
+  background-color: white; 
+  color: rgb(79, 5, 153); 
+  margin-top: 25px;
+}
+#list-example{
+  height: 300px; 
+  top: 100px;
+}
+.c2 {
+  height: 50px;
+  width: 70px;
+  color: rgb(79, 5, 153);
+  font-family: 'Times New Roman', Times, serif;
+  position: fixed;
+  bottom: 20px;
+  left: 150px;
+  background-color:rgb(142, 240, 138);
+}
+.hide {
+  display: none;
+}
+a:hover{
+  color: blueviolet;
+}
+h4>span{
+  color:rgb(238, 162, 90);
+   background-color: rgb(105, 233, 255); 
+   font-family: 'Times New Roman', Times, serif;
+}

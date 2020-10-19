@@ -16,6 +16,7 @@ import { JsmeComponent } from '../app/jsme/jsme/jsme.component';
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import { FileUploadModule } from 'ng2-file-upload';
 import {DataTablesModule} from 'angular-datatables';
+// import {ElModule} from 'element-angular';
 
 
 import {StorageService} from './service/storage/storage.service'
@@ -26,6 +27,12 @@ import { LayoutComponent } from './layout/layout.component';
 import { HomeComponent } from './home/home.component';
 import {SearchComponent} from './search/search.component';
 import { ProdictionResultComponent } from './prodiction-result/prodiction-result.component';
+import { ModelsDocsComponent } from './models-docs/models-docs.component';
+import { NavbuttonComponent } from './navbutton/navbutton.component';
+import { SearchResultComponent } from './search-result/search-result.component';
+import { ContactComponent } from './contact/contact.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { RangeResultComponent } from './range-result/range-result.component';
 
 
 @NgModule({
@@ -39,6 +46,12 @@ import { ProdictionResultComponent } from './prodiction-result/prodiction-result
     LayoutComponent,
     HomeComponent,
     ProdictionResultComponent,
+    ModelsDocsComponent,
+    NavbuttonComponent,
+    SearchResultComponent,
+    ContactComponent,
+    NotFoundComponent,
+    RangeResultComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +65,7 @@ import { ProdictionResultComponent } from './prodiction-result/prodiction-result
     FileUploadModule,
     DataTablesModule,
     CommonModule,
+    // ElModule.forRoot(),
  
   ],
   providers: [GlobalService,

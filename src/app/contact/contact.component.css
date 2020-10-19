@@ -1,0 +1,20 @@
+.breadcrumb{
+    font-size: 18px;
+    background-color:rgb(199, 202, 204);
+  }
+#divContainer{
+    background-color: white; 
+    color: rgb(79, 5, 153); 
+    margin-top: 25px;
+    }
+.well{
+    line-height: 30px;
+    background-color: #fafafa;
+    border: 1px solid #eee;
+    padding: 19px;
+    margin-top: 20px;
+    font-size: 17px;
+    }
+#introduce {
+    background-color: rgb(199, 202, 204);
+}

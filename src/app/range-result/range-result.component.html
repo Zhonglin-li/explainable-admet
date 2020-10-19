@@ -1,0 +1,33 @@
+<div class="container" id="divContainer">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/admetgcn/home">admetgcn</a></li>
+          <li class="breadcrumb-item"><a href="/admetgcn/search">search</a></li>
+          <li class="breadcrumb-item active" aria-current="page">results</li> 
+        </ol>
+    </nav>
+    
+    <div class="row" style="margin-top: 25px;"> 
+        <div class="col-sm-12" style="border: 1px solid blueviolet; ">
+          <table  class="row-border hover" id="example">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Smiles</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of result,let i=index">
+                <td>{{i +1}}</td>
+                <td style="word-break: break-all;word-wrap: break-word;">{{data.Smiles}}</td>
+                <td>{{data.Label}}</td>
+              </tr>
+              
+            </tbody>
+          </table> 
+        </div>
+        
+
+    </div>
+</div>

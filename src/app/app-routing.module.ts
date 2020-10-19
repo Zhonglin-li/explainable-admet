@@ -5,6 +5,11 @@ import {HomeComponent} from './home/home.component';
 import {FilterChooseComponent} from './filter-choose/filter-choose.component';
 import {SearchComponent} from './search/search.component';
 import { ProdictionResultComponent } from './prodiction-result/prodiction-result.component';
+import { SearchResultComponent } from './search-result/search-result.component';
+import {ModelsDocsComponent} from './models-docs/models-docs.component';
+import {ContactComponent} from './contact/contact.component';
+import {NotFoundComponent} from './not-found/not-found.component';
+import {RangeResultComponent} from './range-result/range-result.component';
 // import { SearchComponent } from './view/search/search.component';
 // import {IndexComponent} from './view/index/index.component';
 // import {SearchComponent} from './view/search/search.component';
@@ -12,11 +17,11 @@ import { ProdictionResultComponent } from './prodiction-result/prodiction-result
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/admet/home',
+    redirectTo: '/admetgcn/home',
     pathMatch: 'full'
   },
   {
-    path: 'admet',
+    path: 'admetgcn',
     component: LayoutComponent,
     children: [
       {
@@ -33,7 +38,30 @@ const routes: Routes = [
       },
       {
         path: 'prediction/result',
+        // path: 'prediction/result/:index'配置动态路由
         component: ProdictionResultComponent
+      },
+      {
+        path: 'search/propertyResult',
+        // path: 'prediction/result/:index'配置动态路由
+        component: SearchResultComponent
+      },
+      {
+        path: 'search/rangeResult',
+        // path: 'prediction/result/:index'配置动态路由
+        component: RangeResultComponent
+      },
+      {
+        path: 'models',
+        component: ModelsDocsComponent
+      },
+      {
+        path: 'contact',
+        component: ContactComponent
+      },
+      {
+        path: '**',
+         component: NotFoundComponent
       },
     ]
   },

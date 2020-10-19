@@ -2,16 +2,29 @@
 <!-- text-center -->
 <!-- 用户选择部分 -->
 <!-- style="font-size: 20px; background-color: rgb(191, 197, 195); color: azure;" -->
+
 <div
   class="container"
-  style="background-color: white; color: rgb(79, 5, 153)"
   [style.height]="
-    filter.mode == 'By Drawing Molecule from Editor' ? '600px' : '300px'
+    filter.mode == 'By Drawing Molecule from Editor' ? '600px' : '500px'
   "
+  id="divContainer"
 >
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="/admetgcn/home" title="home"><span>admetgcn</span></a>
+      </li>
+      <!-- <li class="breadcrumb-item"><a href="#">Library</a></li> -->
+      <li class="breadcrumb-item active" aria-current="page">
+        <span>prediction</span>
+      </li>
+    </ol>
+  </nav>
   <br />
-  <!-- (submit) = "signup()" -->
-  <form method="POST" enctype="multipart/form-data" (submit) = "signup()">
+  <!-- (submit) = "postData()" -->
+  <form method="POST" enctype="multipart/form-data" #filterForm="ngForm">
+    <!-- {% csrf_token %} -->
     <div class="form-group row">
       <!-- class="col-md-4 control-label1" -->
       <label
@@ -28,7 +41,6 @@
           name="queryMode"
           [(ngModel)]="filter.mode"
           style="color: rgb(79, 5, 153)"
-          
         >
           <option [value]="item" *ngFor="let item of filter.modes">
             {{ item }}
@@ -39,8 +51,8 @@
         id="queryModeHelp"
         class="form-text text-muted col-sm-10 offset-1"
         style="font-size: 17px"
-        >Before calculation, users should prepare a valid SMILES or *.sdf file
-        in case of errors. Users can use ChemSAR to do this.</small
+        >Before calculation, users should prepare a valid SMILES in case of
+        errors. Users can use ChemSAR to do this.</small
       >
     </div>
     <br />
@@ -63,9 +75,22 @@
             id="fliterform1"
             style="color: rgb(79, 5, 153)"
             name="smiles"
-            placeholder="CC1=CN=C(C(=C1OC)C)CS(=O)C2=NC3=C(N2)C=C(C=C3)OC"
-            [(ngModel)]="inputData.Smiles"
+            placeholder="CC(=O)Oc1ccccc1C(=O)O"
+            [(ngModel)]="predictionData.Smiles"
+            required
+            minlength="2"
+            #inputSmiles="ngModel"
           />
+          <span style="color: red;"> {{ validation }}</span>
+          <div
+            *ngIf="
+              inputSmiles.invalid && (inputSmiles.dirty || inputSmiles.touched)
+            "
+            class="alert alert-danger"
+          >
+            <div *ngIf="inputSmiles.errors.required">Smiles is required!</div>
+            <div *ngIf="inputSmiles.errors.minlength">Smiles must be at least 2 characters long!</div>
+          </div>
         </div>
         <small
           id="fliterform1Help"
@@ -78,7 +103,7 @@
     </div>
 
     <!-- 用户上传文件部分 -->
-    <div
+    <!-- <div
       [style.display]="filter.mode == 'By Uploading Files' ? 'block' : 'none'"
     >
       <div class="form-group row">
@@ -106,7 +131,7 @@
           result will show the text of uploaded file itself.</small
         >
       </div>
-    </div>
+    </div> -->
     <!-- 画结构部分 -->
     <div
       [style.display]="
@@ -114,72 +139,108 @@
       "
     >
       <div class="form-group row">
-        <div
+        <!-- <div
           class="col-sm-3 align-self-center justify-content-center"
           style="font-size: 23px"
         >
           Drawing Molecule from Editor:
-        </div>
+        </div> -->
 
-        <div class="col-sm-9">
+        <div class="col-sm">
           <div class="row">
             <div class="col-sm-7 offset-1" id="filtform3">
               <app-jsme
-               
                 [elementId]="'structure-search'"
-                [width]="'380px'"
-                [height]="'300px'"
+                [width]="'450px'"
+                [height]="'350px'"
                 [showDemo]="true"
                 >loading JSME widget
               </app-jsme>
-              <div class="row">
+
+              <!-- <div class="row">
                 <div class="col-sm-4 offset-3">
                   <button style="font-size: 18px" (click)="getJsmeSmiles()">
                     Get Smiles
                   </button>
                 </div>
-              </div>
+              </div> -->
 
               <!-- <button mat-icon-button (click)="getJsmeSmiles()" color="warn">
                 <mat-icon>trending_flat</mat-icon> 
             </button> -->
             </div>
-            <div class="col-sm-4 align-self-center">
-              <h5 style="color: rgb(79, 5, 153)" style="font-size: 23px">
-                SMILES:
-              </h5>
+            <!-- align-self-center -->
+            <div class="col-sm-3 align-self-center">
               <textarea
                 name="jsme"
                 class="smile-container"
-                #smiles
-                [(ngModel)]="inputData.Smiles"
+                required
+                minlength="2"
+                #drawSmiles="ngModel"
+                [(ngModel)]="predictionData.Smiles"
+                cols="55"
+                rows="8"
+                readonly
               ></textarea>
+              <span style="color: red;"> {{ validation }}</span>
+              <div
+                *ngIf="
+                  drawSmiles.invalid && (drawSmiles.dirty || drawSmiles.touched)
+                "
+                class="alert alert-danger"
+              >
+                <div *ngIf="drawSmiles.errors.required">
+                  Smiles is required!
+                </div>
+                <div *ngIf="inputSmiles.errors.minlength">Smiles must be at least 2 characters long!</div>
+              </div>
             </div>
           </div>
+          <br>
+          <small
+          id="drawStructureHelp"
+          class="form-text text-muted col-sm-10 offset-1"
+          style="font-size: 17px"
+          >After you have finished drawing, please click the button:<i style="font-weight: bold;">Smiles</i> or you can not submit your structure.
+          </small>
         </div>
       </div>
     </div>
+    <br />
+    <br />
     <div class="form-group row">
+      <button
+        type="button"
+        style="font-size: 18px; color: rgb(79, 5, 153)"
+        class="btn btn-outline-primary col-sm-1 offset-3"
+        [style.display]="
+          filter.mode == 'By Drawing Molecule from Editor' ? 'block' : 'none'
+        "
+        (click)="getJsmeSmiles()"
+      >
+        Smiles
+      </button>
       <button
         type="submit"
         style="color: rgb(79, 5, 153)"
-        class="btn btn-outline-primary col-sm-1 offset-4"
+        class="btn btn-outline-primary col-sm-1 offset-5"
+        [disabled]="!filterForm.form.valid"
+        (click)="postData()"
       >
         Submit
       </button>
       <!-- (click)="postData()" -->
-      <button
+      <!-- <button
         type="reset"
         style="color: rgb(79, 5, 153)"
         class="btn btn-outline-primary col-sm-1 offset-2"
-        
+        (click)="rest_form()"
       >
         Reset
-      </button>
+      </button> -->
     </div>
 
-
-    <div class="bd-example">
+    <!-- <div class="bd-example">
       <div class="accordion" id="accordionExample">
         <div class="card">
           <div class="card-header" id="headingOne">
@@ -472,8 +533,46 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </form>
+  <br />
+  <br />
+
+  <!-- <div class="row">
+    <div class="col-lg-4 mb-4">
+      <div class="card h-100">
+        <h4 class="card-header">Card Title</h4>
+        <div class="card-body">
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+        </div>
+        <div class="card-footer">
+          <a href="/admetgcn/models" class="btn btn-primary">Learn More</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 mb-4">
+      <div class="card h-100">
+        <h4 class="card-header">Card Title</h4>
+        <div class="card-body">
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
+        </div>
+        <div class="card-footer">
+          <a href="#" class="btn btn-primary">Learn More</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 mb-4">
+      <div class="card h-100">
+        <h4 class="card-header">Card Title</h4>
+        <div class="card-body">
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+        </div>
+        <div class="card-footer">
+          <a href="#" class="btn btn-primary">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </div> -->
 </div>
 
 <!-- 折叠信息部分 -->
