@@ -8,6 +8,9 @@
   margin-top: 25px;
 }
 tr th{
-  text-align: end;
+  text-align: center;
+}
+tr td{
+  text-align: center;
 }
 

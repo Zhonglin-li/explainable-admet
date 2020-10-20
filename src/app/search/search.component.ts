@@ -81,8 +81,14 @@ export class SearchComponent implements OnInit {
 
     formdata.append('rangeProperty', this.raSearch.mode);
     if (this.regression.indexOf(this.raSearch.mode) > -1){
-      formdata.append('leftMargin', this.inputData.leftMargin);
-      formdata.append('rightMargin', this.inputData.rightMargin);
+      if (this.inputData.leftMargin < this.inputData.rightMargin){
+        formdata.append('leftMargin', this.inputData.leftMargin);
+        formdata.append('rightMargin', this.inputData.rightMargin);
+      }
+      else{
+        formdata.append('leftMargin', this.inputData.rightMargin);
+        formdata.append('rightMargin', this.inputData.leftMargin);
+      }
     }
     else if (this.classification.indexOf(this.raSearch.mode) > -1){
       formdata.append('rangeRadio', this.inputData.rangeRadio);

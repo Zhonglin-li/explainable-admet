@@ -13,14 +13,16 @@
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Smiles</th>
+                <th>Molecule</th>
                 <th>Value</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let data of result,let i=index">
                 <td>{{i +1}}</td>
-                <td style="word-break: break-all;word-wrap: break-word;">{{data.Smiles}}</td>
+                <!-- style="word-break: break-all;word-wrap: break-word;" -->
+                <!-- {{data.Mol}} -->
+                <td ><img [src]="'data:image/jpeg;base64,'+ data.Mol" alt="" /></td>
                 <td>{{data.Label}}</td>
               </tr>
               
