@@ -65,14 +65,7 @@ const routes: Routes = [
       },
     ]
   },
-  // {
-  //   path: "",
-  //   component: IndexComponent
-  // },
-  // {
-  //   path:"search",
-  //   component:SearchComponent
-  // }
+
 ];
 /* const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/welcome' },

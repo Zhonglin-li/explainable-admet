@@ -11,6 +11,10 @@ p{
     color: rgb(79, 5, 153);
     margin-top: 25px;
 }
-/* td{
-    font-size: 20px;
-} */
+
+tr td{
+    text-align: center;
+}
+tr th{
+    text-align: center;
+}

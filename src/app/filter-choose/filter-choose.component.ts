@@ -69,11 +69,6 @@ export class FilterChooseComponent implements OnInit {
   }
 
   ngOnInit(){
-    
-  }
-  ngAfterViewInit(): void{
-    // console.log(this.SmilesFile)
-    
   }
   getJsmeSmiles(){
     this.predictionData.Smiles = this.jsme.smiles;
@@ -151,22 +146,4 @@ export class FilterChooseComponent implements OnInit {
     //   loading: true
     // };
   }
-  
-  // signup(): void{
-  //   const formdata = new FormData();
-  //   if (this.file){
-  //     formdata.append('file', this.file);
-  //     console.log(this.file);
-  //   }
-  //   else{
-  //     formdata.append('smiles', this.inputData.Smiles);
-  //     console.log(this.inputData.Smiles);
-  //   }
-  //   // formdata.append('Property', this.inputData.Property);
-  //   // console.log(formdata.get('Property'));
-  //   this.storage.setData(formdata);
-  //   // console.log(this.storage.getData().get('Property'));
-  //   // setTimeout(() => this.router.navigateByUrl('/gcn/prediction/result'), 1000);
-  //   this.router.navigateByUrl('/admetgcn/prediction/result');
-  // }
 }

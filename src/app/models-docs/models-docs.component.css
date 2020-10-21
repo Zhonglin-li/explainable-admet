@@ -35,3 +35,9 @@ h4>span{
    background-color: rgb(105, 233, 255); 
    font-family: 'Times New Roman', Times, serif;
 }
+tr td{
+  text-align: center;
+}
+.thCenter{
+  text-align: center;
+}

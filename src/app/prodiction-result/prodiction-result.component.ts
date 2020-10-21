@@ -57,13 +57,6 @@ export class ProdictionResultComponent implements OnInit {
     console.log(this.result[0]["input_smiles"]);
 
   }
-  // ngAfterContentInit(): void{
-  //   let data = this.storage.getData();
-  //   this.list.push(data);
-  //   console.log(this.list);
-  //   console.log(data);
-  //   console.log('content carry on')
-  // }
 
 
 }

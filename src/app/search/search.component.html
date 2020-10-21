@@ -295,6 +295,7 @@
                 >1</label>
             </div>
             
+            
           <!-- <div
             class="col-sm-5"
             [style.display]="raSearch.mode == 'HBA' ? 'block' : 'none'"
@@ -328,12 +329,19 @@
           >
           </div> -->
           </div>
+          <small *ngIf="classification.indexOf(raSearch.mode) > -1"
+            class="form-text text-muted col-sm-10 offset-1"
+            style="font-size: 17px"
+            >
+            0 Represents a noninhibitor, nonsubstrate, or nontoxic, while 1 represents an inhibitor, substrate, or toxic
+          </small>
           <!-- <p>{{inputData.rightMargin|json}}</p>
           <p>{{inputData.rangeRadio|json}}</p> -->
           <small
             id="fliterform1Help"
             class="form-text text-muted col-sm-10 offset-1"
             style="font-size: 17px"
+            *ngIf="regression.indexOf(raSearch.mode) > -1"
             >Some invalid descriptor values (e.g., NaN, infinity or a value too
             large) will lead to errors.</small
           >
