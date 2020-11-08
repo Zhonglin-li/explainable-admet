@@ -10,6 +10,7 @@ import {StorageService} from '../service/storage/storage.service';
 })
 export class SearchComponent implements OnInit {
   public validation = '';
+  public searchError = '';
   public len: any;
   public search: any = {
     mode: 'Range Property',
@@ -117,13 +118,15 @@ export class SearchComponent implements OnInit {
       }
     },
     (error: any) => {
-      // console.log(error.error.msg);
+      // console.log(error.error);
       if (error.error.msg){
-        alert(error.error.msg);
+        this.searchError = error.error.msg;
       }
       else{
-        alert('server not found ');
+        this.searchError = 'Server Not Found ';
+        // alert('server not found ');
       }
+      ($('#searchModal')as any).modal('show');
     });
   }
 

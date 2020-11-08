@@ -17,9 +17,11 @@ import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import { FileUploadModule } from 'ng2-file-upload';
 import {DataTablesModule} from 'angular-datatables';
 // import {ElModule} from 'element-angular';
+import * as bootstrap from 'bootstrap';
+import * as $ from 'jquery';
 
 
-import {StorageService} from './service/storage/storage.service'
+import {StorageService} from './service/storage/storage.service';
 import {GlobalService} from './service/global/global.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FilterChooseComponent } from './filter-choose/filter-choose.component';
@@ -33,6 +35,7 @@ import { SearchResultComponent } from './search-result/search-result.component';
 import { ContactComponent } from './contact/contact.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { RangeResultComponent } from './range-result/range-result.component';
+
 
 
 @NgModule({
@@ -66,7 +69,6 @@ import { RangeResultComponent } from './range-result/range-result.component';
     DataTablesModule,
     CommonModule,
     // ElModule.forRoot(),
- 
   ],
   providers: [GlobalService,
     StorageService,

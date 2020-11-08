@@ -4,8 +4,14 @@ import {JsmeComponent} from '../jsme/jsme/jsme.component';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {StorageService} from '../service/storage/storage.service';
+import { shallowEqual } from 'ng-zorro-antd';
+// import * as bootstrap from 'bootstrap';
+// import * as $ from 'jquery';
+
+
 // import {FileUploader} from 'ng2-file-upload';
 // const URL = 'http://172.16.41.163:8000/admetgcn/prediction';
+
 
 @Component({
   selector: 'app-filter-choose',
@@ -23,6 +29,8 @@ export class FilterChooseComponent implements OnInit {
   public validation = '';
   public data: any = {};
   public file: File;
+  public predictionError = '';
+  
 
   public predictionData: any = {
     Smiles: '',
@@ -116,11 +124,13 @@ export class FilterChooseComponent implements OnInit {
     (error: any) => {
       // console.log(error.error);
       if (error.error.msg){
-        alert(error.error.msg);
+        this.predictionError = error.error.msg;
       }
       else{
-        alert('server not found ');
+        this.predictionError = 'Server Not Found ';
+        // alert('server not found ');
       }
+      ($('#predictionModal')as any).modal('show');
     }
     );
     // const httpOptions = {headers: new HttpHeaders({'content-type': 'application/json'})};
@@ -146,4 +156,5 @@ export class FilterChooseComponent implements OnInit {
     //   loading: true
     // };
   }
+
 }
