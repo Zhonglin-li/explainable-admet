@@ -5,11 +5,13 @@ import {HomeComponent} from './home/home.component';
 import {FilterChooseComponent} from './filter-choose/filter-choose.component';
 import {SearchComponent} from './search/search.component';
 import { ProdictionResultComponent } from './prodiction-result/prodiction-result.component';
+import {OptimizeComponent} from './optimize/optimize.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import {ModelsDocsComponent} from './models-docs/models-docs.component';
 import {ContactComponent} from './contact/contact.component';
 import {NotFoundComponent} from './not-found/not-found.component';
 import {RangeResultComponent} from './range-result/range-result.component';
+import {OptimizeResultComponent} from './optimize-result/optimize-result.component';
 // import { SearchComponent } from './view/search/search.component';
 // import {IndexComponent} from './view/index/index.component';
 // import {SearchComponent} from './view/search/search.component';
@@ -37,9 +39,18 @@ const routes: Routes = [
         component: SearchComponent
       },
       {
+        path: 'optimize',
+        component: OptimizeComponent
+      },
+      {
         path: 'prediction/result',
         // path: 'prediction/result/:index'配置动态路由
         component: ProdictionResultComponent
+      },
+      {
+        path: 'optimize/result',
+        // path: 'prediction/result/:index'配置动态路由
+        component: OptimizeResultComponent
       },
       {
         path: 'search/propertyResult',

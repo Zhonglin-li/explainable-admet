@@ -68,7 +68,7 @@
             id="fliterform1"
             style="color: rgb(79, 5, 153)"
             name="smiles"
-            placeholder="CC(=O)Oc1ccccc1C(=O)O"
+            placeholder="e.g.,CC(=O)Oc1ccccc1C(=O)O"
             [(ngModel)]="predictionData.Smiles"
             required
             minlength="2"
@@ -132,7 +132,6 @@
       "
     >
       <div class="form-group row">
-
         <div class="col-sm">
           <div class="row">
             <div class="col-sm-7 offset-1" id="filtform3">
@@ -775,17 +774,16 @@
 </form> -->
 
 
-
 <div class="modal fade" id="predictionModal" tabindex="-1" role="dialog" aria-labelledby="predictionModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="predictionModalLabel">ERROR</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title" id="predictionModalLabel">Error</h5>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
-        </button>
+        </button> -->
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="text-align: center; font-size: 19px; font-family: 'Times New Roman', Times, serif;">
        {{predictionError}}
       </div>
       <div class="modal-footer">
@@ -793,4 +791,23 @@
       </div>
     </div>
   </div>
+</div>
+
+
+<div class="modal fade" id="loadingModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" >
+    <span style="color: rgb(220, 247, 234); font-size: 20px; font-family: 'Times New Roman', Times, serif;">Calculating, please wait</span>
+    &nbsp;&nbsp;&nbsp;
+    <div class="spinner-grow text-info" role="status" style="width: 3rem; height: 3rem;">
+      <span class="sr-only">Loading...</span>
+    </div>
+    &nbsp;&nbsp;
+    <div class="spinner-grow text-info" role="status" style="width: 2rem; height: 2rem;">
+      <span class="sr-only">Loading...</span>
+    </div>
+    &nbsp;&nbsp;
+    <div class="spinner-grow text-info" role="status" style="width: 1rem; height: 1rem;">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div> 
 </div>

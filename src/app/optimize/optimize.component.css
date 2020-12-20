@@ -1,0 +1,15 @@
+.breadcrumb{
+    font-size: 18px;
+    background-color:rgb(199, 202, 204);
+}
+#divContainer{
+    background-color: white; 
+    color: rgb(79, 5, 153); 
+    margin-top: 25px;
+}
+.ng-valid[required], .ng-valid.required {
+    border-left: 3px solid #42a948;
+}
+.ng-invalid:not(form) {
+    border-left: 3px solid #a94442;
+}

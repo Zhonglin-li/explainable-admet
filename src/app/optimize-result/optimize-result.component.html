@@ -1,0 +1,141 @@
+
+<div class="container" id="divContainer">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/admetgcn/home" title="home">admetgcn</a></li>
+          <li class="breadcrumb-item"><a href="/admetgcn/optimize" title="optimize">optimize</a></li>
+          <li class="breadcrumb-item active" aria-current="page">results</li>
+        </ol>
+    </nav>
+    <br>
+    <div class="card mb-3" >
+      <div class="row no-gutters">
+        <div class="col-sm-5">
+          <a href="" data-toggle="modal" data-target="#staticBackdrop">
+            <img [src]="'data:image/png;base64,'+ result[0].img" class="card-img" alt="optimizedPicture" width=250px; height=350px;>
+          </a>
+          <div class="row" style="margin-bottom: 5px;">
+            <div class="col-sm-3 offset-1">
+              <span style="font-size: 19px; font-family: 'Times New Roman', Times, serif;">RA score:</span>
+            </div>
+            <div class="col-sm-5" >
+              <div class="progress" style="margin-top: 7px;">
+                <div class="progress-bar progress-bar-striped bg-info" role="progressbar" [style.width]="result[0].score +'%'" [attr.aria-valuenow]="result[0].score" aria-valuemin="0" aria-valuemax="100">{{result[0].score + '%'}}
+                </div>
+              </div>    
+            </div>
+            <br>
+            <br>
+            <br>
+            <div class="col-sm-10 offset-1" style="font-size: 16px; font-family: 'Times New Roman', Times, serif;">
+              Retrosynthetic Accessibility (RA) score is intended to be a binary score, indicating whether the underlying computer aided synthesis planning tool can find a route (1) or not (0) to a given compound.The tool has been trained on 200,000 compounds from ChEMBL and so is limited to compounds within similar regions of chemical space. It is intended to predict the retrosyntehtic accessibility of bioactive molecules.
+            </div>
+            
+          </div>
+        </div>
+        <div class="col-sm-7" >
+          <div class="card-body">
+            <h5 class="card-title" style="text-align: center; font-size: 19px; font-family: 'Times New Roman', Times, serif;">Bioisosteric Replacements</h5>
+            <p class="card-text" style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">Bioisosteres - A bioisostere is a molecule resulting from the exchange of an atom or of a group of atoms with an alternative, broadly similar, atom or group of atoms. The objective of a bioisosteric replacement is to create a new molecule with similar biological properties to the parent compound. The bioisosteric replacement may be physicochemically or topologically based. The replacement can attenuate toxicity, modify activity of lead, and/or alter pharmacokinetics or the toxicity of the lead. If you want to get the Bioisosteres of the compound on the left, please click on it to modify.</p>
+            <p class="card-text" style="font-size: 17px; font-family: 'Times New Roman', Times, serif;">Simple replacements</p>
+            <div class="row">
+              <div class="col-sm-6">
+                <ul class="card-text">
+                  <li>
+                    <p>H  &nbsp;&nbsp;  D  &nbsp;&nbsp; F</p>
+                  </li>
+                  <li>
+                    <p>Cl  &nbsp; PH<sub>2  &nbsp;  </sub>  SH   &nbsp;   CN</p>
+                  </li>
+                  <li>
+                    <p>I   &nbsp;&nbsp; tBu    &nbsp;&nbsp; CF<sub>3</sub>  </p>
+                  </li>
+                  <li>
+                    <p>CO<sub>2</sub>R      CONHR       COSR    
+                    <br> COCH<sub>2</sub>R</p>
+                  </li>
+                  <li>
+                    <p>C  &nbsp;&nbsp;  Si</p>
+                  </li>
+                  <li>
+                    <p>-OH &nbsp; -F &nbsp; -OMe</p>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-sm-6"> 
+                <ul class="card-text">
+                  <li>
+                    <p>Me &nbsp;  NH<sub>2</sub> &nbsp; OH   &nbsp;   F &nbsp;  Cl</p>
+                  </li>
+                  <li>
+                    <p>Br &nbsp;&nbsp;  iPr &nbsp;&nbsp;   CF<sub>3</sub></p>
+                  </li>
+                  <li>
+                    <p>CH<sub>2</sub>   NH   &nbsp;   O &nbsp;  S</p>
+                  </li>
+                  <li>
+                    <p>-CH=   &nbsp;  -N=   &nbsp;  -S-</p>
+                  </li>
+                  <li>
+                    <p>Phenyl  &nbsp;&nbsp;&nbsp; Pyridyl Thiophene 
+                    <br> 4-Fluorophenyl</p>
+                  </li>
+                  <li>
+                    <p>-O- &nbsp;&nbsp;&nbsp; -CF<sub>2</sub>-  &nbsp;  </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+      </div>
+      <div class="modal-body">
+        <app-jsme
+                [elementId]="'structure-search'"
+                [width]="'450px'"
+                [height]="'350px'"
+                [showDemo]="false"
+                [molString] = "result[0].smiles"
+                >loading JSME widget
+        </app-jsme>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" 
+        (click)="postData()">confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="optimizationModal" tabindex="-1" role="dialog" aria-labelledby="optimizationModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="optimizationModalLabel">ERROR</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       {{optimizeError}}
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Comfirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

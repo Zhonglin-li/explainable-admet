@@ -30,7 +30,6 @@ export class FilterChooseComponent implements OnInit {
   public data: any = {};
   public file: File;
   public predictionError = '';
-  
 
   public predictionData: any = {
     Smiles: '',
@@ -99,6 +98,7 @@ export class FilterChooseComponent implements OnInit {
   }
   postData(){
     const formdata = new FormData();
+    ($('#loadingModal')as any).modal('show');
     if (this.file){
       formdata.append('file', this.file);
       console.log(this.file);
@@ -110,7 +110,7 @@ export class FilterChooseComponent implements OnInit {
     const httpOptions = {headers: new HttpHeaders(), withCredentails: true};
     let api= 'http://172.16.41.163:8000/admetgcn/prediction';
     // send request of post and get data from backstage
-    this.http.post(api, formdata, httpOptions).subscribe((response:any)=>{
+    this.http.post(api, formdata, httpOptions).subscribe((response: any) => {
       console.log(response);
       console.log(response[0].validation);
       if (response[0].validation){
@@ -119,10 +119,12 @@ export class FilterChooseComponent implements OnInit {
       else{
         this.storage.setData(response);
         this.router.navigateByUrl('/admetgcn/prediction/result');
+        ($('#loadingModal')as any).modal('hide');
       }
     },
     (error: any) => {
       // console.log(error.error);
+      ($('#loadingModal')as any).modal('hide');
       if (error.error.msg){
         this.predictionError = error.error.msg;
       }

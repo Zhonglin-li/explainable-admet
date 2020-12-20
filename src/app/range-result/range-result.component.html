@@ -1,8 +1,8 @@
 <div class="container" id="divContainer">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/admetgcn/home">admetgcn</a></li>
-          <li class="breadcrumb-item"><a href="/admetgcn/search">search</a></li>
+          <li class="breadcrumb-item"><a href="/admetgcn/home" title="home">admetgcn</a></li>
+          <li class="breadcrumb-item"><a href="/admetgcn/search" title="search">search</a></li>
           <li class="breadcrumb-item active" aria-current="page">results</li> 
         </ol>
     </nav>
@@ -22,7 +22,8 @@
                 <td>{{i +1}}</td>
                 <!-- style="word-break: break-all;word-wrap: break-word;" -->
                 <!-- {{data.Mol}} -->
-                <td ><img [src]="'data:image/jpeg;base64,'+ data.Mol" alt="" /></td>
+                <td ><img [src]="'data:image/png;base64,'+ data.Mol" alt="" /></td>
+                <td>{{data.ChemblID}}</td>
                 <td>{{data.Label}}</td>
               </tr>
               

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {StorageService} from '../service/storage/storage.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ActivatedRoute} from '@angular/router';
-
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -14,11 +14,8 @@ export class ProdictionResultComponent implements OnInit {
   // public data: any;
   public historyList: any[] = [];
   public result: any;
-  // public regressionList = [
-  //   'LogS (Solubility)', 'LogP (Distribution Coefficient P)', 'LogD (Distribution Coefficient D at PH=7.4)', 'T 1/2 (Half Life)', 'CL (Clearance)', 'PPB (Plasma Protein Binding)'
-  // ];
-  // public list: any[] = [1];
-  constructor(public http: HttpClient, public storage: StorageService, public route: ActivatedRoute, ){ }
+  public validation: any = '';
+  constructor(public http: HttpClient, public storage: StorageService, public route: ActivatedRoute, private router: Router,){ }
   ngOnInit(): void {
     // console.log('oninit carry on');
     // get data from service:StorageService
@@ -57,6 +54,34 @@ export class ProdictionResultComponent implements OnInit {
     console.log(this.result[0]["input_smiles"]);
 
   }
+  opt(){
+    const formdata = new FormData();
+    ($('#loadingModal')as any).modal('show');
+    formdata.append('smiles', this.result[0]["input_smiles"]);
+    // console.log(this.inputData.Smiles);
+    const httpOptions = {headers: new HttpHeaders(), withCredentails: true};
+    let api = 'http://172.16.41.163:8000/admetgcn/optimize';
+    this.http.post(api, formdata, httpOptions).subscribe((response: any) => {
+      // console.log(response);
+      this.storage.setData(response);
+      this.router.navigateByUrl('/admetgcn/optimize/result');
+      ($('#loadingModal')as any).modal('hide');
+    },
+    (error: any) => {
+      // console.log(error.error);
+      if (error.error.msg){
+        this.validation = error.error.msg;
+      }
+      else{
+        this.validation = 'Server Not Found ';
+        // alert('server not found ');
+      }
+      ($('#loadingModal')as any).modal('hide');
+      ($('#validationModal')as any).modal('show');
+    }
+    );
+  }
+
 
 
 }

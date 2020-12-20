@@ -1,14 +1,12 @@
 <div class="container" id="divContainer">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/admetgcn/home">admetgcn</a></li>
-      <!-- <li class="breadcrumb-item"><a href="/admetgcn/prediction">prediction</a></li> -->
+      <li class="breadcrumb-item"><a href="/admetgcn/home" title="home">admetgcn</a></li>
       <li class="breadcrumb-item active" aria-current="page">search</li>
     </ol>
   </nav>
   <br />
   <div class="row">
-    <!-- class="col-md-4 control-label1" -->
     <label
       for="searchSelect"
       class="col-sm-3 col-form-label col-form-label-lg offset-1"
@@ -29,13 +27,7 @@
         </option>
       </select>
     </div>
-    <!-- <small id="searchModeHelp"  class="form-text text-muted col-sm-10 offset-1"
-    style="font-size: 17px;">Before calculation, users should prepare a valid SMILES or *.sdf file
-      in case of errors. Users can use ChemSAR to do this.</small
-    > -->
   </div>
-
-  <!-- <form method="POST" enctype="multipart/form-data" #searchForm="ngForm"> -->
     <br />
     <br />
     <div
@@ -56,7 +48,7 @@
               id="searchform1"
               style="color: rgb(79, 5, 153)"
               name="smiles"
-              placeholder="CC1=CN=C(C(=C1OC)C)CS(=O)C2=NC3=C(N2)C=C(C=C3)OC"
+              placeholder="e.g.,CC1=CN=C(C(=C1OC)C)CS(=O)C2=NC3=C(N2)C=C(C=C3)OC"
               [(ngModel)]="inputData.Smiles"
               required
               minlength="2"
@@ -83,82 +75,7 @@
             large) will lead to errors.</small
           >
         </div>
-        <!-- <div class="form-group row">
-          <div class="col-sm-3 offset-1">
-            <select
-              class="form-control form-control-lg"
-              id="PropertySearch"
-              name="PropertySearchMode"
-              [(ngModel)]="acSearch.mode"
-              style="color: rgb(79, 5, 153)"
-            >
-              <option [value]="item" *ngFor="let item of acSearch.modes">
-                {{ item }}
-              </option>
-            </select>
-          </div>
-
-          <div
-            class="col-sm-5"
-            
-            [style.display]="acSearch.mode == item ? 'block' : 'none'" *ngFor="let item of acSearch.modes"
-          >
-            <input
-              type="text"
-              class="form-control form-control-lg"
-              style="color: rgb(79, 5, 153)"
-              placeholder="Example:O=C([O-])C(C)c1ccc(cc1)CC(C)C"
-              name={{acSearch.mode}}
-            />
-            <small
-            id="acSearch1Help"
-            class="form-text text-muted col-sm-10 " style="font-size: 17px;"
-            >Please Write Correct SMILES in {{acSearch.mode}}</small
-          > -->
-        <!-- </div> -->
-
-        <!-- <small
-            id="fliterform1Help"
-            class="form-text text-muted col-sm-10 offset-1"
-            style="font-size: 17px;"
-            >Some invalid descriptor values (e.g., NaN, infinity or a value too
-            large) will lead to errors.</small
-          > -->
-        <!-- <div
-            class="col-sm-7"
-            [style.display]="acSearch.mode == 'CAS RN' ? 'block' : 'none'"
-          >
-            <input
-              type="text"
-              class="form-control form-control-lg"
-              style="color: rgb(79, 5, 153)"
-              placeholder="Example:15687-27-1"
-            />
-            <small
-            id="acSearch2Help"
-            class="form-text text-muted col-sm-10 " style="font-size: 17px;"
-            >e.g., ibuprofen</small
-          >
-          </div>
-          
-          <div
-            class="col-sm-7"
-            [style.display]="acSearch.mode == 'IUPAC Name' ? 'block' : 'none'"
-          >
-            <input
-              type="text"
-              class="form-control form-control-lg"
-              style="color: rgb(79, 5, 153)"
-              placeholder="Example:2-[4-(2-methylpropyl)phenyl]propanoate"
-            />
-            <small
-            id="acSearch3Help"
-            class="form-text text-muted col-sm-10 " style="font-size: 17px;"
-            >e.g., ibuprofen</small
-          >
-          </div> -->
-
-        <!-- </div> -->
+        
         <br />
         <div class="form-group row">
           <button
@@ -170,9 +87,6 @@
           >
             Submit
           </button>
-          <!-- <button type="reset" style="color:rgb(79, 5, 153)" class="btn btn-outline-primary col-sm-1 offset-2">
-              Reset
-            </button> -->
         </div>
       </form>
     </div>
@@ -251,12 +165,6 @@
               
               </div>
             </div>
-            <!-- <small
-              id="raSearch1Help"
-              class="form-text text-muted col-sm-10"
-              style="font-size: 17px"
-              >Limit: 1:1500</small
-            > -->
             
           
           </div>
@@ -295,39 +203,6 @@
                 >1</label>
             </div>
             
-            
-          <!-- <div
-            class="col-sm-5"
-            [style.display]="raSearch.mode == 'HBA' ? 'block' : 'none'"
-          >
-            <input
-              type="text"
-              class="form-control form-control-lg"
-              style="color: rgb(79, 5, 153)"
-              placeholder="0:5"
-            />
-            <small
-            id="raSearch3Help"
-            class="form-text text-muted col-sm-10 " style="font-size: 17px;"
-            >Limit: 0:20</small
-          >
-          </div>
-          <div
-            class="col-sm-5"
-            [style.display]="raSearch.mode == 'HBD' ? 'block' : 'none'"
-          >
-            <input
-              type="text"
-              class="form-control form-control-lg"
-              style="color: rgb(79, 5, 153)"
-              placeholder="0:3"
-            />
-            <small
-            id="raSearch3Help"
-            class="form-text text-muted col-sm-10 " style="font-size: 17px;"
-            >Limit: 0:20</small
-          >
-          </div> -->
           </div>
           <small *ngIf="classification.indexOf(raSearch.mode) > -1"
             class="form-text text-muted col-sm-10 offset-1"
@@ -358,9 +233,6 @@
           >
             Submit
           </button>
-          <!-- <button type="reset" style="color:rgb(79, 5, 153)" class="btn btn-outline-primary col-sm-1 offset-2">
-              Reset
-            </button> -->
         </div>
         
         
@@ -488,12 +360,12 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="searchModalLabel">ERROR</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title" id="searchModalLabel">Error</h5>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
-        </button>
+        </button> -->
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="font-size: 19px; font-family: 'Times New Roman', Times, serif; text-align: center;">
        {{searchError}}
       </div>
       <div class="modal-footer">
@@ -501,4 +373,23 @@
       </div>
     </div>
   </div>
+</div>
+
+
+<div class="modal fade" id="loadingModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" >
+    <span style="color: rgb(220, 247, 234); font-size: 20px; font-family: 'Times New Roman', Times, serif;">Searching, please wait</span>
+    &nbsp;&nbsp;&nbsp;
+    <div class="spinner-grow text-info" role="status" style="width: 3rem; height: 3rem;">
+      <span class="sr-only">Loading...</span>
+    </div>
+    &nbsp;&nbsp;
+    <div class="spinner-grow text-info" role="status" style="width: 2rem; height: 2rem;">
+      <span class="sr-only">Loading...</span>
+    </div>
+    &nbsp;&nbsp;
+    <div class="spinner-grow text-info" role="status" style="width: 1rem; height: 1rem;">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div> 
 </div>

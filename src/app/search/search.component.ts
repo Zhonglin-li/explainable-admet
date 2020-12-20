@@ -22,25 +22,23 @@ export class SearchComponent implements OnInit {
     rightMargin: '',
     rangeRadio: '',
   };
-  // public acSearch = {
-  //   mode: 'solubility',
-  //   modes: ['solubility', 'LogD', 'LogP', 'Papp (Caco-2 Permeability)', 'Pgp-inhibitor', 'HIA', 'PPB', 'BBB', 'P450 CYP1A2 inhibitor', 'CYP450 2C19 inhibitor', 'CYP450 2C9 inhibitor', 'CYP450 2C9 substrate', 'CYP450 2D6 inhibitor', 'CYP450 2D6 substrate', 'CYP450 3A4 inhibitor',  'CYP450 3A4 substrate', 'Clearance', 'T1/2', 'hERG', 'H-HT', 'Ames', 'DILI', 'FDAMDD'],
-  // };
+
   public raSearch = {
-    mode: 'Water solubility',
-    modes: ['Water solubility', 'LogD', 'Plasma protein binding', 'Volume of distribution', 'T1/2', 'Acute Oral Toxicity', 'Pyriformis', 'Human Intestinal Absorption', 'Blood Brain Barrier', 'BCRP', 'OATP1B3 inhibitior', 'P-glycoprotein inhibitior', 'CYP3A4 substrate', 'CYP2D6 substrate', 'CYP2C9 inhibition', 'CYP2D6 inhibition', 'Carcinogenicity', 'Eye corrosion', 'Ames mutagenesis', 'FDAMDD', 'Genotoxicity', 'Honey bee toxicity', 'Fish aquatic toxicity', 'Caco-2', 'Human oral bioavailability', 'OATP1B1 inhibitior', 'OCT2 inhibitior', 'P-glycoprotein substrate', 'CYP2C9 substrate', 'CYP3A4 inhibition', 'CYP2C19 inhibition', 'CYP1A2 inhibition', 'DILI', 'Eye irritation', 'H-HT', 'HERG', 'Skin_sensitization', 'Biodegradation'
+    mode: 'Logs',
+    modes: ['Logs', 'LogD', 'Plasma protein binding', 'Volume of distribution', 'Acute Oral Toxicity', 'Pyriformis', 'Human Intestinal Absorption', 'Blood Brain Barrier', 'BCRP', 'OATP1B3 inhibitior', 'P-glycoprotein inhibitior', 'CYP3A4 substrate', 'CYP2D6 substrate', 'CYP2C9 inhibition', 'CYP2D6 inhibition', 'Carcinogenicity', 'Eye corrosion', 'Ames mutagenesis', 'FDAMDD', 'Genotoxicity', 'Honey bee toxicity', 'Fish aquatic toxicity', 'Caco-2', 'Human oral bioavailability', 'OATP1B1 inhibitior', 'OCT2 inhibitior', 'P-glycoprotein substrate', 'CYP2C9 substrate', 'CYP3A4 inhibition', 'CYP2C19 inhibition', 'CYP1A2 inhibition', 'DILI', 'Eye irritation', 'H-HT', 'HERG', 'Skin_sensitization', 'Biodegradation', 'Boiling point', 'Bioconcentration factor', 'Logvp', 'Melting point', 'Logp'
     ]
   };
   public regression = [
-    'Water solubility', 'LogD', 'Plasma protein binding', 'Volume of distribution', 'T1/2', 'Acute Oral Toxicity', 'Pyriformis'
+    'Logs', 'LogD', 'Plasma protein binding', 'Volume of distribution',  'Acute Oral Toxicity', 'Pyriformis', 'Boiling point',
+    'Bioconcentration factor', 'Logvp', 'Melting point', 'Logp'
   ];
   public classification = [
     'Human Intestinal Absorption', 'Blood Brain Barrier', 'BCRP', 'OATP1B3 inhibitior', 'P-glycoprotein inhibitior', 'CYP3A4 substrate', 'CYP2D6 substrate', 'CYP2C9 inhibition', 'CYP2D6 inhibition', 'Carcinogenicity', 'Eye corrosion', 'Ames mutagenesis', 'FDAMDD', 'Genotoxicity', 'Honey bee toxicity', 'Fish aquatic toxicity', 'Caco-2', 'Human oral bioavailability', 'OATP1B1 inhibitior', 'OCT2 inhibitior', 'P-glycoprotein substrate', 'CYP2C9 substrate', 'CYP3A4 inhibition', 'CYP2C19 inhibition', 'CYP1A2 inhibition', 'DILI', 'Eye irritation', 'H-HT', 'HERG', 'Skin_sensitization', 'Biodegradation'
   ];
 
-  public fingerprinter = {
-    modes: ['MACCS fingerprint', 'Daylight fingerprint', 'Atom paris fingerprint', 'Topological Torsion Fingerprint', 'Morgan Fingerprint (radius=2)']
-  };
+  // public fingerprinter = {
+  //   modes: ['MACCS fingerprint', 'Daylight fingerprint', 'Atom paris fingerprint', 'Topological Torsion Fingerprint', 'Morgan Fingerprint (radius=2)']
+  // };
 
   constructor(private http: HttpClient, private router: Router, public storage: StorageService, ) { }
 
@@ -48,10 +46,9 @@ export class SearchComponent implements OnInit {
   }
   postData(){
     const formdata = new FormData();
-
+    ($('#loadingModal')as any).modal('show');
     formdata.append('smiles', this.inputData.Smiles);
     // console.log(this.inputData.Smiles);
-
     const httpOptions = {headers: new HttpHeaders()};
     let api = 'http://172.16.41.163:8000/admetgcn/search/property';
     // send request of post and get data from backstage
@@ -64,22 +61,25 @@ export class SearchComponent implements OnInit {
       else{
         this.storage.setData(response);
         this.router.navigateByUrl('/admetgcn/search/propertyResult');
+        ($('#loadingModal')as any).modal('hide');
       }
     },
     (error: any) => {
       // console.log(error.error.msg);
+      ($('#loadingModal')as any).modal('hide');
       if (error.error.msg){
-        alert(error.error.msg);
+        this.searchError = error.error.msg;
       }
       else{
-        alert('server not found ');
+        this.searchError = 'Server Not Found ';
       }
+      ($('#searchModal')as any).modal('show');
     });
     // setTimeout(() => this.router.navigateByUrl('/admetgcn/search/result'), 1500);
   }
   postRangeData(){
     const formdata = new FormData();
-
+    ($('#loadingModal')as any).modal('show');
     formdata.append('rangeProperty', this.raSearch.mode);
     if (this.regression.indexOf(this.raSearch.mode) > -1){
       if (this.inputData.leftMargin < this.inputData.rightMargin){
@@ -115,10 +115,12 @@ export class SearchComponent implements OnInit {
         response = response.slice(0, this.len);
         this.storage.setData(response);
         this.router.navigateByUrl('/admetgcn/search/rangeResult');
+        ($('#loadingModal')as any).modal('hide');
       }
     },
     (error: any) => {
       // console.log(error.error);
+      ($('#loadingModal')as any).modal('hide');
       if (error.error.msg){
         this.searchError = error.error.msg;
       }
