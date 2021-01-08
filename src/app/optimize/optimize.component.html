@@ -1,14 +1,72 @@
 <div class="container" id="divContainer">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/admetgcn/home" title="home">admetgcn</a></li>
+      <li class="breadcrumb-item"><a href="/explainable-admet/home" title="home">Explainable-Admet</a></li>
       <li class="breadcrumb-item active" aria-current="page">optimize</li>
     </ol>
   </nav>
   <br>
   <br>
+  <br>
   <form method="POST" enctype="multipart/form-data" #optimizeForm="ngForm">
-    <div class="form-group row">
+
+    <div class="form-group row" >
+      <label
+      for="DbSelect"
+      class="col-sm-2 col-form-label col-form-label-lg offset-1"
+      style="font-size: 23px"
+      >Property:</label
+    >
+
+      <div class="col-sm-3">
+        <select
+          class="form-control form-control-lg"
+          id="DbSelect"
+          name="optDb"
+          [(ngModel)]="choice.db"
+          style="color: rgb(79, 5, 153)"
+        >
+          <option [value]="item" *ngFor="let item of choice.dbs">
+            {{ item }}
+          </option>
+        </select>
+      </div>
+    <br>
+    <br>
+      <label
+      for="optCutoffSelect"
+      class="col-sm-1 col-form-label col-form-label-lg "
+      style="font-size: 23px"
+      >Cutoff:</label
+    >
+
+      <div class="col-sm-3">
+        <select
+          class="form-control form-control-lg"
+          id="optCutoffSelect"
+          name="optCutoff"
+          [(ngModel)]="choice.threshold"
+          style="color: rgb(79, 5, 153)"
+        >
+          <option [value]="i" *ngFor="let i of choice.thresholds">
+            {{ i }}
+          </option>
+        </select>
+      </div>
+      <small
+        id="optCutoffHelp"
+        class="form-text text-muted col-sm-10 offset-1"
+        style="font-size: 17px"
+        >Please select properties and threshold of the compound you want to optimize.</small
+      >
+
+      
+      
+      
+     
+      <br>
+      <br>
+
       <label
         for="optimizeform"
         class="col-sm-2 col-form-label col-form-label-lg offset-1"
@@ -40,6 +98,7 @@
       </div>
       <br>
       <br>
+      
       <small
         id="optimizeformHelp"
         class="form-text text-muted col-sm-10 offset-1"
@@ -48,6 +107,8 @@
         large) will lead to errors.</small
       >
     </div>
+    <br>
+
 
     <div class="form-group row">
       <button

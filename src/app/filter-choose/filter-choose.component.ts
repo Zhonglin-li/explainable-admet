@@ -4,13 +4,14 @@ import {JsmeComponent} from '../jsme/jsme/jsme.component';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {StorageService} from '../service/storage/storage.service';
+import {environment} from '../../environments/environment';
 import { shallowEqual } from 'ng-zorro-antd';
 // import * as bootstrap from 'bootstrap';
 // import * as $ from 'jquery';
 
 
 // import {FileUploader} from 'ng2-file-upload';
-// const URL = 'http://172.16.41.163:8000/admetgcn/prediction';
+// const URL = 'http://172.16.41.163:8000/explainable-admet/prediction';
 
 
 @Component({
@@ -30,7 +31,8 @@ export class FilterChooseComponent implements OnInit {
   public data: any = {};
   public file: File;
   public predictionError = '';
-
+  private restHost = environment.REST_HOST;
+  public api = this.restHost + '/explainable-admet/prediction';
   public predictionData: any = {
     Smiles: '',
     // File: '',
@@ -81,10 +83,10 @@ export class FilterChooseComponent implements OnInit {
     this.predictionData.Smiles = this.jsme.smiles;
   }
   getData(){
-    let api = 'http://172.16.41.163:8000/admetgcn/prediction';
+    // const api = this.restHost + '/explainable-admet/prediction';
     // rxjs
-    this.http.get(api).subscribe((response) => {
-      console.log(response);
+    this.http.get(this.api).subscribe((response) => {
+      // console.log(response);
     });
   }
   inputFile(file: File[]){
@@ -101,30 +103,29 @@ export class FilterChooseComponent implements OnInit {
     ($('#loadingModal')as any).modal('show');
     if (this.file){
       formdata.append('file', this.file);
-      console.log(this.file);
+      // console.log(this.file);
     }
     else{
       formdata.append('smiles', this.predictionData.Smiles);
       // console.log(this.inputData.Smiles);
     }
     const httpOptions = {headers: new HttpHeaders(), withCredentails: true};
-    let api= 'http://172.16.41.163:8000/admetgcn/prediction';
+    // let api= 'http://172.16.41.163:8000/explainable-admet/prediction';
     // send request of post and get data from backstage
-    this.http.post(api, formdata, httpOptions).subscribe((response: any) => {
-      console.log(response);
-      console.log(response[0].validation);
+    this.http.post(this.api, formdata, httpOptions).subscribe((response: any) => {
+      // console.log(response);
+      // console.log(response[0].validation);
       if (response[0].validation){
         this.validation = response[0].validation;
       }
       else{
         this.storage.setData(response);
-        this.router.navigateByUrl('/admetgcn/prediction/result');
+        this.router.navigateByUrl('/explainable-admet/prediction/result');
         ($('#loadingModal')as any).modal('hide');
       }
     },
     (error: any) => {
       // console.log(error.error);
-      ($('#loadingModal')as any).modal('hide');
       if (error.error.msg){
         this.predictionError = error.error.msg;
       }
@@ -132,11 +133,12 @@ export class FilterChooseComponent implements OnInit {
         this.predictionError = 'Server Not Found ';
         // alert('server not found ');
       }
+      ($('#loadingModal')as any).modal('hide');
       ($('#predictionModal')as any).modal('show');
     }
     );
     // const httpOptions = {headers: new HttpHeaders({'content-type': 'application/json'})};
-    // let api= 'http://192.168.1.135:8000/admetgcn/prediction';
+    // let api= 'http://192.168.1.135:8000/explainable-admet/prediction';
     // this.http.post(api, {'smiles': this.inputData.Smiles, 'Property': this.inputData.Property}, httpOptions).subscribe((response)=>{
     //   console.log(response);
     //   this.storage.setData({Property: this.inputData.Property});
@@ -152,8 +154,8 @@ export class FilterChooseComponent implements OnInit {
   //     this.formdata.append('Property', this.inputData.Property);
   //     this.storage.setData(this.formdata);
   //     console.log(this.storage.getData());
-    // setTimeout(() => this.router.navigateByUrl('/admetgcn/prediction/result'), 1500);
-    // this.router.navigateByUrl('/admetgcn/prediction/result');
+    // setTimeout(() => this.router.navigateByUrl('/explainable-admet/prediction/result'), 1500);
+    // this.router.navigateByUrl('/explainable-admet/prediction/result');
     // return {
     //   loading: true
     // };

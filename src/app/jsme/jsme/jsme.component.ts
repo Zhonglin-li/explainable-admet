@@ -21,7 +21,7 @@ export class JsmeComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() option: string;
   smiles = '';
   applet;
-  private _demoSmiles = 'CC(=O)Oc1ccccc1C(=O)O';
+  private _demoSmiles = 'NC1=NC2=C(N=CN2[C@@H]2C[C@H](CO)C=C2)C(NC2CC2)=N1';
 
   constructor(private zone: NgZone, private globalService: GlobalService, private myRouter:Router) {
   }

@@ -11,10 +11,16 @@ p{
     color: rgb(79, 5, 153);
     margin-top: 25px;
 }
-
+table th{
+    vertical-align:middle;
+}
 tr td{
     text-align: center;
 }
 tr th{
     text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 17px;
+    color: rgb(42, 35, 49);
+    padding: 0;
 }

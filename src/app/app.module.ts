@@ -37,6 +37,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { RangeResultComponent } from './range-result/range-result.component';
 import { OptimizeComponent } from './optimize/optimize.component';
 import { OptimizeResultComponent } from './optimize-result/optimize-result.component';
+import { HelpComponent } from './help/help.component';
 
 
 
@@ -59,6 +60,7 @@ import { OptimizeResultComponent } from './optimize-result/optimize-result.compo
     RangeResultComponent,
     OptimizeComponent,
     OptimizeResultComponent,
+    HelpComponent,
   ],
   imports: [
     BrowserModule,

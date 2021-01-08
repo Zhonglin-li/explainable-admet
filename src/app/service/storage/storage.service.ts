@@ -7,12 +7,20 @@ import {Observable} from 'rxjs';
 export class StorageService {
   public resData: any;
   constructor() { }
-  
   set(key: string, value: any){
-  localStorage.setItem(key, JSON.stringify(value));
+    sessionStorage.setItem(key, JSON.stringify(value));
+  // localStorage.setItem(key, JSON.stringify(value));
   }
   get(key: string){
-    return JSON.parse(localStorage.getItem(key));
+    return JSON.parse(sessionStorage.getItem(key));
+    // return JSON.parse(localStorage.getItem(key));
+  }
+  remove(key: string){
+    sessionStorage.removeItem(key);
+    // localStorage.removeItem(key);
+  }
+  clear(){
+    sessionStorage.clear();
   }
   setData(value: any){
     // this.resData.push(value);

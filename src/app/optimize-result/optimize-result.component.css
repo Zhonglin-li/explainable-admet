@@ -7,3 +7,27 @@
     color: rgb(79, 5, 153); 
     margin-top: 25px;
 }
+table{
+  vertical-align:middle;
+}
+tr th{
+  text-align: center;
+  font-size: 17px;
+  font-family: 'Times New Roman', Times, serif;
+}
+tr td{
+  text-align: center;
+  vertical-align: middle; 
+  padding: 0;
+}
+td img{
+  width: 250px;
+  height: 250px;
+}
+p{
+  color: black;
+}
+.nav-link{
+  font-size: 18px;
+  font-family: 'Times New Roman', Times, serif;
+}

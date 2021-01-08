@@ -1,0 +1,17 @@
+.breadcrumb{
+    font-size: 18px;
+    background-color:rgb(199, 202, 204);
+}
+#divContainer{
+    background-color: white; 
+    color: rgb(79, 5, 153); 
+    margin-top: 25px;
+}
+p{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 19px;
+    color: black;
+}
+h1{
+    text-align: center;
+}

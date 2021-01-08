@@ -1,36 +1,87 @@
 <div class="container" id="divContainer">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/admetgcn/home" title="home">admetgcn</a></li>
-          <li class="breadcrumb-item"><a href="/admetgcn/search" title="search">search</a></li>
+          <li class="breadcrumb-item"><a href="/explainable-admet/home" title="home">Explainable-Admet</a></li>
+          <li class="breadcrumb-item"><a href="/explainable-admet/search" title="search">search</a></li>
           <li class="breadcrumb-item active" aria-current="page">results</li> 
         </ol>
     </nav>
     
-    <div class="row" style="margin-top: 25px;"> 
+    <!-- <div class="row" style="margin-top: 25px;"> 
         <div class="col-sm-12" style="border: 1px solid blueviolet; ">
-          <table  class="row-border hover" id="example">
+          <table  class="row-border hover table table-striped table-hover" id="rangeResult" style="margin: 5px;">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>Index</th>
+                
                 <th>Molecule</th>
+                <th>ChemblID</th>
                 <th>Value</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let data of result,let i=index">
                 <td>{{i +1}}</td>
-                <!-- style="word-break: break-all;word-wrap: break-word;" -->
-                <!-- {{data.Mol}} -->
-                <td ><img [src]="'data:image/png;base64,'+ data.Mol" alt="" /></td>
-                <td>{{data.ChemblID}}</td>
+                
+                <td>
+                  <img [src]="'data:image/png;base64,'+ data.Mol" alt="" />
+                </td>
+                <td>{{data.ChemblId}}</td>
                 <td>{{data.Label}}</td>
               </tr>
+             
               
             </tbody>
-          </table> 
+          </table>
         </div>
         
 
-    </div>
+    </div> -->
+
+    <div class="row" style="margin-top: 25px;"> 
+      <div class="col-sm-12" style="border: 1px solid blueviolet; ">
+        <table  class="row-border hover table table-striped table-hover" id="Result" style="margin: 5px;">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Molecule</th>
+              <th>ChemblID</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <!-- <tbody>
+            <td>{{tableres.data[0].id}}</td>
+            <td>{{tableres.data[0].Mol}}</td>
+            <td>{{tableres.data[0].ChemblId}}</td>
+            <td>{{tableres.data[0].Label}}</td>
+          </tbody> -->
+          <!-- style="word-break: break-all;word-wrap: break-word;" -->
+              <!-- {{data.Mol}} -->
+              <!-- <img [src]="'data:image/png;base64,'+ data.Mol" alt="" /> -->
+              <!-- <app-jsme [elementId]="'compound_'+i"
+                  [width]="'220x'"
+                  [height]="'250px'"
+                  [option]="'depict nozoom noshowdraganddropsymbolindepictmode'"
+                  [molString]="data.Smiles"
+                ></app-jsme> -->
+          <!-- <tbody>
+            <tr *ngFor="let data of result,let i=index">
+              <td>{{i +1}}</td>
+              
+              
+              <td>
+                <img [src]="'data:image/png;base64,'+ data.Mol" alt="" />
+              </td>
+              <td>{{data.ChemblId}}</td>
+              <td>{{data.Label}}</td>
+            </tr>
+           
+            
+          </tbody> -->
+        </table>
+      </div>
+      
+
+  </div>
+    
 </div>

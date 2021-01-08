@@ -2,8 +2,8 @@
    <div class="container" id="divContainer"> 
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/admetgcn/home" title="home">admetgcn</a></li>
-        <li class="breadcrumb-item"><a href="/admetgcn/search" title="search">search</a></li>
+        <li class="breadcrumb-item"><a href="/explainable-admet/home" title="home">Explainable-Admet</a></li>
+        <li class="breadcrumb-item"><a href="/explainable-admet/search" title="search">search</a></li>
         <li class="breadcrumb-item active" aria-current="page">results</li> 
       </ol>
     </nav>
@@ -18,8 +18,8 @@
           <div class="col-sm-4" >
             <div>
               <img [src]="'data:image/jpeg;base64,'+ result[0].img" alt="" />
-              <p>&nbsp;&nbsp;&nbsp; Smiles : &nbsp; {{result[0]["smiles"]}}</p>
-              <a href=""></a>
+              <!-- <p>&nbsp;&nbsp;&nbsp; Smiles : &nbsp; {{result[0]["smiles"]}}</p> -->
+              <!-- <a href=""></a> -->
             </div>
           </div>
           <div class="col-sm-8" >
@@ -87,9 +87,9 @@
           <li class="nav-item" role="presentation">
             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Metabolism" role="tab" aria-controls="profile" aria-selected="false">Metabolism</a>
           </li>
-          <li class="nav-item" role="presentation">
+          <!-- <li class="nav-item" role="presentation">
             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Excretion" role="tab" aria-controls="profile" aria-selected="false">Excretion</a>
-          </li>
+          </li> -->
           <li class="nav-item" role="presentation">
             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Toxicity" role="tab" aria-controls="profile" aria-selected="false">Toxicity</a>
           </li>
@@ -116,6 +116,26 @@
               <tr>
                 <th scope="row">LogD</th>
               <td>{{result[0]["B_small_mole_logd"]}}</td> 
+              </tr>
+              <tr>
+                <th scope="row">LogP</th>
+              <td>{{result[0]["B_logp"]}}</td> 
+              </tr>
+              <tr>
+                <th scope="row">LogVP</th>
+              <td>{{result[0]["B_logvp"]}}</td> 
+              </tr>
+              <tr>
+                <th scope="row">LogBcf</th>
+              <td>{{result[0]["B_logbcf"]}}</td> 
+              </tr>
+              <tr>
+                <th scope="row">Boiling point</th>
+              <td>{{result[0]["B_bp"]}}</td> 
+              </tr>
+              <tr>
+                <th scope="row">Melting point</th>
+              <td>{{result[0]["B_mp"]}}</td> 
               </tr>
             </tbody>
           </table>
@@ -179,8 +199,8 @@
                     <td>{{result[0]["D_BBB"]}}</td> 
                 </tr>
                 <tr>
-                    <th scope="row">Volume of distribution</th>
-                    <td>{{result[0]["D_vd"]}}</td>
+                    <th scope="row">LogVD(Volume Distribution)</th>
+                    <td>{{result[0]["D_logvd"]}}</td>
                 </tr>
               </tbody>
             </table>
@@ -216,19 +236,19 @@
                 </tr>
                 <tr>
                     <th scope="row">CYP1A2 inhibition</th>
-                    <td>{{result[0]["M_CYP1a2"]}}</td>
+                    <td>{{result[0]["M_cyp1a2"]}}</td>
                 </tr>
                 <tr>
                     <th scope="row">CYP2C9 inhibition</th>
-                    <td>{{result[0]["M_CYP2c9"]}}</td>
+                    <td>{{result[0]["M_cyp2c9"]}}</td>
                 </tr>
                 <tr>
                     <th scope="row">CYP2C19 inhibition</th>
-                    <td>{{result[0]["M_CYP2c19"]}}</td>
+                    <td>{{result[0]["M_cyp2c19"]}}</td>
                 </tr>
                 <tr>
                     <th scope="row">CYP2D6 inhibition</th>
-                    <td>{{result[0]["M_CYP2d6"]}}</td>
+                    <td>{{result[0]["M_cyp2d6"]}}</td>
                 </tr>
                 <tr>
                     <th scope="row">CYP3A4 inhibition</th>
@@ -249,7 +269,7 @@
               </tbody>
             </table>
           </div>
-          <div class="tab-pane fade " id="Excretion" role="tabpanel" aria-labelledby="home-tab">
+          <!-- <div class="tab-pane fade " id="Excretion" role="tabpanel" aria-labelledby="home-tab">
             <table class="table table-striped table-hover">
               <thead>
                 <tr>
@@ -269,7 +289,7 @@
                 
               </tbody>
             </table>
-          </div>
+          </div> -->
           <div class="tab-pane fade " id="Toxicity" role="tabpanel" aria-labelledby="home-tab">
             <table class="table table-striped table-hover">
               <thead>

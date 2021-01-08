@@ -12,6 +12,7 @@ import {ContactComponent} from './contact/contact.component';
 import {NotFoundComponent} from './not-found/not-found.component';
 import {RangeResultComponent} from './range-result/range-result.component';
 import {OptimizeResultComponent} from './optimize-result/optimize-result.component';
+import {HelpComponent} from './help/help.component';
 // import { SearchComponent } from './view/search/search.component';
 // import {IndexComponent} from './view/index/index.component';
 // import {SearchComponent} from './view/search/search.component';
@@ -19,11 +20,11 @@ import {OptimizeResultComponent} from './optimize-result/optimize-result.compone
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/admetgcn/home',
+    redirectTo: '/explainable-admet/home',
     pathMatch: 'full'
   },
   {
-    path: 'admetgcn',
+    path: 'explainable-admet',
     component: LayoutComponent,
     children: [
       {
@@ -39,7 +40,7 @@ const routes: Routes = [
         component: SearchComponent
       },
       {
-        path: 'optimize',
+        path: 'optimization',
         component: OptimizeComponent
       },
       {
@@ -48,7 +49,7 @@ const routes: Routes = [
         component: ProdictionResultComponent
       },
       {
-        path: 'optimize/result',
+        path: 'optimization/result',
         // path: 'prediction/result/:index'配置动态路由
         component: OptimizeResultComponent
       },
@@ -65,6 +66,10 @@ const routes: Routes = [
       {
         path: 'models',
         component: ModelsDocsComponent
+      },
+      {
+        path: 'help',
+        component: HelpComponent
       },
       {
         path: 'contact',

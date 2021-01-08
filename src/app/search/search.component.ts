@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {StorageService} from '../service/storage/storage.service';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-search',
@@ -12,6 +13,7 @@ export class SearchComponent implements OnInit {
   public validation = '';
   public searchError = '';
   public len: any;
+  private restHost = environment.REST_HOST;
   public search: any = {
     mode: 'Range Property',
     modes: ['Range Property', 'Accurate Property'],
@@ -46,40 +48,44 @@ export class SearchComponent implements OnInit {
   }
   postData(){
     const formdata = new FormData();
-    ($('#loadingModal')as any).modal('show');
+    // ($('#searchLoadingModal')as any).modal('show');
     formdata.append('smiles', this.inputData.Smiles);
     // console.log(this.inputData.Smiles);
     const httpOptions = {headers: new HttpHeaders()};
-    let api = 'http://172.16.41.163:8000/admetgcn/search/property';
+    // let api = 'http://172.16.41.163:8000/explainable-admet/search/property';
+    const api = this.restHost + '/explainable-admet/search/property';
     // send request of post and get data from backstage
-    this.http.post(api, formdata, httpOptions).subscribe((response)=>{
+    this.http.post(api, formdata, httpOptions).subscribe((response) => {
       console.log(response);
-      console.log(response[0].validation);
+      // console.log(response[0].validation);
       if (response[0].validation){
         this.validation = response[0].validation;
       }
       else{
         this.storage.setData(response);
-        this.router.navigateByUrl('/admetgcn/search/propertyResult');
-        ($('#loadingModal')as any).modal('hide');
+        // setTimeout(() => this.router.navigateByUrl('/explainable-admet/search/propertyResult'), 2000);
+        // ($('#searchLoadingModal')as any).modal('hide');
+        // ($('#searchLoadingModal')as any).modal('dispose');
+        this.router.navigateByUrl('/explainable-admet/search/propertyResult');
+        // console.log('close')
       }
     },
     (error: any) => {
       // console.log(error.error.msg);
-      ($('#loadingModal')as any).modal('hide');
       if (error.error.msg){
         this.searchError = error.error.msg;
       }
       else{
         this.searchError = 'Server Not Found ';
       }
+      // ($('#searchLoadingModal')as any).modal('hide');
       ($('#searchModal')as any).modal('show');
     });
-    // setTimeout(() => this.router.navigateByUrl('/admetgcn/search/result'), 1500);
+    // setTimeout(() => this.router.navigateByUrl('/explainable-admet/search/result'), 1500);
   }
   postRangeData(){
+    // ($('#loadingModal')as any).modal('show');
     const formdata = new FormData();
-    ($('#loadingModal')as any).modal('show');
     formdata.append('rangeProperty', this.raSearch.mode);
     if (this.regression.indexOf(this.raSearch.mode) > -1){
       if (this.inputData.leftMargin < this.inputData.rightMargin){
@@ -100,27 +106,32 @@ export class SearchComponent implements OnInit {
     // console.log(this.inputData.Smiles);
 
     const httpOptions = {headers: new HttpHeaders()};
-    let api = 'http://172.16.41.163:8000/admetgcn/search/range';
+    // let api = 'http://172.16.41.163:8000/explainable-admet/search/range';
+    const api = this.restHost + '/explainable-admet/search/range';
     // send request of post and get data from backstage
-    this.http.post(api, formdata, httpOptions).subscribe((response: any)=>{
+    this.http.post(api, formdata, httpOptions).subscribe((response: any) => {
+      // console.log(response.data);
       // console.log(response);
       // console.log(response[response.length - 1]);
       // console.log(typeof(response));
       // console.log(response[response.length-1].validation);
       this.len = response.length - 1;
+      // console.log(this.len);
       if (response[response.length - 1].validation){
         this.validation = response[response.length - 1].validation;
       }
       else{
         response = response.slice(0, this.len);
+        // console.log(response);
         this.storage.setData(response);
-        this.router.navigateByUrl('/admetgcn/search/rangeResult');
-        ($('#loadingModal')as any).modal('hide');
+        this.router.navigateByUrl('/explainable-admet/search/rangeResult');
+        // ($('#loadingModal')as any).modal('hide');
       }
     },
     (error: any) => {
       // console.log(error.error);
-      ($('#loadingModal')as any).modal('hide');
+      // ($('#searchLoadingModal')as any).modal('hide');
+      // ($('#loadingModal')as any).modal('hide');
       if (error.error.msg){
         this.searchError = error.error.msg;
       }

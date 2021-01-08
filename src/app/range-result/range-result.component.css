@@ -7,10 +7,26 @@
   color: rgb(79, 5, 153); 
   margin-top: 25px;
 }
+
+table{
+  vertical-align:middle;
+}
 tr th{
   text-align: center;
+  font-size: 18px;
+  font-family: 'Times New Roman', Times, serif;
 }
-tr td{
-  text-align: center;
+/* tr td{
+  text-align: center !important;
+  vertical-align: middle !important; 
+  padding: 0 !important;
 }
+.rangeRes{
+  
+} */
+/* .table td{
+  text-align: center !important;
+  vertical-align: middle !important; 
+  padding: 0 !important;
+} */
 

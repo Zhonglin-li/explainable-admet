@@ -2,8 +2,8 @@
 <div class="container"  id="divContainer">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/admetgcn/home" title="home">admetgcn</a></li>
-      <li class="breadcrumb-item"><a href="/admetgcn/prediction" title="prediction">prediction</a></li>
+      <li class="breadcrumb-item"><a href="/explainable-admet/home" title="home">Explainable-Admet</a></li>
+      <li class="breadcrumb-item"><a href="/explainable-admet/prediction" title="prediction">prediction</a></li>
       <li class="breadcrumb-item active" aria-current="page">results</li> 
     </ol>
   </nav>
@@ -21,7 +21,7 @@
             <!-- <p>&nbsp;&nbsp; Smiles:&nbsp; {{result[0]["input_smiles"]}}</p> -->
             <div class="row" style="margin-bottom: 5px;">
               <div class="col-sm-4 offset-3" style="vertical-align: middle; ">
-                <button type="button" class="btn btn-secondary" (click)="opt()">optimize</button>
+                <button type="button" class="btn btn-info" (click)="opt()">optimize</button>
               </div>
             </div>
           </div>
@@ -70,7 +70,7 @@
   <br>
   <br>
   <div class="alert alert-primary" >
-    If you want to optimize this compound, please click the optimize button.
+    If you want to optimize this compound, please click the "optimize" button.
   </div>
   <!-- <div class="alert alert-primary" >
     <span class="badge badge-secondary">+</span> The best classification models for the coressponding ADME/T related properties <span class="badge badge-secondary">-</span>
@@ -95,13 +95,14 @@
         <table class="table table-striped table-hover">
           <thead>
             <tr>
+              <th scope="col">Category</th>
               <th scope="col">
-                Classifications
+                Property
               </th>
               <th scope="col">Value</th>
               <th scope="col">Probability</th>
               <th scope="col">
-                Classifications
+                Property
               </th>
               <th scope="col">Value</th>
               <th scope="col">Probability</th>
@@ -110,16 +111,19 @@
 
           <tbody class="accordion" id="accordionClassification">
               <tr>
-                  <th scope="row" >
+                <th scope="row" rowspan="6" style="vertical-align: middle">
+                  Absorption
+                </th>
+                  <td scope="row" >
                     <a data-toggle="collapse" href=".multi1" aria-expanded="false" aria-controls="HIA Caco2">
                     Human Intestinal Absorption
-                  </a></th>
+                  </a></td>
                   <td>{{result[0]["Prediction_value_A_HIA.csv"]}}</td>
                   <td>{{result[0]["Probability_A_HIA.csv"]}}</td>
-                  <th scope="row" >
+                  <td scope="row" >
                     <a data-toggle="collapse" href=".multi1" aria-expanded="false" aria-controls="HIA Caco2">
                     Caco-2
-                  </a></th>
+                  </a></td>
                   <td>{{result[0]["Prediction_value_A_caco2.csv"]}}</td>
                   <td>{{result[0]["Probability_A_caco2.csv"]}}</td>
               </tr>
@@ -130,6 +134,7 @@
                       <div class="row">
                         <div class="col-sm-8 offset-1">
                           <img [src]="'data:image/png;base64,'+ result[0]['ex_img_A_HIA.csv']" alt="Human Intestinal Absorption" />
+                          <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                         </div>
                       </div>
                        
@@ -142,6 +147,53 @@
                       <div class="row">
                         <div class="col-sm-8 offset-1">
                           <img [src]="'data:image/png;base64,'+ result[0]['ex_img_A_caco2.csv']" alt="Caco-2" />
+                          <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+
+              <tr>
+                <td scope="row">
+                  <a data-toggle="collapse" href=".multi2" aria-expanded="false" aria-controls="pgp pgp_subs">
+                    P-glycoprotein inhibitior
+                  </a>
+                </td>
+                <td>{{result[0]["Prediction_value_A_pgp.csv"]}}</td>
+                <td>{{result[0]["Probability_A_pgp.csv"]}}</td>
+                <td scope="row">
+                  <a data-toggle="collapse" href=".multi5" aria-expanded="false" aria-controls="pgp pgp_subs">
+                    P-glycoprotein substrate
+                  </a>
+                </td>
+                <td>{{result[0]["Prediction_value_A_pgp_subs.csv"]}}</td>
+                <td>{{result[0]["Probability_A_pgp_subs.csv"]}}</td>
+              </tr> 
+              <tr>
+                <td colspan="3">
+                  <div class="collapse multi2" id="pgp" data-parent="#accordionClassification">
+                    <div class="card card-body">
+                      <div class="row">
+                        <div class="col-sm-8 offset-1">
+                          <img [src]="'data:image/png;base64,'+ result[0]['ex_img_A_pgp.csv']" alt="P-glycoprotein inhibitior" />
+                          <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </td>
+                <td colspan="3">
+                  <div class="collapse multi2" id="pgp_subs" data-parent="#accordionClassification">
+                    <div class="card card-body">
+                      <div class="row">
+                        <div class="col-sm-8 offset-1">
+                          <img [src]="'data:image/png;base64,'+ result[0]['ex_img_A_pgp_subs.csv']" alt="P-glycoprotein substrate" />
+                          <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                         </div>
                       </div>
                       
@@ -150,72 +202,60 @@
                 </td>
               </tr>
             
-            <tr>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi2" aria-expanded="false" aria-controls="BBB OB">
-                  Blood Brain Barrier
-                </a>
-              </th>
-              <td>{{result[0]["Prediction_value_D_BBB.csv"]}}</td>
-              <td>{{result[0]["Probability_D_BBB.csv"]}}</td>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi2" aria-expanded="false" aria-controls="BBB OB">
-                  Human oral bioavailability
-                </a>
-              </th>
-              <td>{{result[0]["Prediction_value_A_OB.csv"]}}</td>
-              <td>{{result[0]["Probability_A_OB.csv"]}}</td>
-            </tr>
-            <tr>
-              <td colspan="3">
-                <div class="collapse multi2" id="BBB" data-parent="#accordionClassification">
-                  <div class="card card-body" >
-                    <div class="row">
-                      <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_D_BBB.csv']" alt="Blood Brain Barrier" />
+              <tr>
+                
+                <td scope="row">
+                  <a data-toggle="collapse" href=".multi3" aria-expanded="false" aria-controls="OB">
+                    Human oral bioavailability
+                  </a>
+                </td>
+                <td>{{result[0]["Prediction_value_A_OB.csv"]}}</td>
+                <td>{{result[0]["Probability_A_OB.csv"]}}</td>
+              </tr>
+              <tr>
+                <td colspan="3">
+                  <div class="collapse multi3" id="OB" data-parent="#accordionClassification">
+                    <div class="card card-body">
+                      <div class="row">
+                        <div class="col-sm-8 offset-1">
+                          <img [src]="'data:image/png;base64,'+ result[0]['ex_img_A_OB.csv']" alt="Human oral bioavailability" />
+                          <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                        </div>
                       </div>
+                      
                     </div>
-                    
                   </div>
-                </div>
-              </td>
-              <td colspan="3">
-                <div class="collapse multi2" id="OB" data-parent="#accordionClassification">
-                  <div class="card card-body">
-                    <div class="row">
-                      <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_A_OB.csv']" alt="Human oral bioavailability" />
-                      </div>
-                    </div>
-                    
-                  </div>
-                </div>
-              </td>
-            </tr>
+                </td>
+              </tr>
+
 
             <tr>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi3" aria-expanded="false" aria-controls="BCRP OATP1B1">
+              <th scope="row" rowspan="12" style="vertical-align: middle">
+                Metabolism
+              </th>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi5" aria-expanded="false" aria-controls="BCRP OATP1B1">
                   BCRP
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_M_BCRP.csv"]}}</td>
               <td>{{result[0]["Probability_M_BCRP.csv"]}}</td>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi3" aria-expanded="false" aria-controls="BCRP OATP1B1">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi5" aria-expanded="false" aria-controls="BCRP OATP1B1">
                   OATP1B1 inhibitior
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_M_OATP1B1_inhib.csv"]}}</td>
               <td>{{result[0]["Probability_M_OATP1B1_inhib.csv"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi3" id="BCRP" data-parent="#accordionClassification">
+                <div class="collapse multi5" id="BCRP" data-parent="#accordionClassification">
                   <div class="card card-body" >
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_BCRP.csv']" alt="BCRP" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -223,11 +263,12 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi3" id="OATP1B1" data-parent="#accordionClassification">
+                <div class="collapse multi5" id="OATP1B1" data-parent="#accordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_OATP1B1_inhib.csv']" alt="OATP1B1 inhibitior" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -237,28 +278,29 @@
             </tr>
 
             <tr>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi4" aria-expanded="false" aria-controls="OATP1B3 OCT2">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi6" aria-expanded="false" aria-controls="OATP1B3 OCT2">
                   OATP1B3 inhibitior
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_M_OATP1B3_inhib.csv"]}}</td>
               <td>{{result[0]["Probability_M_OATP1B3_inhib.csv"]}}</td>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi4" aria-expanded="false" aria-controls="OATP1B3 OCT2">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi6" aria-expanded="false" aria-controls="OATP1B3 OCT2">
                   OCT2 inhibitior
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_M_OCT2.csv"]}}</td>
               <td>{{result[0]["Probability_M_OCT2.csv"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi4" id="OATP1B3" data-parent="#accordionClassification">
+                <div class="collapse multi6" id="OATP1B3" data-parent="#accordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_OATP1B3_inhib.csv']" alt="OATP1B3 inhibitior" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -266,11 +308,12 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi4" id="OCT2" data-parent="#accordionClassification">
+                <div class="collapse multi6" id="OCT2" data-parent="#accordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_OCT2.csv']" alt="OCT2 inhibitior" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -279,72 +322,32 @@
               </td>
             </tr>
 
-            <tr>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi5" aria-expanded="false" aria-controls="pgp pgp_subs">
-                  P-glycoprotein inhibitior
-                </a>
-              </th>
-              <td>{{result[0]["Prediction_value_A_pgp.csv"]}}</td>
-              <td>{{result[0]["Probability_A_pgp.csv"]}}</td>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi5" aria-expanded="false" aria-controls="pgp pgp_subs">
-                  P-glycoprotein substrate
-                </a>
-              </th>
-              <td>{{result[0]["Prediction_value_A_pgp_subs.csv"]}}</td>
-              <td>{{result[0]["Probability_A_pgp_subs.csv"]}}</td>
-            </tr> 
-            <tr>
-              <td colspan="3">
-                <div class="collapse multi5" id="pgp" data-parent="#accordionClassification">
-                  <div class="card card-body">
-                    <div class="row">
-                      <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_A_pgp.csv']" alt="P-glycoprotein inhibitior" />
-                      </div>
-                    </div>
-                    
-                  </div>
-                </div>
-              </td>
-              <td colspan="3">
-                <div class="collapse multi5" id="pgp_subs" data-parent="#accordionClassification">
-                  <div class="card card-body">
-                    <div class="row">
-                      <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_A_pgp_subs.csv']" alt="P-glycoprotein substrate" />
-                      </div>
-                    </div>
-                    
-                  </div>
-                </div>
-              </td>
-            </tr>
+            
 
             <tr>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi6" aria-expanded="false" aria-controls="cyp3a4_subs cyp2C9_subs">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi7" aria-expanded="false" aria-controls="cyp3a4_subs cyp2C9_subs">
                   CYP3A4 substrate
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_M_cyp3a4_substrates.csv"]}}</td>
               <td>{{result[0]["Probability_M_cyp3a4_substrates.csv"]}}</td>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi6" aria-expanded="false" aria-controls="cyp3a4_subs cyp2c9_subs">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi7" aria-expanded="false" aria-controls="cyp3a4_subs cyp2c9_subs">
                   CYP2C9 substrate
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_M_cyp2C9_substrates.csv"]}}</td>
               <td>{{result[0]["Probability_M_cyp2C9_substrates.csv"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi6" id="cyp3a4_subs" data-parent="#accordionClassification">
+                <div class="collapse multi7" id="cyp3a4_subs" data-parent="#accordionClassification">
                   <div class="card card-body" >
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_cyp3a4_substrates.csv']" alt="CYP3A4 substrate" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -352,11 +355,12 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi6" id="cyp2c9_subs" data-parent="#accordionClassification">
+                <div class="collapse multi7" id="cyp2c9_subs" data-parent="#accordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_cyp2C9_substrates.csv']" alt="CYP2C9 substrate" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -366,28 +370,29 @@
             </tr>
 
             <tr>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi7" aria-expanded="false" aria-controls="cyp2d6_subs cyp3a4">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi8" aria-expanded="false" aria-controls="cyp2d6_subs cyp3a4">
                   CYP2D6 substrate
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_M_cyp2d6subs.csv"]}}</td>
               <td>{{result[0]["Probability_M_cyp2d6subs.csv"]}}</td>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi7" aria-expanded="false" aria-controls="cyp2d6_subs cyp3a4">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi8" aria-expanded="false" aria-controls="cyp2d6_subs cyp3a4">
                   CYP3A4 inhibition
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_M_cyp3a4.csv"]}}</td>
               <td>{{result[0]["Probability_M_cyp3a4.csv"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi7" id="cyp2d6_subs" data-parent="#accordionClassification">
+                <div class="collapse multi8" id="cyp2d6_subs" data-parent="#accordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_cyp2d6subs.csv']" alt="CYP2D6 substrate" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -395,11 +400,12 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi7" id="cyp3a4" data-parent="#accordionClassification">
+                <div class="collapse multi8" id="cyp3a4" data-parent="#accordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_cyp3a4.csv']" alt="CYP3A4 inhibition" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -409,28 +415,29 @@
             </tr>
 
             <tr>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi8" aria-expanded="false" aria-controls="cyp2c9 cyp2c19">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi9" aria-expanded="false" aria-controls="cyp2c9 cyp2c19">
                   CYP2C9 inhibition
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_M_cyp2c9.csv"]}}</td>
               <td>{{result[0]["Probability_M_cyp2c9.csv"]}}</td>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi8" aria-expanded="false" aria-controls="cyp2c9 cyp2c19">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi9" aria-expanded="false" aria-controls="cyp2c9 cyp2c19">
                   CYP2C19 inhibition
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_M_cyp2c19.csv"]}}</td>
               <td>{{result[0]["Probability_M_cyp2c19.csv"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi8" id="cyp2c9" data-parent="#accordionClassification">
+                <div class="collapse multi9" id="cyp2c9" data-parent="#accordionClassification">
                   <div class="card card-body" >
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_cyp2c9.csv']" alt="CYP2C9 inhibition" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -438,11 +445,12 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi8" id="cyp2c19" data-parent="#accordionClassification">
+                <div class="collapse multi9" id="cyp2c19" data-parent="#accordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_cyp2c19.csv']" alt="CYP2C19 inhibition" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -452,28 +460,29 @@
             </tr>
 
             <tr>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi9" aria-expanded="false" aria-controls="cyp2d6 cyp1a2">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi10" aria-expanded="false" aria-controls="cyp2d6 cyp1a2">
                   CYP2D6 inhibition
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_M_cyp2d6.csv"]}}</td>
               <td>{{result[0]["Probability_M_cyp2d6.csv"]}}</td>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi9" aria-expanded="false" aria-controls="cyp2d6 cyp1a2">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi10" aria-expanded="false" aria-controls="cyp2d6 cyp1a2">
                   CYP1A2 inhibition
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_M_cyp1a2.csv"]}}</td>
               <td>{{result[0]["Probability_M_cyp1a2.csv"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi9" id="cyp2d6" data-parent="#accordionClassification">
+                <div class="collapse multi10" id="cyp2d6" data-parent="#accordionClassification">
                   <div class="card card-body" >
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_cyp2d6.csv']" alt="CYP2D6 inhibition" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -481,11 +490,41 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi9" id="cyp1a2" data-parent="#accordionClassification">
+                <div class="collapse multi10" id="cyp1a2" data-parent="#accordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_cyp1a2.csv']" alt="CYP1A2 inhibition" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+
+            <tr>
+              <th scope="row" rowspan="2" style="vertical-align: middle">
+                Distribution
+              </th>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi4" aria-expanded="false" aria-controls="BBB">
+                  Blood Brain Barrier
+                </a>
+              </td>
+              <td>{{result[0]["Prediction_value_D_BBB.csv"]}}</td>
+              <td>{{result[0]["Probability_D_BBB.csv"]}}</td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div class="collapse multi4" id="BBB" data-parent="#accordionClassification">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_D_BBB.csv']" alt="Blood Brain Barrier" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -495,28 +534,32 @@
             </tr>
 
             <tr>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi10" aria-expanded="false" aria-controls="carcinogenicity DILI">
+              <th scope="row" rowspan="14" style="vertical-align: middle">
+                Toxicity
+              </th>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi11" aria-expanded="false" aria-controls="carcinogenicity DILI">
                   Carcinogenicity
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_T_Carcinogenicity.csv"]}}</td>
               <td>{{result[0]["Probability_T_Carcinogenicity.csv"]}}</td>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi10" aria-expanded="false" aria-controls="carcinogenicity DILI">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi11" aria-expanded="false" aria-controls="carcinogenicity DILI">
                   DILI
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_T_DILI.csv"]}}</td>
               <td>{{result[0]["Probability_T_DILI.csv"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi10" id="carcinogenicity" data-parent="#accordionClassification">
+                <div class="collapse multi11" id="carcinogenicity" data-parent="#accordionClassification">
                   <div class="card card-body" >
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_Carcinogenicity.csv']" alt="Carcinogenicity" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -524,11 +567,12 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi10" id="DILI" data-parent="#accordionClassification">
+                <div class="collapse multi11" id="DILI" data-parent="#accordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_DILI.csv']" alt="DILI" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -538,28 +582,29 @@
             </tr>
 
             <tr>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi11" aria-expanded="false" aria-controls="eye_corrossion eye_injury">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi12" aria-expanded="false" aria-controls="eye_corrossion eye_injury">
                   Eye corrosion
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_T_eye_corrossion.csv"]}}</td>
               <td>{{result[0]["Probability_T_eye_corrossion.csv"]}}</td>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi11" aria-expanded="false" aria-controls="eye_corrossion eye_injury">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi12" aria-expanded="false" aria-controls="eye_corrossion eye_injury">
                   Eye irritation
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_T_eye_injury.csv"]}}</td>
               <td>{{result[0]["Probability_T_eye_injury.csv"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi11" id="eye_corrossion" data-parent="#accordionClassification">
+                <div class="collapse multi12" id="eye_corrossion" data-parent="#accordionClassification">
                   <div class="card card-body" >
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_eye_corrossion.csv']" alt="Eye corrosion" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -567,11 +612,12 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi11" id="eye_injury" data-parent="#accordionClassification">
+                <div class="collapse multi12" id="eye_injury" data-parent="#accordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_eye_injury.csv']" alt="Eye irritation" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -581,28 +627,29 @@
             </tr>
 
             <tr>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi12" aria-expanded="false" aria-controls="ames H_HT">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi13" aria-expanded="false" aria-controls="ames H_HT">
                   Ames mutagenesis
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_T_Ames.csv"]}}</td>
               <td>{{result[0]["Probability_T_Ames.csv"]}}</td>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi12" aria-expanded="false" aria-controls="ames H_HT">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi13" aria-expanded="false" aria-controls="ames H_HT">
                   H-HT
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_T_H_HT.csv"]}}</td>
               <td>{{result[0]["Probability_T_H_HT.csv"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi12" id="ames" data-parent="#accordionClassification">
+                <div class="collapse multi13" id="ames" data-parent="#accordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_Ames.csv']" alt="Ames mutagenesis" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -610,11 +657,12 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi12" id="H_HT" data-parent="#accordionClassification">
+                <div class="collapse multi13" id="H_HT" data-parent="#accordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_H_HT.csv']" alt="H-HT" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -624,28 +672,29 @@
             </tr>
 
             <tr>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi13" aria-expanded="false" aria-controls="fdammd herg">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi14" aria-expanded="false" aria-controls="fdammd herg">
                   FDAMDD
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_T_fdammd.csv"]}}</td>
               <td>{{result[0]["Probability_T_fdammd.csv"]}}</td>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi13" aria-expanded="false" aria-controls="fdammd herg">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi14" aria-expanded="false" aria-controls="fdammd herg">
                   HERG
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_T_herg.csv"]}}</td>
               <td>{{result[0]["Probability_T_herg.csv"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi13" id="fdammd" data-parent="#accordionClassification">
+                <div class="collapse multi14" id="fdammd" data-parent="#accordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_fdammd.csv']" alt="FDAMDD" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -653,11 +702,12 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi13" id="herg" data-parent="#accordionClassification">
+                <div class="collapse multi14" id="herg" data-parent="#accordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_herg.csv']" alt="HERG" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -667,28 +717,29 @@
             </tr>
 
             <tr>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi14" aria-expanded="false" aria-controls="genotoxicity skin_sens">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi15" aria-expanded="false" aria-controls="genotoxicity skin_sens">
                   Genotoxicity
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_T_genotoxicity.csv"]}}</td>
               <td>{{result[0]["Probability_T_herg.csv"]}}</td>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi14" aria-expanded="false" aria-controls="genotoxicity skin_sens">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi15" aria-expanded="false" aria-controls="genotoxicity skin_sens">
                   Skin_sensitization
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_T_skin_sensitization.csv"]}}</td>
               <td>{{result[0]["Probability_T_skin_sensitization.csv"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi14" id="genotoxicity" data-parent="#accordionClassification">
+                <div class="collapse multi15" id="genotoxicity" data-parent="#accordionClassification">
                   <div class="card card-body" >
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_genotoxicity.csv']" alt="Genotoxicity" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -696,11 +747,12 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi14" id="skin_sens" data-parent="#accordionClassification">
+                <div class="collapse multi15" id="skin_sens" data-parent="#accordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_skin_sensitization.csv']" alt="Skin_sensitization" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -710,28 +762,29 @@
             </tr>
 
             <tr>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi15" aria-expanded="false" aria-controls="Beetoxic Biodegradation">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi16" aria-expanded="false" aria-controls="Beetoxic Biodegradation">
                   Honey bee toxicity
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_T_Beetoxic.csv"]}}</td>
               <td>{{result[0]["Probability_T_Beetoxic.csv"]}}</td>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi15" aria-expanded="false" aria-controls="Beetoxic Biodegradation">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi16" aria-expanded="false" aria-controls="Beetoxic Biodegradation">
                   Biodegradation
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_T_Biodegradation.csv"]}}</td>
               <td>{{result[0]["Probability_T_Biodegradation.csv"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi15" id="Beetoxic" data-parent="#accordionClassification">
+                <div class="collapse multi16" id="Beetoxic" data-parent="#accordionClassification">
                   <div class="card card-body" >
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_Beetoxic.csv']" alt="Honey bee toxicity" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -739,11 +792,12 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi15" id="Biodegradation" data-parent="#accordionClassification">
+                <div class="collapse multi16" id="Biodegradation" data-parent="#accordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_Biodegradation.csv']" alt="Biodegradation" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -753,21 +807,22 @@
             </tr>
 
             <tr>
-              <th scope="row">
-                <a data-toggle="collapse" href=".multi16" aria-expanded="false" aria-controls="Fishtoxic">
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi17" aria-expanded="false" aria-controls="Fishtoxic">
                   Fish aquatic toxicity
                 </a>
-              </th>
+              </td>
               <td>{{result[0]["Prediction_value_T_Fishtoxic.csv"]}}</td>
               <td>{{result[0]["Probability_T_Fishtoxic.csv"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi16" id="Fishtoxic" data-parent="#accordionClassification">
+                <div class="collapse multi17" id="Fishtoxic" data-parent="#accordionClassification">
                   <div class="card card-body" >
                     <div class="row">
                       <div class="col-sm-8 offset-1">
                         <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_Fishtoxic.csv']" alt="Fish aquatic toxicity" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
                     
@@ -782,7 +837,8 @@
         <table class="table table-striped table-hover">
           <thead>
             <tr>
-              <th scope="col">Regressions</th>
+              <th scope="col">Category</th>
+              <th scope="col">Property</th>
               <th scope="col">Value</th>
               <th scope="col">Unit</th>
             </tr>
@@ -791,57 +847,68 @@
           <tbody>
             
             <tr>
-              <th scope="row">LogS</th>
+              <th scope="row" rowspan="7" style="vertical-align: middle">
+                Physicochemical property
+              </th>
+              <td scope="row">LogS</td>
               <td>{{result[0]["Prediction_value_B_logs.csv"]}}</td>
               <td>logS</td>
             </tr>
             <tr>
-              <th scope="row">LogD</th>
+              <td scope="row">LogD</td>
               <td>{{result[0]["Prediction_value_B_small_mole_logd.csv"]}}</td>
               <td>logd</td>
             </tr>
             <tr>
-              <th scope="row">Plasma protein binding</th>
-              <td>{{result[0]["Prediction_value_D_PPB.csv"]}}</td>
-              <td>%</td>
-            </tr>
-            <tr>
-              <th scope="row">Volume of distribution</th>
-              <td>{{result[0]["Prediction_value_D_logvd.csv"]}}</td>
-              <td>L/kg</td>
-            </tr>
-            <tr>
-              <th scope="row">Boiling point</th>
+              <td scope="row">Boiling point</td>
               <td>{{result[0]["Prediction_value_B_bp.csv"]}}</td>
               <td>℃</td>
             </tr>
             <tr>
-              <th scope="row">Logbcf</th>
+              <td scope="row">Logbcf</td>
               <td>{{result[0]["Prediction_value_B_logbcf.csv"]}}</td>
               <td></td>
             </tr>
             <tr>
-              <th scope="row">Logp</th>
+              <td scope="row">Logp</td>
               <td>{{result[0]["Prediction_value_B_logp.csv"]}}</td>
               <td></td>
             </tr>
             <tr>
-              <th scope="row">Logvp</th>
+              <td scope="row">Logvp</td>
               <td>{{result[0]["Prediction_value_B_logvp.csv"]}}</td>
               <td></td>
             </tr>
             <tr>
-              <th scope="row">Melting point</th>
+              <td scope="row">Melting point</td>
               <td>{{result[0]["Prediction_value_B_mp.csv"]}}</td>
               <td>℃</td>
             </tr>
+            
             <tr>
-              <th scope="row">Acute Oral Toxicity</th>
+              <th scope="row" rowspan="2" style="vertical-align: middle">
+                Distribution
+              </th>
+              <td scope="row">Plasma protein binding</td>
+              <td>{{result[0]["Prediction_value_D_PPB.csv"]}}</td>
+              <td>%</td>
+            </tr>
+            <tr>
+              <td scope="row">Volume of distribution</td>
+              <td>{{result[0]["Prediction_value_D_logvd.csv"]}}</td>
+              <td>L/kg</td>
+            </tr>
+            
+            <tr>
+              <th scope="row" rowspan="2" style="vertical-align: middle">
+                Toxicity
+              </th>
+              <td scope="row">Acute Oral Toxicity</td>
               <td>{{result[0]["Prediction_value_T_Acute_oral_toxicity.csv"]}}</td>
               <td>pLD50</td>
             </tr>
             <tr>
-              <th scope="row">Pyriformis</th>
+              <td scope="row">Pyriformis</td>
               <td>{{result[0]["Prediction_value_T_pyriformis.csv"]}}</td>
               <td>pIGC50 </td>
             </tr>
