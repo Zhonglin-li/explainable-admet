@@ -42,37 +42,6 @@ export class FilterChooseComponent implements OnInit {
     modes: ['By Inputting SMILES',  'By Drawing Molecule from Editor', ],
   };
   // 'By Uploading Files',
-  // public physicochemical: any = {
-  //   mode: 'LogS (Solubility)',
-  //   modes: ['LogS (Solubility)', 'LogD (Distribution Coefficient D at PH=7.4)', 'LogP (Distribution Coefficient P)',
-  //   ],
-  // };
-  // public absorption: any = {
-  //   mode: 'LogPapp (Caco-2 Permeability)',
-  //   modes: ['LogPapp (Caco-2 Permeability)', 'Pgp-inhibitor', 'HIA (Human Intestinal Absorption)',
-  //   ],
-  // };
-  // public distribution: any = {
-  //   mode: 'PPB (Plasma Protein Binding)',
-  //   modes: ['PPB (Plasma Protein Binding)', 'BBB (Blood–Brain Barrier)',
-  //   ],
-  // };
-  // public metabolism: any = {
-  //   mode: 'CYP450 1A2 inhibitor',
-  //   modes: ['CYP450 1A2 inhibitor', 'CYP450 3A4 inhibitor', 'CYP450 3A4 substrate', 'CYP450 2C9 inhibitor', 'CYP450 2C9 substrate', 'CYP450 2C19 inhibitor', 'CYP450 2D6 inhibitor', 'CYP450 2D6 substrate'
-
-  //   ],
-  // };
-  // public excretion: any = {
-  //   mode: 'T 1/2 (Half Life)',
-  //   modes: ['T 1/2 (Half Life)', 'CL (Clearance)',
-  //   ],
-  // };
-  // public toxicity: any = {
-  //   mode: 'hERG (hERG Blockers)',
-  //   modes: ['hERG (hERG Blockers)', 'H-HT (Human Hepatotoxicity)', 'Ames (Ames Mutagenicity)', 'DILI (Drug Induced Liver Injury)', 'FDAMDD (Maximum Recommended Daily Dose)',
-  //   ],
-  // };
 
   constructor(private http: HttpClient, private router: Router, public storage: StorageService, ) {
   }
@@ -107,14 +76,11 @@ export class FilterChooseComponent implements OnInit {
     }
     else{
       formdata.append('smiles', this.predictionData.Smiles);
-      // console.log(this.inputData.Smiles);
     }
     const httpOptions = {headers: new HttpHeaders(), withCredentails: true};
-    // let api= 'http://172.16.41.163:8000/explainable-admet/prediction';
     // send request of post and get data from backstage
     this.http.post(this.api, formdata, httpOptions).subscribe((response: any) => {
       // console.log(response);
-      // console.log(response[0].validation);
       if (response[0].validation){
         this.validation = response[0].validation;
       }
@@ -131,7 +97,6 @@ export class FilterChooseComponent implements OnInit {
       }
       else{
         this.predictionError = 'Server Not Found ';
-        // alert('server not found ');
       }
       ($('#loadingModal')as any).modal('hide');
       ($('#predictionModal')as any).modal('show');

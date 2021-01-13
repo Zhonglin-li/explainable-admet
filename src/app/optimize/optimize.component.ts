@@ -36,7 +36,6 @@ export class OptimizeComponent implements OnInit {
     formdata.append('smiles', this.optimizeData.Smiles);
     formdata.append('cutoff', this.choice.threshold);
     formdata.append('dbname', this.choice.db);
-    // console.log(this.inputData.Smiles);
     const httpOptions = {headers: new HttpHeaders(), withCredentails: true};
     const api = this.restHost + '/explainable-admet/optimization';
     this.http.post(api, formdata, httpOptions).subscribe((response: any) => {
@@ -53,12 +52,10 @@ export class OptimizeComponent implements OnInit {
       }
       else{
         this.validation = 'Server Not Found ';
-        // alert('server not found ');
       }
       ($('#validationModal')as any).modal('show');
     }
     );
- 
   }
 
 }

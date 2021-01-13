@@ -112,11 +112,7 @@ export class SearchComponent implements OnInit {
     this.http.post(api, formdata, httpOptions).subscribe((response: any) => {
       // console.log(response.data);
       // console.log(response);
-      // console.log(response[response.length - 1]);
-      // console.log(typeof(response));
-      // console.log(response[response.length-1].validation);
       this.len = response.length - 1;
-      // console.log(this.len);
       if (response[response.length - 1].validation){
         this.validation = response[response.length - 1].validation;
       }
@@ -137,7 +133,6 @@ export class SearchComponent implements OnInit {
       }
       else{
         this.searchError = 'Server Not Found ';
-        // alert('server not found ');
       }
       ($('#searchModal')as any).modal('show');
     });

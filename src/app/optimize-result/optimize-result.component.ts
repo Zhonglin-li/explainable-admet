@@ -44,12 +44,13 @@ export class OptimizeResultComponent implements OnInit {
       $('#optimizeTable').DataTable( {
         dom: 'iptl',
         ordering: false,
+        processing: true,
       } );
     });
     if (this.storage.getData()){
       this.result = this.storage.getData();
       // console.log(this.result);
-      // use method set() of service:StorageService to implement local storage of data,and judge if the data exits or not
+      // use method set() of service:StorageService to implement session storage of data,and judge if the data exits or not
       if (this.historyList.indexOf(this.result) === -1){
         this.result[1].score = String(this.result[1].score * 100);
         this.historyList.push(this.result);
@@ -75,9 +76,7 @@ export class OptimizeResultComponent implements OnInit {
     formdata.append('smiles', this.optimizeData.Smiles);
     formdata.append('cutoff', this.choice.threshold);
     formdata.append('dbname', this.choice.db);
-    // console.log(this.inputData.Smiles);
     const httpOptions = {headers: new HttpHeaders(), withCredentails: true};
-    // const api = 'http://172.16.41.163:8000/explainable-admet/optimization';
     const api = this.restHost + '/explainable-admet/optimization';
     this.http.post(api, formdata, httpOptions).subscribe((response: any) => {
       // console.log(response);
@@ -90,13 +89,6 @@ export class OptimizeResultComponent implements OnInit {
         this.storage.set('optimizationParama', this.historyList);
         window.location.reload();
       }
-      // this.result[1].score = String(this.result[1].score * 100);
-      // $(function(): void{
-      //   $('#optimizeTable').DataTable( {
-      //     destroy: true,
-      //     dom: 'iptl'
-      //   } );
-      // });
       ($('#loadingModal')as any).modal('hide');
     },
     (error: any) => {
@@ -106,7 +98,6 @@ export class OptimizeResultComponent implements OnInit {
       }
       else{
         this.optimizeError = 'Server Not Found ';
-        // alert('server not found ');
       }
       ($('#loadingModal')as any).modal('hide');
       ($('#optimizationModal')as any).modal('show');
@@ -114,43 +105,6 @@ export class OptimizeResultComponent implements OnInit {
     );
 
   }
-  // preData(){
-  //   const formdata = new FormData();
-  //   ($('#loadingModal')as any).modal('show');
-  //   formdata.append('smiles', this.result[0].smiles);
-  //   // console.log(this.inputData.Smiles);
-  //   const httpOptions = {headers: new HttpHeaders(), withCredentails: true};
-  //   let api= 'http://172.16.41.163:8000/explainable-admet/prediction';
-  //   // send request of post and get data from backstage
-  //   this.http.post(api, formdata, httpOptions).subscribe((response: any) => {
-  //     console.log(response);
-  //     // this.preresult = response;  
-  //     // this.prebool = true;
-  //     this.storage.setData(response);
-  //     this.router.navigateByUrl('/explainable-admet/prediction/result');
-  //     ($('#loadingModal')as any).modal('hide');
-      
-  //     // this.storage.setData(response);
-  //     // this.router.navigateByUrl('/explainable-admet/prediction/result');
-  //     // ($('#loadingModal')as any).modal('hide');
-      
-  //   },
-  //   (error: any) => {
-  //     // console.log(error.error);
-  //     if (error.error.msg){
-  //       this.preError = error.error.msg;
-  //     }
-  //     else{
-  //       this.preError = 'Server Not Found ';
-  //       // alert('server not found ');
-  //     }
-  //     ($('#loadingModal')as any).modal('hide');
-  //     ($('#preModal')as any).modal('show');
-  //   }
-  //   );
-  
-
-  // }
   predicting(index = null){
     const formdata = new FormData();
     ($('#loadingModal')as any).modal('show');
@@ -160,9 +114,7 @@ export class OptimizeResultComponent implements OnInit {
     else{
       formdata.append('smiles', this.result[0][index].smiles);
     }
-    // console.log(this.inputData.Smiles);
     const httpOptions = {headers: new HttpHeaders(), withCredentails: true};
-    // const api = 'http://172.16.41.163:8000/explainable-admet/prediction';
     const api = this.restHost + '/explainable-admet/prediction';
     this.http.post(api, formdata, httpOptions).subscribe((response: any) => {
       // console.log(response);
@@ -177,7 +129,6 @@ export class OptimizeResultComponent implements OnInit {
       }
       else{
         this.preError = 'Server Not Found ';
-        // alert('server not found ');
       }
       ($('#loadingModal')as any).modal('hide');
       ($('#preModal')as any).modal('show');
@@ -190,12 +141,10 @@ export class OptimizeResultComponent implements OnInit {
     };
     const downName = file + '.csv';
     const link = document.createElement('a');
-    // const api = 'http://172.16.41.163:8000/explainable-admet/downloadfile';
     const api = this.restHost + '/explainable-admet/downloadfile';
     this.http.get(api, {params: datas, responseType: 'blob'}).subscribe((response: any ) => {
       // console.log(response);
       link.setAttribute('href', window.URL.createObjectURL(response));
-      // link.setAttribute('download', 'results.csv');
       link.setAttribute('download', downName);
       link.style.visibility = 'hidden';
       document.body.appendChild(link);
