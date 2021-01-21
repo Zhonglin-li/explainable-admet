@@ -1,11 +1,17 @@
 .breadcrumb{
-    font-size: 18px;
-    background-color:rgb(199, 202, 204);
+    /* font-size: 18px; */
+    /* background-color:#e4dfdf; */
+    background-image: linear-gradient(to right, #e4afcb 0%, #b8cbb8 0%, #b8cbb8 0%, #e2c58b 30%, #c2ce9c 64%, #7edbdc 100%);
 }
 #divContainer{
     background-color: white; 
     color: rgb(79, 5, 153); 
     margin-top: 25px;
+}
+.breadcrumb-item{
+  font-size: 24px;
+  font-family: Tahoma, sans-serif;
+  font-weight: lighter;
 }
 table{
   vertical-align:middle;
@@ -28,6 +34,17 @@ p{
   color: black;
 }
 .nav-link{
-  font-size: 18px;
+  font-size: 25px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+small{
   font-family: 'Times New Roman', Times, serif;
+  font-weight: lighter;
+}
+em{
+  font-size: 18px;
+  text-shadow: 0 0 2px grey;
+}
+.nav-pills .nav-link.active{
+  background-color: rgb(238, 43, 245);
 }

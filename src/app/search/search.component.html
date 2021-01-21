@@ -5,12 +5,13 @@
       <li class="breadcrumb-item active" aria-current="page">search</li>
     </ol>
   </nav>
-  <br />
+  <br>
+  <br>
   <div class="row">
     <label
       for="searchSelect"
       class="col-sm-3 col-form-label col-form-label-lg offset-1"
-      style="font-size: 23px"
+      style="font-size: 23px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; text-shadow: 0 0 2px rgb(9, 61, 54);"
       >Retrieval method:</label
     >
 
@@ -38,7 +39,7 @@
           <label
             for="searchform1"
             class="col-sm-2 col-form-label col-form-label-lg offset-1"
-            style="font-size: 23px"
+            style="font-size: 23px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; text-shadow: 0 0 2px rgb(9, 61, 54);"
             >Smiles:</label
           >
           <div class="col-sm-7">
@@ -71,12 +72,10 @@
             id="searchform1Help"
             class="form-text text-muted col-sm-10 offset-1"
             style="font-size: 17px"
-            >Some invalid descriptor values (e.g., NaN, infinity or a value too
-            large) will lead to errors.</small
+            >Some <em>invalid input</em> will lead to errors.</small
           >
         </div>
-        
-        <br />
+        <br>
         <div class="form-group row">
           <button
             type="submit"
@@ -95,7 +94,7 @@
     <div [style.display]="search.mode == 'Range Property' ? 'block' : 'none'">
       <form method="POST" enctype="multipart/form-data" #rangeForm="ngForm">
         <div class="form-group row">
-          <div class="col-sm-4 ">
+          <div class="col-sm-4 offset-1">
             <select
               class="form-control form-control-lg"
               id="rangeSearch"
@@ -223,6 +222,7 @@
         
       </div>
         <br />
+        <br>
         <div class="form-group row">
           <button
             type="submit"
@@ -353,6 +353,7 @@
     </div> -->
   <!-- </form> -->
 </div>
+
 
 
 

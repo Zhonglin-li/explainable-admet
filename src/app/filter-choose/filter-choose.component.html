@@ -3,7 +3,7 @@
 <div
   class="container"
   [style.height]="
-    filter.mode == 'By Drawing Molecule from Editor' ? '600px' : '500px'
+    filter.mode == 'By Drawing Molecule from Editor' ? '750px' : '500px'
   "
   id="divContainer"
 >
@@ -23,7 +23,7 @@
       <label
         for="exampleSelect1"
         class="col-sm-3 col-form-label col-form-label-lg offset-1"
-        style="font-size: 23px"
+        style="font-size: 23px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; text-shadow: 0 0 2px rgb(9, 61, 54);"
         >Select the Data Source:</label
       >
 
@@ -44,8 +44,8 @@
         id="queryModeHelp"
         class="form-text text-muted col-sm-10 offset-1"
         style="font-size: 17px"
-        >Before calculation, users should prepare a valid SMILES in case of
-        errors. Users can use ChemSAR to do this.</small
+        >Before calculation, users should prepare a <em>valid SMILES</em> in case of
+        errors. Users can use <em>ChemSAR</em> to do this.</small
       >
     </div>
     <br />
@@ -58,7 +58,7 @@
         <label
           for="fliterform1"
           class="col-sm-2 col-form-label col-form-label-lg offset-1"
-          style="font-size: 23px"
+          style="font-size: 23px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; text-shadow: 0 0 2px rgb(35, 110, 129);"
           >Smiles:</label
         >
         <div class="col-sm-7">
@@ -89,8 +89,7 @@
           id="fliterform1Help"
           class="form-text text-muted col-sm-10 offset-1"
           style="font-size: 17px"
-          >Some invalid descriptor values (e.g., NaN, infinity or a value too
-          large) will lead to errors.</small
+          >Some <em>invalid input</em> will lead to errors.</small
         >
       </div>
     </div>
@@ -184,7 +183,6 @@
     <div class="form-group row">
       <button
         type="button"
-        style="font-size: 18px; color: rgb(79, 5, 153)"
         class="btn btn-outline-primary col-sm-1 offset-3"
         [style.display]="
           filter.mode == 'By Drawing Molecule from Editor' ? 'block' : 'none'
@@ -195,7 +193,6 @@
       </button>
       <button
         type="submit"
-        style="color: rgb(79, 5, 153)"
         class="btn btn-outline-primary col-sm-1 offset-5"
         [disabled]="!filterForm.form.valid"
         (click)="postData()"

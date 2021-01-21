@@ -3,17 +3,46 @@
   background-color: white; 
   color: rgb(79, 5, 153); 
   margin-top: 25px;
+  /* height: 100%;
+  background-image: linear-gradient(to right, #e4afcb 0%, #b8cbb8 0%, #b8cbb8 0%, #e2c58b 30%, #c2ce9c 64%, #7edbdc 100%); */
 }
 .collapsedata{
     color:rgb(79, 5, 153);   
 }
 .breadcrumb{
-  font-size: 18px;
-  background-color:rgb(199, 202, 204);
+  /* font-size: 18px; */
+  /* background-color:#e4dfdf; */
+  /* background-color: rgb(190,231,233); */
+  background-image: linear-gradient(to right, #e4afcb 0%, #b8cbb8 0%, #b8cbb8 0%, #e2c58b 30%, #c2ce9c 64%, #7edbdc 100%);
 }
 .ng-valid[required], .ng-valid.required {
   border-left: 3px solid #42a948;
 }
 .ng-invalid:not(form) {
   border-left: 3px solid #a94442;
+}
+.breadcrumb-item{
+  font-size: 24px;
+  font-family: Tahoma, sans-serif;
+  /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+  font-weight: lighter;
+}
+small{
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: lighter;
+}
+button{
+  font-size: 18px; 
+  color: rgb(79, 5, 153);
+  font-family: 'Times New Roman', Times, serif;
+}
+em{
+  font-size: 18px;
+  text-shadow: 0 0 2px grey;
+}
+input{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+select{
+  font-family: 'Times New Roman', Times, serif;
 }

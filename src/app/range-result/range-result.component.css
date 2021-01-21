@@ -1,13 +1,18 @@
 .breadcrumb{
-    font-size: 18px;
-    background-color:rgb(199, 202, 204);
+    /* font-size: 18px;
+    background-color:#e4dfdf; */
+    background-image: linear-gradient(to right, #e4afcb 0%, #b8cbb8 0%, #b8cbb8 0%, #e2c58b 30%, #c2ce9c 64%, #7edbdc 100%);
 }
 #divContainer{
   background-color: white; 
   color: rgb(79, 5, 153); 
   margin-top: 25px;
 }
-
+.breadcrumb-item{
+  font-size: 24px;
+  font-family: Tahoma, sans-serif;
+  font-weight: lighter;
+}
 table{
   vertical-align:middle;
 }

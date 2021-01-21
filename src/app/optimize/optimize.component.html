@@ -2,10 +2,9 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/explainable-admet/home" title="home">Explainable-Admet</a></li>
-      <li class="breadcrumb-item active" aria-current="page">optimize</li>
+      <li class="breadcrumb-item active" aria-current="page">optimization</li>
     </ol>
   </nav>
-  <br>
   <br>
   <br>
   <form method="POST" enctype="multipart/form-data" #optimizeForm="ngForm">
@@ -14,7 +13,7 @@
       <label
       for="DbSelect"
       class="col-sm-2 col-form-label col-form-label-lg offset-1"
-      style="font-size: 23px"
+      style="font-size: 23px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; text-shadow: 0 0 2px rgb(9, 61, 54);"
       >Property:</label
     >
 
@@ -36,7 +35,7 @@
       <label
       for="optCutoffSelect"
       class="col-sm-1 col-form-label col-form-label-lg "
-      style="font-size: 23px"
+      style="font-size: 23px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; text-shadow: 0 0 2px rgb(9, 61, 54);"
       >Cutoff:</label
     >
 
@@ -57,20 +56,17 @@
         id="optCutoffHelp"
         class="form-text text-muted col-sm-10 offset-1"
         style="font-size: 17px"
-        >Please select properties and threshold of the compound you want to optimize.</small
+        >Please select the right <em>property</em> and <em>threshold</em> of the compound you want to optimize.</small
       >
-
-      
-      
-      
      
+      <br>
       <br>
       <br>
 
       <label
         for="optimizeform"
         class="col-sm-2 col-form-label col-form-label-lg offset-1"
-        style="font-size: 23px"
+        style="font-size: 23px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; text-shadow: 0 0 2px rgb(9, 61, 54);"
         >Smiles:</label
       >
       <div class="col-sm-7">
@@ -103,8 +99,7 @@
         id="optimizeformHelp"
         class="form-text text-muted col-sm-10 offset-1"
         style="font-size: 17px"
-        >Some invalid descriptor values (e.g., NaN, infinity or a value too
-        large) will lead to errors.</small
+        >Some <em>invalid input</em> will lead to errors.</small
       >
     </div>
     <br>

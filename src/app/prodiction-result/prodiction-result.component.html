@@ -21,7 +21,7 @@
             <!-- <p>&nbsp;&nbsp; Smiles:&nbsp; {{result[0]["input_smiles"]}}</p> -->
             <div class="row" style="margin-bottom: 5px;">
               <div class="col-sm-4 offset-3" style="vertical-align: middle; ">
-                <button type="button" class="btn btn-info" (click)="opt()">optimize</button>
+                <button type="button" class="btn btn-outline-info" (click)="opt()">Optimization</button>
               </div>
             </div>
           </div>
@@ -70,9 +70,8 @@
   <br>
   <br>
   <div class="alert alert-primary" >
-    If you want to optimize this compound, please click the "optimize" button.
+    If you want to optimize this compound, please click the <em>Optimization</em> button.
   </div>
-  <br>
   <br>
    <div class="row">
     <div
@@ -200,7 +199,6 @@
               </tr>
             
               <tr>
-                
                 <td scope="row">
                   <a data-toggle="collapse" href=".multi3" aria-expanded="false" aria-controls="OB">
                     Human oral bioavailability
@@ -208,6 +206,9 @@
                 </td>
                 <td>{{result[0]["Prediction_value_A_OB.csv"]}}</td>
                 <td>{{result[0]["Probability_A_OB.csv"]}}</td>
+                <td scope="row"></td>
+                <td></td>
+                <td></td>
               </tr>
               <tr>
                 <td colspan="3">
@@ -220,6 +221,12 @@
                         </div>
                       </div>
                       
+                    </div>
+                  </div>
+                </td>
+                <td colspan="3">
+                  <div class="collapse multi3 vihide" data-parent="#accordionClassification">
+                    <div class="card card-body">
                     </div>
                   </div>
                 </td>
@@ -513,6 +520,9 @@
               </td>
               <td>{{result[0]["Prediction_value_D_BBB.csv"]}}</td>
               <td>{{result[0]["Probability_D_BBB.csv"]}}</td>
+              <td scope="row"></td>
+              <td></td>
+              <td></td>
             </tr>
             <tr>
               <td colspan="3">
@@ -525,6 +535,12 @@
                       </div>
                     </div>
                     
+                  </div>
+                </div>
+              </td>
+              <td colspan="3">
+                <div class="collapse multi4 vihide" data-parent="#accordionClassification">
+                  <div class="card card-body">
                   </div>
                 </div>
               </td>
@@ -811,6 +827,9 @@
               </td>
               <td>{{result[0]["Prediction_value_T_Fishtoxic.csv"]}}</td>
               <td>{{result[0]["Probability_T_Fishtoxic.csv"]}}</td>
+              <td scope="row"></td>
+              <td></td>
+              <td></td>
             </tr>
             <tr>
               <td colspan="3">
@@ -823,6 +842,12 @@
                       </div>
                     </div>
                     
+                  </div>
+                </div>
+              </td>
+              <td colspan="3">
+                <div class="collapse multi17 vihide" data-parent="#accordionClassification">
+                  <div class="card card-body">
                   </div>
                 </div>
               </td>
@@ -844,17 +869,17 @@
           <tbody>
             
             <tr>
-              <th scope="row" rowspan="7" style="vertical-align: middle">
+              <th scope="row" rowspan="9" style="vertical-align: middle">
                 Physicochemical property
               </th>
-              <td scope="row">LogS</td>
-              <td>{{result[0]["Prediction_value_B_logs.csv"]}}</td>
-              <td>logS</td>
+              <td scope="row">Solubility</td>
+              <td>{{result[0]["Prediction_value_Solubility_AqSolDB.csv"]}}</td>
+              <td>log mol/L</td>
             </tr>
             <tr>
               <td scope="row">LogD</td>
               <td>{{result[0]["Prediction_value_B_small_mole_logd.csv"]}}</td>
-              <td>logd</td>
+              <td></td>
             </tr>
             <tr>
               <td scope="row">Boiling point</td>
@@ -881,6 +906,16 @@
               <td>{{result[0]["Prediction_value_B_mp.csv"]}}</td>
               <td>℃</td>
             </tr>
+            <tr>
+              <td scope="row">Lipophilicity</td>
+              <td>{{result[0]["Prediction_value_Lipophilicity_AstraZeneca.csv"]}}</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td scope="row">Hydration free energy</td>
+              <td>{{result[0]["Prediction_value_HydrationFreeEnergy_FreeSolv.csv"]}}</td>
+              <td>Kcal/mol </td>
+            </tr>
             
             <tr>
               <th scope="row" rowspan="2" style="vertical-align: middle">
@@ -892,12 +927,32 @@
             </tr>
             <tr>
               <td scope="row">Volume of distribution</td>
-              <td>{{result[0]["Prediction_value_D_logvd.csv"]}}</td>
+              <td>{{result[0]["Prediction_value_D_vd.csv"]}}</td>
               <td>L/kg</td>
+            </tr>
+
+
+            <tr>
+              <th scope="row" rowspan="3" style="vertical-align: middle">
+                Excretion
+              </th>
+              <td scope="row">LogCL</td>
+              <td>{{result[0]["Prediction_value_E_logcl.csv"]}}</td>
+              <td>mL/min/kg</td>
+            </tr>
+            <tr>
+              <td scope="row">LogMRT(values of mean residence time)</td>
+              <td>{{result[0]["Prediction_value_E_logmrt.csv"]}}</td>
+              <td>h</td>
+            </tr>
+            <tr>
+              <td scope="row">log (T1/2)</td>
+              <td>{{result[0]["Prediction_value_E_logt12.csv"]}}</td>
+              <td>h</td>
             </tr>
             
             <tr>
-              <th scope="row" rowspan="2" style="vertical-align: middle">
+              <th scope="row" rowspan="3" style="vertical-align: middle">
                 Toxicity
               </th>
               <td scope="row">Acute Oral Toxicity</td>
@@ -907,7 +962,12 @@
             <tr>
               <td scope="row">Pyriformis</td>
               <td>{{result[0]["Prediction_value_T_pyriformis.csv"]}}</td>
-              <td>pIGC50 </td>
+              <td>pIGC50</td>
+            </tr>
+            <tr>
+              <td scope="row">LD50</td>
+              <td>{{result[0]["Prediction_value_LD50_Zhu.csv"]}}</td>
+              <td>-log mol/kg</td>
             </tr>
           </tbody>
         </table>

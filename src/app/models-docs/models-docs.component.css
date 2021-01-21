@@ -1,14 +1,17 @@
-/* body {
-    position: relative;
-  } */
+
 .breadcrumb{
   font-size: 18px;
-  background-color:rgb(199, 202, 204);
+  background-image: linear-gradient(to right, #e4afcb 0%, #b8cbb8 0%, #b8cbb8 0%, #e2c58b 30%, #c2ce9c 64%, #7edbdc 100%);
 }
 #divContainer{
   background-color: white; 
   color: rgb(79, 5, 153); 
   margin-top: 25px;
+}
+.breadcrumb-item{
+  font-size: 24px;
+  font-family: Tahoma, sans-serif;
+  font-weight: lighter;
 }
 #list-example{
   height: 300px; 
@@ -37,7 +40,20 @@ h4>span{
 }
 tr td{
   text-align: center;
+  vertical-align: middle;
+}
+tr>th{
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 18px;
 }
 .thCenter{
   text-align: center;
+}
+.list-group-item{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 18px;
+}
+.alert-primary{
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 18px;
 }

@@ -64,19 +64,24 @@
   border:1px solid rgb(79, 5, 153);
 } */
 #nav{
-  /* background-color: rgb(214, 188, 240); */
-  background-color: rgb(223, 213, 233);
+  /* background-color: rgb(190,231,233); */
+  /* background-color: rgb(221, 70, 214); */
+  /* background-color: rgb(149, 88, 129); */
+  background-color: rgb(122, 26, 98);
   height: 80px;
+  /* background-image: linear-gradient(25deg, #b99eff, #a5c1dc, #82e1b7, #34ff8f) */
   
 }
 .navbar-brand>span{
-  color: rgb(91, 178, 218); 
-  font-size: 30px;
+  /* color: rgb(84, 166, 204);  */
+  color: white;
+  font-size: 33px;
   font-weight: 10px;
 }
 .nav-link>span{
-  font-size: 23px;
-  color: rgb(91, 178, 218);
+  font-size: 25px;
+  /* color: rgb(69, 109, 128); */
+  color: white;
   font-weight: 5px;
 }
 #homeImg{
@@ -90,12 +95,16 @@ a:focus{
   color: rgb(224, 177, 236);
 } 
 a>span:hover {
-  color: rgb(130, 52, 150);
+  color: rgb(245, 118, 234);
 }
 .navbar-text{
   font-size: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: aliceblue;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  text-shadow: 2px 2px 3px grey;
 }
-
+span{
+  font-family: 'Times New Roman', Times, serif;
+}
 
   

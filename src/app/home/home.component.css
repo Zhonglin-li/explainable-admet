@@ -7,8 +7,22 @@
     -o-background-size: cover;
     background-size: cover;
   }
-#carouselExampleIndicators{
+#carouselIndicators{
   margin-top: 15px;
 }
+.welcome{
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: lighter;
+  text-shadow: 7px -3px 5px rgb(119, 147, 240);
+}
+.card-header{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: lighter;
+}
+.card-text{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
+}
+
   
  

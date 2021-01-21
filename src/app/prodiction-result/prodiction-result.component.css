@@ -3,24 +3,44 @@ p{
     word-break: break-all;
 }
 .breadcrumb{
-    font-size: 18px;
-    background-color:rgb(199, 202, 204);
+    /* font-size: 18px;
+    background-color:#e4dfdf; */
+    background-image: linear-gradient(to right, #e4afcb 0%, #b8cbb8 0%, #b8cbb8 0%, #e2c58b 30%, #c2ce9c 64%, #7edbdc 100%);
 }
 #divContainer{
     background-color: white; 
     color: rgb(79, 5, 153);
     margin-top: 25px;
 }
+.breadcrumb-item{
+    font-size: 24px;
+    font-family: Tahoma, sans-serif;
+    font-weight: lighter;
+  }
 table th{
     vertical-align:middle;
 }
 tr td{
     text-align: center;
+    font-size: 18px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 tr th{
     text-align: center;
     font-family: 'Times New Roman', Times, serif;
-    font-size: 17px;
+    font-size: 18px;
     color: rgb(42, 35, 49);
     padding: 0;
+}
+button{
+    font-size: 18px; 
+    color: rgb(188, 57, 214);
+    font-family: 'Times New Roman', Times, serif;
+  }
+.alert-primary{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 18px;
+}
+.vihide{
+    visibility: hidden;
 }
