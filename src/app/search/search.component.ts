@@ -26,8 +26,8 @@ export class SearchComponent implements OnInit {
   };
 
   public raSearch = {
-    mode: 'Solubility',
-    modes: ['Solubility', 'LogD', 'Plasma protein binding', 'Volume of distribution', 'Acute Oral Toxicity', 'Pyriformis', 'Human Intestinal Absorption', 'Blood Brain Barrier', 'BCRP', 'OATP1B3 inhibitior', 'P-glycoprotein inhibitior', 'CYP3A4 substrate', 'CYP2D6 substrate', 'CYP2C9 inhibition', 'CYP2D6 inhibition', 'Carcinogenicity', 'Eye corrosion', 'Ames mutagenesis', 'FDAMDD', 'Genotoxicity', 'Honey bee toxicity', 'Fish aquatic toxicity', 'Caco-2', 'Human oral bioavailability', 'OATP1B1 inhibitior', 'OCT2 inhibitior', 'P-glycoprotein substrate', 'CYP2C9 substrate', 'CYP3A4 inhibition', 'CYP2C19 inhibition', 'CYP1A2 inhibition', 'DILI', 'Eye irritation', 'H-HT', 'HERG', 'Skin_sensitization', 'Biodegradation', 'Boiling point', 'Bioconcentration factor', 'Logvp', 'Melting point', 'Logp', 'Hydration Free Energy', 'Lipophilicity', 'LD50', 'LogCL', 'LogMRT', 'T 1/2(Half Life)'
+    mode: 'Plasma protein binding',
+    modes: ['Plasma protein binding', 'Solubility', 'LogD', 'Volume of distribution', 'Acute Oral Toxicity', 'Pyriformis', 'Human Intestinal Absorption', 'Blood Brain Barrier', 'BCRP', 'OATP1B3 inhibitior', 'P-glycoprotein inhibitior', 'CYP3A4 substrate', 'CYP2D6 substrate', 'CYP2C9 inhibition', 'CYP2D6 inhibition', 'Carcinogenicity', 'Eye corrosion', 'Ames mutagenesis', 'FDAMDD', 'Genotoxicity', 'Honey bee toxicity', 'Fish aquatic toxicity', 'Caco-2', 'Human oral bioavailability', 'OATP1B1 inhibitior', 'OCT2 inhibitior', 'P-glycoprotein substrate', 'CYP2C9 substrate', 'CYP3A4 inhibition', 'CYP2C19 inhibition', 'CYP1A2 inhibition', 'DILI', 'Eye irritation', 'H-HT', 'HERG', 'Skin_sensitization', 'Biodegradation', 'Boiling point', 'Bioconcentration factor', 'Logvp', 'Melting point', 'Logp', 'Hydration Free Energy', 'Lipophilicity', 'LD50', 'LogCL', 'LogMRT', 'T 1/2(Half Life)'
     ]
   };
   public regression = [
