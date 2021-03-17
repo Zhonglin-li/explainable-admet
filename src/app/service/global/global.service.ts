@@ -24,9 +24,10 @@ export class GlobalService {
   }
 
   private _globalLoading = new Subject<boolean>();
+  loadingStatus$ = this._globalLoading.asObservable();
   private _nextStep = new Subject<number>();
   nextStepValue$ = this._nextStep.asObservable();
-  loadingStatus$ = this._globalLoading.asObservable();
+  
 
   setNextStepValue(value: number) {
     this._nextStep.next(value);

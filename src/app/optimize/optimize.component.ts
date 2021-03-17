@@ -21,8 +21,7 @@ export class OptimizeComponent implements OnInit {
     thresholds: [1.5, 2.5, 3.5],
     db: 'logbcf',
     dbs: [
-      'logbcf', 'logs', 'logd', 'logvd', 'logvp', 'ppb', 'pyriformis', 'CYP1a2',
-      'CYP2c9', 'CYP2c19', 'CYP2d6', 'CYP3a4'
+      'logbcf', 'logvd', 'ppb', 'CYP1a2', 'CYP2c9',  'CYP2d6', 'CYP3a4',   'logvp', 'pyriformis', 'logs', 'CYP2c19', 'logd'
     ],
   };
 

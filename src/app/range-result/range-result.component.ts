@@ -36,8 +36,9 @@ export class RangeResultComponent implements OnInit {
     else{
       this.router.navigateByUrl('/explainable-admet/search');
     }
+    // tslint:disable-next-line: only-arrow-functions
     $(function(): void{
-      let table = $('#Result').DataTable( {
+      const table = $('#Result').DataTable( {
         dom: 'ipt',
         serverSide: true,
         ordering: false,
@@ -47,9 +48,9 @@ export class RangeResultComponent implements OnInit {
         },
         columnDefs: [
           {
-            "targets": 1,
-            "data": "Mol",
-            "render": function(data) {
+            targets: 1,
+            data: 'Mol',
+            render(data) {
               return '<img src="data:image/png;base64,' + data + '"/>';
             }
 
@@ -57,19 +58,19 @@ export class RangeResultComponent implements OnInit {
         ],
         columns: [
           {
-            data: "id",
+            data: 'id',
             className: 'rangeRes'
           },
           {
-            data: "Mol",
+            data: 'Mol',
             className: 'rangeRes'
           },
           {
-            data: "ChemblId",
+            data: 'ChemblId',
             className: 'rangeRes'
           },
           {
-            data: "Label",
+            data: 'Label',
             className: 'rangeRes'
           },
 
