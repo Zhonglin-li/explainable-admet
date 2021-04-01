@@ -28,9 +28,9 @@ export class OptimizeResultComponent implements OnInit {
     Smiles: '',
   };
   public choice: any = {
-    threshold: 2.5,
-    thresholds: [1.5, 2.5, 3.5],
-    db: 'logbcf',
+    threshold: 1,
+    thresholds: [1, 2, 3],
+    db: 'logvd',
     dbs: [
       'logbcf', 'logs', 'logd', 'logvd', 'logvp', 'ppb', 'pyriformis', 'CYP1a2',
       'CYP2c9', 'CYP2c19', 'CYP2d6', 'CYP3a4'
@@ -63,7 +63,7 @@ export class OptimizeResultComponent implements OnInit {
       this.result = this.historyList[this.historyList.length - 1 ];
     }
     else{
-      this.router.navigateByUrl('/explainable-admet/optimization');
+      this.router.navigateByUrl('/InterpretableAdmet/optimization');
     }
     this.choice.db = this.result[1].dbname;
     this.choice.threshold = this.result[1].cutoff;
@@ -77,7 +77,7 @@ export class OptimizeResultComponent implements OnInit {
     formdata.append('cutoff', this.choice.threshold);
     formdata.append('dbname', this.choice.db);
     const httpOptions = {headers: new HttpHeaders(), withCredentails: true};
-    const api = this.restHost + '/explainable-admet/optimization';
+    const api = this.restHost + '/InterpretableAdmet/optimization';
     this.http.post(api, formdata, httpOptions).subscribe((response: any) => {
       // console.log(response);
       this.result = response;
@@ -115,12 +115,12 @@ export class OptimizeResultComponent implements OnInit {
       formdata.append('smiles', this.result[0][index].smiles);
     }
     const httpOptions = {headers: new HttpHeaders(), withCredentails: true};
-    const api = this.restHost + '/explainable-admet/prediction';
+    const api = this.restHost + '/InterpretableAdmet/prediction';
     this.http.post(api, formdata, httpOptions).subscribe((response: any) => {
       // console.log(response);
       this.storage.setData(response);
       ($('#loadingModal')as any).modal('hide');
-      this.router.navigateByUrl('/explainable-admet/prediction/result');
+      this.router.navigateByUrl('/InterpretableAdmet/prediction/result');
     },
     (error: any) => {
       // console.log(error.error);
@@ -141,7 +141,7 @@ export class OptimizeResultComponent implements OnInit {
     };
     const downName = file + '.csv';
     const link = document.createElement('a');
-    const api = this.restHost + '/explainable-admet/downloadfile';
+    const api = this.restHost + '/InterpretableAdmet/downloadfile';
     this.http.get(api, {params: datas, responseType: 'blob'}).subscribe((response: any ) => {
       // console.log(response);
       link.setAttribute('href', window.URL.createObjectURL(response));

@@ -34,7 +34,7 @@ export class ProdictionResultComponent implements OnInit {
       this.result = this.historyList[this.historyList.length - 1 ];
     }
     else{
-      this.router.navigateByUrl('/explainable-admet/prediction');
+      this.router.navigateByUrl('/InterpretableAdmet/prediction');
     }
     // 获取动态路由传值
     // this.route.paramas.subscribe((data)=>{
@@ -48,14 +48,14 @@ export class ProdictionResultComponent implements OnInit {
     const formdata = new FormData();
     ($('#loadingModal')as any).modal('show');
     formdata.append('smiles', this.result[0]["input_smiles"]);
-    formdata.append('cutoff', '2.5');
-    formdata.append('dbname', 'logbcf');
+    formdata.append('cutoff', '1');
+    formdata.append('dbname', 'logvd');
     const httpOptions = {headers: new HttpHeaders(), withCredentails: true};
-    const api = this.restHost + '/explainable-admet/optimization';
+    const api = this.restHost + '/InterpretableAdmet/optimization';
     this.http.post(api, formdata, httpOptions).subscribe((response: any) => {
       // console.log(response);
       this.storage.setData(response);
-      this.router.navigateByUrl('/explainable-admet/optimization/result');
+      this.router.navigateByUrl('/InterpretableAdmet/optimization/result');
       ($('#loadingModal')as any).modal('hide');
     },
     (error: any) => {

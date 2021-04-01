@@ -48,7 +48,7 @@ export class SearchComponent implements OnInit {
     formdata.append('smiles', this.inputData.Smiles);
     // console.log(this.inputData.Smiles);
     const httpOptions = {headers: new HttpHeaders()};
-    const api = this.restHost + '/explainable-admet/search/property';
+    const api = this.restHost + '/InterpretableAdmet/search/property';
     // send request of post and get data from backstage
     this.http.post(api, formdata, httpOptions).subscribe((response) => {
       console.log(response);
@@ -61,7 +61,7 @@ export class SearchComponent implements OnInit {
         // setTimeout(() => this.router.navigateByUrl('/explainable-admet/search/propertyResult'), 2000);
         // ($('#searchLoadingModal')as any).modal('hide');
         // ($('#searchLoadingModal')as any).modal('dispose');
-        this.router.navigateByUrl('/explainable-admet/search/propertyResult');
+        this.router.navigateByUrl('/Interpretable-Admet/search/propertyResult');
         // console.log('close')
       }
     },
@@ -102,7 +102,7 @@ export class SearchComponent implements OnInit {
 
     const httpOptions = {headers: new HttpHeaders()};
     // let api = 'http://172.16.41.163:8000/explainable-admet/search/range';
-    const api = this.restHost + '/explainable-admet/search/range';
+    const api = this.restHost + '/Interpretable-Admet/search/range';
     // send request of post and get data from backstage
     this.http.post(api, formdata, httpOptions).subscribe((response: any) => {
       // console.log(response.data);
@@ -115,7 +115,7 @@ export class SearchComponent implements OnInit {
         response = response.slice(0, this.len);
         // console.log(response);
         this.storage.setData(response);
-        this.router.navigateByUrl('/explainable-admet/search/rangeResult');
+        this.router.navigateByUrl('/Interpretable-Admet/search/rangeResult');
         // ($('#loadingModal')as any).modal('hide');
       }
     },

@@ -32,7 +32,7 @@ export class SearchResultComponent implements OnInit {
       this.result = this.historyList[this.historyList.length - 1 ];
     }
     else{
-      this.router.navigateByUrl('/explainable-admet/search');
+      this.router.navigateByUrl('/Interpretable-Admet/search');
     }
   }
 

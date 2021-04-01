@@ -20,11 +20,11 @@ import {HelpComponent} from './help/help.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/explainable-admet/home',
+    redirectTo: '/InterpretableAdmet/home',
     pathMatch: 'full'
   },
   {
-    path: 'explainable-admet',
+    path: 'InterpretableAdmet',
     component: LayoutComponent,
     children: [
       {

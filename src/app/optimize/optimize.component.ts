@@ -17,9 +17,9 @@ export class OptimizeComponent implements OnInit {
     Smiles: '',
   };
   public choice: any = {
-    threshold: 2.5,
-    thresholds: [1.5, 2.5, 3.5],
-    db: 'logbcf',
+    threshold: 1,
+    thresholds: [1, 2, 3],
+    db: 'logvd',
     dbs: [
       'logbcf', 'logvd', 'ppb', 'CYP1a2', 'CYP2c9',  'CYP2d6', 'CYP3a4',   'logvp', 'pyriformis', 'logs', 'CYP2c19', 'logd'
     ],
@@ -36,11 +36,11 @@ export class OptimizeComponent implements OnInit {
     formdata.append('cutoff', this.choice.threshold);
     formdata.append('dbname', this.choice.db);
     const httpOptions = {headers: new HttpHeaders(), withCredentails: true};
-    const api = this.restHost + '/explainable-admet/optimization';
+    const api = this.restHost + '/InterpretableAdmet/optimization';
     this.http.post(api, formdata, httpOptions).subscribe((response: any) => {
       // console.log(response);
       this.storage.setData(response);
-      this.router.navigateByUrl('/explainable-admet/optimization/result');
+      this.router.navigateByUrl('/InterpretableAdmet/optimization/result');
       ($('#loadingModal')as any).modal('hide');
     },
     (error: any) => {

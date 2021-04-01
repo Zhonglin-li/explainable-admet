@@ -34,7 +34,7 @@ export class RangeResultComponent implements OnInit {
       this.result = this.historyList[this.historyList.length - 1 ];
     }
     else{
-      this.router.navigateByUrl('/explainable-admet/search');
+      this.router.navigateByUrl('/Interpretable-Admet/search');
     }
     // tslint:disable-next-line: only-arrow-functions
     $(function(): void{
@@ -44,7 +44,7 @@ export class RangeResultComponent implements OnInit {
         ordering: false,
         processing: true,
         ajax: {
-          url: 'http://172.16.41.163:8000/explainable-admet/search/range',
+          url: 'http://192.168.31.26:8000/InterpretableAdmet/search/range',
         },
         columnDefs: [
           {

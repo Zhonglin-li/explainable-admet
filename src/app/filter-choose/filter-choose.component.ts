@@ -6,8 +6,7 @@ import {Router} from '@angular/router';
 import {StorageService} from '../service/storage/storage.service';
 import {environment} from '../../environments/environment';
 import { shallowEqual } from 'ng-zorro-antd';
-// import * as bootstrap from 'bootstrap';
-// import * as $ from 'jquery';
+
 
 
 // import {FileUploader} from 'ng2-file-upload';
@@ -32,7 +31,7 @@ export class FilterChooseComponent implements OnInit {
   public file: File;
   public predictionError = '';
   private restHost = environment.REST_HOST;
-  public api = this.restHost + '/explainable-admet/prediction';
+  public api = this.restHost + '/InterpretableAdmet/prediction';
   public predictionData: any = {
     Smiles: '',
     // File: '',
@@ -86,7 +85,7 @@ export class FilterChooseComponent implements OnInit {
       }
       else{
         this.storage.setData(response);
-        this.router.navigateByUrl('/explainable-admet/prediction/result');
+        this.router.navigateByUrl('/InterpretableAdmet/prediction/result');
         ($('#loadingModal')as any).modal('hide');
       }
     },
