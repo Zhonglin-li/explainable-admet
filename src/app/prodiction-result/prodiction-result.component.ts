@@ -20,7 +20,7 @@ export class ProdictionResultComponent implements OnInit {
   ngOnInit(): void {
     if (this.storage.getData()){
       this.result = this.storage.getData();
-      // console.log(this.result);
+      console.log(this.result);
       // use method set() of service:StorageService to implement session storage of data,and judge if the data exits or not
       if (this.historyList.indexOf(this.result) === -1){
         this.historyList.push(this.result);

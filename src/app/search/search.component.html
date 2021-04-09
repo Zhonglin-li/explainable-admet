@@ -49,7 +49,7 @@
               id="searchform1"
               style="color: rgb(79, 5, 153)"
               name="smiles"
-              placeholder="e.g.,CC1=CN=C(C(=C1OC)C)CS(=O)C2=NC3=C(N2)C=C(C=C3)OC"
+              placeholder="e.g.,NCCc1ccc(O)c(O)c1"
               [(ngModel)]="inputData.Smiles"
               required
               minlength="2"
@@ -220,7 +220,7 @@
             large) will lead to errors.</small
           >
         
-      </div>
+        </div>
         <br />
         <br>
         <div class="form-group row">
@@ -239,119 +239,264 @@
       </form>
     </div>
 
-    <!-- <div [style.display]="search.mode == 'Similarity' ? 'block' : 'none'">
-      <div class="form-group row">
-        <label
-          for="smilesOfSimilarity"
-          class="col-sm-3 col-form-label col-form-label-lg offset-1"
-          style="font-size: 23px;"
-          >SMILES:</label
-        >
-        <div class="col-sm-5">
-          <input
-            type="text"
-            class="form-control form-control-lg"
-            id="smilesOfSimilarity"
-            style="color:rgb(79, 5, 153)"
-            placeholder="CC(C)CC1=CC=C(C=C1)C(C)C(O)=O"
-          />
-        </div>
-        <small
-          id="Similarity1Help"
-          class="form-text text-muted col-sm-10 offset-4" style="font-size: 17px;"
-          >e.g., ibuprofen</small
-        >
-      </div>
+    <div [style.display]="search.mode == 'Similarity Property' ? 'block' : 'none'">
+      <form method="POST" enctype="multipart/form-data" #similarityForm="ngForm">
+        <div class="form-group row">
+          <label
+            for="smilesOfSimilarity"
+            class="col-sm-3 col-form-label col-form-label-lg offset-1"
+            style="font-size: 23px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode','Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            text-shadow: 0 0 2px rgb(35, 110, 129);">Smiles:</label>
+          <!-- <div class="col-sm-5">
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="smilesOfSimilarity"
+              style="color:rgb(79, 5, 153)"
+              placeholder="CC(C)CC1=CC=C(C=C1)C(C)C(O)=O"
+            />
+          </div>
+          <small
+            id="Similarity1Help"
+            class="form-text text-muted col-sm-10 offset-4" style="font-size: 17px;"
+            >e.g., ibuprofen</small
+          > -->
 
-      <div class="form-group row">
-         class="col-md-4 control-label1" 
-        <label
-          for="selectFingerprinterOfSimilarity"
-          class="col-sm-3 col-form-label col-form-label-lg offset-1"
-          style="font-size: 23px;"
-          >Select fingerprinter
-          :</label
-        >
-  
-        <div class="col-sm-5">
-          <select
-            class="form-control form-control-lg"
-            id="selectFingerprinterOfSimilarity"
-            name="selectFingerprinter"
-            
-            style="color:rgb(79, 5, 153);"
-          >
-            <option [value]="item" *ngFor="let item of fingerprinter.modes">{{
-              item
-            }}</option>
-          </select>
-        </div> 
-      </div>
-
-
-
-      <fieldset class="form-group">
-        <div class="row">
-          <legend class="col-form-label col-sm-3 pt-0 offset-1" style="font-size: 23px;">Select similarity metric:
-          </legend>
           <div class="col-sm-5">
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-              <label class="form-check-label" for="gridRadios1">
-                Tanimoto
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-              <label class="form-check-label" for="gridRadios2">
-                Dice
-              </label>
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="smilesOfSimilarity"
+              style="color: rgb(79, 5, 153)"
+              name="similaritySmiles"
+              placeholder="e.g.,NCCc1ccc(O)c(O)c1"
+              [(ngModel)]="inputData.substructure"
+              required
+              minlength="2"
+              #inputSubstructure="ngModel"
+            />
+            <div
+              *ngIf="
+              inputSubstructure.invalid &&
+                (inputSubstructure.dirty || inputSubstructure.touched)
+              "
+              class="alert alert-danger"
+            >
+              <div *ngIf="inputSubstructure.errors.required">Smiles is required!</div>
+              <div *ngIf="inputSubstructure.errors.minlength">
+                Smiles must be at least 2 characters long!
+              </div>
             </div>
           </div>
+          <small
+            id="searchform1Help"
+            class="form-text text-muted col-sm-10 offset-1"
+            style="font-size: 17px"
+            >Some <em>invalid input</em> will lead to errors.</small
+          >
+
+          <label
+            for="selectFingerprinterOfSimilarity"
+            class="col-sm-3 col-form-label col-form-label-lg offset-1"
+            style="font-size: 23px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode','Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            text-shadow: 0 0 2px rgb(35, 110, 129);"
+            >Select fingerprinter
+            :</label
+          >
+    
+          <div class="col-sm-5">
+            <select
+              class="form-control form-control-lg"
+              id="selectFingerprinterOfSimilarity"
+              name="selectFingerprinter" 
+              [(ngModel)] = "fingerprinter.mode"
+              style="color:rgb(79, 5, 153);"
+            >
+              <option [value]="item" *ngFor="let item of fingerprinter.modes">{{
+                item
+              }}</option>
+            </select>
+          </div>
+          
+          <br>
+          <small
+                id="similaritySliderHelp"
+                class="form-text text-muted col-sm-10 offset-1"
+                style="font-size: 17px"
+                ><em>Tanimoto threshold</em> can only be adjusted when the <em>structure</em> is selected.</small
+              >
+          <br>
+          <div
+                class="col-sm-4 offset-1"
+                style="
+                  font-family: 'Gill Sans', 'Gill Sans MT', Calibri,
+                    'Trebuchet MS', sans-serif;
+                  font-size: 20px;
+                "
+              >
+                <span
+                  style="
+                    font-size: 23px;
+                    font-family: 'Trebuchet MS', 'Lucida Sans Unicode',
+                      'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                    text-shadow: 0 0 2px rgb(35, 110, 129);
+                  "
+                  >Tanimoto threshold:</span
+                >
+                <em style="color: blue;" class="offset-1">{{ similaritySlider.value }}</em>
+              </div>
+          <p style="width: 300px" class="col-sm-4 " style="vertical-align:middle;
+              text-align: center; margin-bottom: 0;margin-top: 5px;">
+              
+                <input
+                  name="similaritySlider"
+                  class="mdl-slider mdl-js-slider"
+                  type="range"
+                  id="s1"
+                  min="0.1"
+                  max="0.9"
+                  [value]="similarity"
+                  [(ngModel)]="similarity"
+                  step="0.1"
+                  #similaritySlider
+                />
+              </p>
+      
         </div>
-      </fieldset>
+        <!-- class="col-md-4 control-label1"  -->
+        <!-- <div class="form-group row">
+          
+          <label
+            for="selectFingerprinterOfSimilarity"
+            class="col-sm-3 col-form-label col-form-label-lg offset-1"
+            style="font-size: 23px;"
+            >Select fingerprinter
+            :</label
+          >
+    
+          <div class="col-sm-5">
+            <select
+              class="form-control form-control-lg"
+              id="selectFingerprinterOfSimilarity"
+              name="selectFingerprinter"
+              
+              style="color:rgb(79, 5, 153);"
+            >
+              <option [value]="item" *ngFor="let item of fingerprinter.modes">{{
+                item
+              }}</option>
+            </select>
+          </div>
+          
+
+          <div
+                class="col-sm-4 offset-1"
+                style="
+                  font-family: 'Gill Sans', 'Gill Sans MT', Calibri,
+                    'Trebuchet MS', sans-serif;
+                  font-size: 20px;
+                "
+              >
+                <span
+                  style="
+                    font-size: 23px;
+                    font-family: 'Trebuchet MS', 'Lucida Sans Unicode',
+                      'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                    text-shadow: 0 0 2px rgb(35, 110, 129);
+                  "
+                  >Tanimoto threshold:</span
+                >
+                <em style="color: blue;" class="offset-1">{{ similaritySlider.value }}</em>
+              </div>
+          <p style="width: 300px" class="col-sm-4 " style="vertical-align:middle;
+              text-align: center; margin-bottom: 0;margin-top: 5px;">
+              
+                <input
+                  name="similaritySlider"
+                  class="mdl-slider mdl-js-slider"
+                  type="range"
+                  id="s1"
+                  min="0.7"
+                  max="1"
+                  [value]="similarity"
+                  [(ngModel)]="similarity"
+                  step="0.01"
+                  #similaritySlider
+                  [disabled]="structureType === 'substructure'"
+                />
+              </p>
+              
+              <small
+                id="similaritySliderHelp"
+                class="form-text text-muted col-sm-10 offset-1"
+                style="font-size: 17px"
+                ><em>Tanimoto threshold</em> can only be adjusted when the <em>structure</em> is selected.</small
+              >
+        </div> -->
 
 
 
-      <div class="form-group row">
-        <label
-          for="similarityOfSimilarity"
-          class="col-sm-3 col-form-label col-form-label-lg offset-1"
-          style="font-size: 23px;"
-          >Similarity:</label
-        >
-        <div class="col-sm-5">
-          <input
-            type="text"
-            class="form-control form-control-lg"
-            id="similarityOfSimilarity"
-            style="color:rgb(79, 5, 153)"
-            placeholder="Example:0.7"
-          />
+        <!-- <fieldset class="form-group">
+          <div class="row">
+            <legend class="col-form-label col-sm-3 pt-0 offset-1" style="font-size: 23px;">Select similarity metric:
+            </legend>
+            <div class="col-sm-5">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                <label class="form-check-label" for="gridRadios1">
+                  Tanimoto
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                <label class="form-check-label" for="gridRadios2">
+                  Dice
+                </label>
+              </div>
+            </div>
+          </div>
+        </fieldset> -->
+
+        <!-- <div class="form-group row">
+          <label
+            for="similarityOfSimilarity"
+            class="col-sm-3 col-form-label col-form-label-lg offset-1"
+            style="font-size: 23px;"
+            >Similarity:</label
+          >
+          <div class="col-sm-5">
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="similarityOfSimilarity"
+              style="color:rgb(79, 5, 153)"
+              placeholder="Example:0.7"
+            />
+          </div>
+          <small
+            id="Similarity2Help"
+            class="form-text text-muted col-sm-10 offset-4" style="font-size: 17px;"
+            >e.g., 0.7; Limit: 0.2-1.0</small
+          >
+        </div>   -->
+
+        <br/>
+        <div class="form-group row">
+          <button
+            type="submit"
+            style="color: rgb(79, 5, 153)"
+            class="btn btn-outline-primary col-sm-1 offset-5"
+            [disabled]="!similarityForm.form.valid"
+            (click)="postSimilarityData()"
+          >
+            Submit
+          </button>
+            <!-- <button type="reset" style="color:rgb(79, 5, 153)" class="btn btn-outline-primary col-sm-1 offset-2">
+              Reset
+            </button>  -->
         </div>
-        <small
-          id="Similarity2Help"
-          class="form-text text-muted col-sm-10 offset-4" style="font-size: 17px;"
-          >e.g., 0.7; Limit: 0.2-1.0</small
-        >
-      </div>  
-      </div> -->
-    <!-- <br />
-    <div class="form-group row">
-      <button
-        type="submit"
-        style="color: rgb(79, 5, 153)"
-        class="btn btn-outline-primary col-sm-1 offset-5"
-        [disabled]="!searchForm.form.valid"
-        (click)="postData()"
-      >
-        Submit
-      </button>
-        <button type="reset" style="color:rgb(79, 5, 153)" class="btn btn-outline-primary col-sm-1 offset-2">
-          Reset
-        </button> 
-    </div> -->
-  <!-- </form> -->
+      </form>
+    </div>
 </div>
 
 

@@ -47,15 +47,49 @@ export class FilterChooseComponent implements OnInit {
 
   ngOnInit(){
   }
-  getJsmeSmiles(){
-    this.predictionData.Smiles = this.jsme.smiles;
-  }
-  getData(){
-    // const api = this.restHost + '/explainable-admet/prediction';
-    // rxjs
-    this.http.get(this.api).subscribe((response) => {
-      // console.log(response);
-    });
+  // getJsmeSmiles(){
+  //   this.predictionData.Smiles = this.jsme.smiles;
+  // }
+  // getData(){
+  //   // const api = this.restHost + '/explainable-admet/prediction';
+  //   // rxjs
+  //   this.http.get(this.api).subscribe((response) => {
+  //     // console.log(response);
+  //   });
+  // }
+  getData(smiles){
+    if (smiles){
+      const formdata = new FormData();
+      ($('#loadingModal')as any).modal('show');
+      formdata.append('smiles', smiles);
+      const httpOptions = {headers: new HttpHeaders(), withCredentails: true};
+      this.http.post(this.api, formdata, httpOptions).subscribe((response: any) => {
+        // console.log(response);
+        if (response[0].validation){
+          this.validation = response[0].validation;
+        }
+        else{
+          this.storage.setData(response);
+          this.router.navigateByUrl('/InterpretableAdmet/prediction/result');
+          ($('#loadingModal')as any).modal('hide');
+        }
+      },
+      (error: any) => {
+        // console.log(error.error);
+        if (error.error.msg){
+          this.predictionError = error.error.msg;
+        }
+        else{
+          this.predictionError = 'Server Not Found ';
+        }
+        ($('#loadingModal')as any).modal('hide');
+        ($('#predictionModal')as any).modal('show');
+      }
+      );
+    }
+    else{
+      ($('#jsmeModal')as any).modal('show');
+    }
   }
   inputFile(file: File[]){
     console.log(file[0]);
@@ -67,40 +101,58 @@ export class FilterChooseComponent implements OnInit {
     this.predictionData.Smiles = '';
   }
   postData(){
-    const formdata = new FormData();
-    ($('#loadingModal')as any).modal('show');
-    if (this.file){
-      formdata.append('file', this.file);
-      // console.log(this.file);
+    switch (this.filter.mode)
+    {
+      case'By Inputting SMILES':
+        this.getData(this.predictionData.Smiles);
+        break;
+      case'By Drawing Molecule from Editor':
+        this.getData(this.jsme.smiles);
+        break;
     }
-    else{
-      formdata.append('smiles', this.predictionData.Smiles);
-    }
-    const httpOptions = {headers: new HttpHeaders(), withCredentails: true};
-    // send request of post and get data from backstage
-    this.http.post(this.api, formdata, httpOptions).subscribe((response: any) => {
-      // console.log(response);
-      if (response[0].validation){
-        this.validation = response[0].validation;
-      }
-      else{
-        this.storage.setData(response);
-        this.router.navigateByUrl('/InterpretableAdmet/prediction/result');
-        ($('#loadingModal')as any).modal('hide');
-      }
-    },
-    (error: any) => {
-      // console.log(error.error);
-      if (error.error.msg){
-        this.predictionError = error.error.msg;
-      }
-      else{
-        this.predictionError = 'Server Not Found ';
-      }
-      ($('#loadingModal')as any).modal('hide');
-      ($('#predictionModal')as any).modal('show');
-    }
-    );
+    // if (this.predictionData.Smiles || this.jsme.smiles){
+    //   const formdata = new FormData();
+    //   ($('#loadingModal')as any).modal('show');
+    //   // if (this.file){
+    //   //   formdata.append('file', this.file);
+    //   //   // console.log(this.file);
+    //   // }
+    //   if (this.predictionData.Smiles){
+    //     formdata.append('smiles', this.predictionData.Smiles);
+    //   }
+    //   else if (this.jsme.smiles){
+    //     formdata.append('smiles', this.jsme.smiles);
+    //   }
+    //   const httpOptions = {headers: new HttpHeaders(), withCredentails: true};
+    //   // send request of post and get data from backstage
+    //   this.http.post(this.api, formdata, httpOptions).subscribe((response: any) => {
+    //     // console.log(response);
+    //     if (response[0].validation){
+    //       this.validation = response[0].validation;
+    //     }
+    //     else{
+    //       this.storage.setData(response);
+    //       this.router.navigateByUrl('/InterpretableAdmet/prediction/result');
+    //       ($('#loadingModal')as any).modal('hide');
+    //     }
+    //   },
+    //   (error: any) => {
+    //     // console.log(error.error);
+    //     if (error.error.msg){
+    //       this.predictionError = error.error.msg;
+    //     }
+    //     else{
+    //       this.predictionError = 'Server Not Found ';
+    //     }
+    //     ($('#loadingModal')as any).modal('hide');
+    //     ($('#predictionModal')as any).modal('show');
+    //   }
+    //   );
+    // }
+    // else{
+    //   ($('#jsmeModal')as any).modal('show');
+    // }
+
     // const httpOptions = {headers: new HttpHeaders({'content-type': 'application/json'})};
     // let api= 'http://192.168.1.135:8000/explainable-admet/prediction';
     // this.http.post(api, {'smiles': this.inputData.Smiles, 'Property': this.inputData.Property}, httpOptions).subscribe((response)=>{

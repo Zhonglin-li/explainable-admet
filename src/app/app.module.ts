@@ -38,6 +38,7 @@ import { RangeResultComponent } from './range-result/range-result.component';
 import { OptimizeComponent } from './optimize/optimize.component';
 import { OptimizeResultComponent } from './optimize-result/optimize-result.component';
 import { HelpComponent } from './help/help.component';
+import { SimilarityResultComponent } from './similarity-result/similarity-result.component';
 
 
 
@@ -61,6 +62,7 @@ import { HelpComponent } from './help/help.component';
     OptimizeComponent,
     OptimizeResultComponent,
     HelpComponent,
+    SimilarityResultComponent,
   ],
   imports: [
     BrowserModule,

@@ -16,13 +16,26 @@ export class OptimizeComponent implements OnInit {
   public optimizeData: any = {
     Smiles: '',
   };
+  // public longChoice: any = {
+  //   threshold: 9,
+  //   thresholds: [9, 8, 7],
+  //   db: 'LD50',
+  //   dbs: [
+  //      'pyriformis', 'logs', 'CYP2c19', 'logd', 'LD50'
+  //   ],
+  // };
   public choice: any = {
-    threshold: 1,
-    thresholds: [1, 2, 3],
+    threshold: 3,
+    longThreshold: 9,
+    thresholds: [3, 2, 1],
+    longThresholds: [9, 8, 7],
     db: 'logvd',
     dbs: [
-      'logbcf', 'logvd', 'ppb', 'CYP1a2', 'CYP2c9',  'CYP2d6', 'CYP3a4',   'logvp', 'pyriformis', 'logs', 'CYP2c19', 'logd'
+      'logbcf', 'logvd', 'ppb', 'CYP1a2', 'CYP2c9',  'CYP2d6', 'CYP3a4', 'logvp',
+      'pyriformis', 'logs', 'CYP2c19', 'logd', 'LD50'
     ],
+    db1: ['logbcf', 'logvd', 'ppb', 'CYP1a2', 'CYP2c9',  'CYP2d6', 'CYP3a4', ],
+    db2: ['pyriformis', 'logs', 'CYP2c19', 'logd', 'LD50', 'logvp'],
   };
 
   constructor(private http: HttpClient, private router: Router, public storage: StorageService, ) { }
@@ -33,6 +46,10 @@ export class OptimizeComponent implements OnInit {
     ($('#loadingModal')as any).modal('show');
     const formdata = new FormData();
     formdata.append('smiles', this.optimizeData.Smiles);
+    if (this.choice.db1.indexOf(this.choice.db) === -1){
+      this.choice.threshold = this.choice.longThreshold;
+    }
+    // console.log(this.choice.threshold);
     formdata.append('cutoff', this.choice.threshold);
     formdata.append('dbname', this.choice.db);
     const httpOptions = {headers: new HttpHeaders(), withCredentails: true};

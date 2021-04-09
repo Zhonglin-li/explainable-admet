@@ -40,7 +40,8 @@
     >
 
       <div class="col-sm-3">
-        <select
+          <select
+          *ngIf="choice.db1.includes(choice.db)"
           class="form-control form-control-lg"
           id="optCutoffSelect"
           name="optCutoff"
@@ -51,6 +52,19 @@
             {{ i }}
           </option>
         </select>
+        <select
+          *ngIf="choice.db2.includes(choice.db)"
+          class="form-control form-control-lg"
+          id="optCutoffSelect"
+          name="optCutoff"
+          [(ngModel)]="choice.longThreshold"
+          style="color: rgb(79, 5, 153)"
+        >
+          <option [value]="i" *ngFor="let i of choice.longThresholds">
+            {{ i }}
+          </option>
+        </select>
+        
       </div>
       <small
         id="optCutoffHelp"

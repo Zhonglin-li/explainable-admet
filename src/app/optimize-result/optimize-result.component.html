@@ -41,7 +41,7 @@
             <div class="col-sm-7" >
               <div class="card-body">
                 <p class="card-text" style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">
-                  A bioisostere is a molecule resulting from the exchange of an atom or of a group of atoms with an alternative, broadly similar, atom or group of atoms. The replacement can attenuate toxicity, modify activity of lead, and/or alter pharmacokinetics or the toxicity of the lead. 
+                  A analogue is a molecule resulting from the exchange of an atom or of a group of atoms with an alternative, broadly similar, atom or group of atoms. The replacement can attenuate toxicity, modify activity of lead, and/or alter pharmacokinetics or the toxicity of the lead. 
                 </p>
                 <p class="card-text" style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">
                   Optimization function can convert the structure of the compound into a "constant" part and a "variable" part, by comparing the variable part with the structure in the database of your choice, the replacement of biological isosteres can be realized, and PAINS compounds will be removed.
@@ -50,7 +50,7 @@
                   Retrosynthetic Accessibility (RA) score has been trained on 200,000 compounds from ChEMBL. It is intended to predict the retrosyntehtic accessibility of bioactive molecules.
                 </p>
                 <p class="card-text" style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">
-                  If you want to get the Bioisosteres of the compound on the left, please click on it to modify.
+                  If you want to get the analogues of the compound on the left, please click on it to modify.
                 </p>
               
     
@@ -154,6 +154,7 @@
 
                 <div class="col-sm-3">
                   <select
+                    *ngIf="choice.db1.includes(choice.db)"
                     class="form-control form-control-lg"
                     id="cutoffSelect"
                     name="cutoffname"
@@ -164,6 +165,19 @@
                       {{ item }}
                     </option>
                   </select>
+                  
+                  <select
+                    *ngIf="choice.db2.includes(choice.db)"
+                    class="form-control form-control-lg"
+                    id="optCutoffSelect"
+                    name="optCutoff"
+                    [(ngModel)]="choice.longThreshold"
+                    style="color: rgb(79, 5, 153)"
+                  >
+                    <option [value]="i" *ngFor="let i of choice.longThresholds">
+                      {{ i }}
+                    </option>
+                </select>
                   
                 </div>
                 <small

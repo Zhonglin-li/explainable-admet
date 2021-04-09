@@ -29,12 +29,16 @@ export class OptimizeResultComponent implements OnInit {
   };
   public choice: any = {
     threshold: 1,
+    longThreshold: 9,
     thresholds: [1, 2, 3],
+    longThresholds: [9, 8, 7],
     db: 'logvd',
     dbs: [
       'logbcf', 'logs', 'logd', 'logvd', 'logvp', 'ppb', 'pyriformis', 'CYP1a2',
-      'CYP2c9', 'CYP2c19', 'CYP2d6', 'CYP3a4'
+      'CYP2c9', 'CYP2c19', 'CYP2d6', 'CYP3a4', 'LD50'
     ],
+    db1: ['logbcf', 'logvd', 'ppb', 'CYP1a2', 'CYP2c9',  'CYP2d6', 'CYP3a4', ],
+    db2: ['pyriformis', 'logs', 'CYP2c19', 'logd', 'LD50', 'logvp'],
   };
 
   constructor(private http: HttpClient, private router: Router, public storage: StorageService, ) { }
@@ -66,7 +70,12 @@ export class OptimizeResultComponent implements OnInit {
       this.router.navigateByUrl('/InterpretableAdmet/optimization');
     }
     this.choice.db = this.result[1].dbname;
-    this.choice.threshold = this.result[1].cutoff;
+    if (this.choice.db1.indexOf(this.choice.db) === -1){
+      this.choice.longThreshold = this.result[1].cutoff;
+    }
+    else{
+      this.choice.threshold = this.result[1].cutoff;
+    }
   }
   postData(){
     this.prebool = false;
@@ -74,6 +83,9 @@ export class OptimizeResultComponent implements OnInit {
     this.optimizeData.Smiles = this.jsme.smiles;
     const formdata = new FormData();
     formdata.append('smiles', this.optimizeData.Smiles);
+    if (this.choice.db1.indexOf(this.choice.db) === -1){
+      this.choice.threshold = this.choice.longThreshold;
+    }
     formdata.append('cutoff', this.choice.threshold);
     formdata.append('dbname', this.choice.db);
     const httpOptions = {headers: new HttpHeaders(), withCredentails: true};
@@ -141,7 +153,7 @@ export class OptimizeResultComponent implements OnInit {
     };
     const downName = file + '.csv';
     const link = document.createElement('a');
-    const api = this.restHost + '/InterpretableAdmet/downloadfile';
+    const api = this.restHost + '/InterpretableAdmet/optimization/downloadfile';
     this.http.get(api, {params: datas, responseType: 'blob'}).subscribe((response: any ) => {
       // console.log(response);
       link.setAttribute('href', window.URL.createObjectURL(response));

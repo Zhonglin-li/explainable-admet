@@ -22,17 +22,18 @@ export class RangeResultComponent implements OnInit {
   ngOnInit(): void {
     if (this.storage.getData()){
       this.result = this.storage.getData();
+    }
       // use method set() of service:StorageService to implement session storage of data,and judge if the data exits or not
-      if (this.historyList.indexOf(this.result) === -1){
-        this.historyList.push(this.result);
-        this.storage.remove('rangeResult');
-        this.storage.set('rangeResult', this.historyList);
-      }
-    }
-    else if (this.storage.get('rangeResult')){
-      this.historyList = this.storage.get('rangeResult');
-      this.result = this.historyList[this.historyList.length - 1 ];
-    }
+    //   if (this.historyList.indexOf(this.result) === -1){
+    //     this.historyList.push(this.result);
+    //     this.storage.remove('rangeResult');
+    //     this.storage.set('rangeResult', this.historyList);
+    //   }
+    // }
+    // else if (this.storage.get('rangeResult')){
+    //   this.historyList = this.storage.get('rangeResult');
+    //   this.result = this.historyList[this.historyList.length - 1 ];
+    // }
     else{
       this.router.navigateByUrl('/Interpretable-Admet/search');
     }

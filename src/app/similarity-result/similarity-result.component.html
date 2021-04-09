@@ -1,0 +1,74 @@
+<div class="container" id="divContainer">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/eInterpretableAdmet/home" title="home">Interpretable-Admet</a></li>
+          <li class="breadcrumb-item"><a href="/InterpretableAdmet/search" title="search">SimilaritySearch</a></li>
+          <li class="breadcrumb-item active" aria-current="page">results</li> 
+        </ol>
+    </nav>
+
+    <div class="row" style="margin-top: 25px;"> 
+      <div class="col-sm-12" style="border: 1px solid rgb(127, 121, 133); " >
+        <table  class="table table-sm table-hover" style="margin: 5px;" id='optimizeTable'>
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Index</th>
+              <th scope="col">Smiles</th>
+              <th scope="col">Img</th>
+              <th scope="col">Tanimoto</th>
+            </tr>
+          </thead>
+          <!-- |slice:0:10 -->
+          <tbody>
+            <tr *ngFor="let data of result;let i=index;">
+              <td>{{i + 1}}</td>
+              <td><a (click)="aSearch(i)">{{data.canonical_smiles}}</a></td>
+              <td>
+                  <img [src]="'data:image/png;base64,'+ data.img" alt="" />
+                  <!-- <app-jsme [elementId]="'structure_'+i"
+                    [width]="'220px'"
+                    [height]="'250px'"
+                    [option]="'depict nozoom noshowdraganddropsymbolindepictmode'"
+                    [molString]="data.smiles"
+                  ></app-jsme> -->
+              </td>
+              <!-- noshowdraganddropsymbolindepictmode -->
+              <!-- <td >
+                <img [src]="'data:image/png;base64,'+ data.from_img" alt="" width="200px" height="200px"/></td>
+              <td >
+                <img [src]="'data:image/png;base64,'+ data.to_img" alt="" width="200px" height="200px"/></td> -->
+              <td>
+                <!-- {{data.label_avg}} -->
+                {{data.tanimoto | number:'0.3-3'}}
+              </td>
+            </tr>
+            
+          </tbody>
+        </table> 
+      </div>
+      <div class="col-sm-8 offset-2 " style="margin-top: 5px; font-family: 'Times New Roman', Times, serif; font-size: 18px;">
+      If you want to download the corresponding file, please click <button type="button" class="btn btn-outline-info" (click)="Download()" [disabled]= "!result[0]">Download</button> 
+      </div>
+      <br>
+      
+    </div>
+
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="searchModalLabel">Error</h5>
+          </div>
+          <div class="modal-body" style="text-align: center; font-size: 19px; font-family: 'Times New Roman', Times, serif;">
+           {{searchError}}
+          </div>
+          <div class="modal-footer">
+             <button type="button" class="btn btn-secondary" data-dismiss="modal">Comfirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      
+  </div>

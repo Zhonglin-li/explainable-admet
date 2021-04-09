@@ -13,6 +13,7 @@ import {NotFoundComponent} from './not-found/not-found.component';
 import {RangeResultComponent} from './range-result/range-result.component';
 import {OptimizeResultComponent} from './optimize-result/optimize-result.component';
 import {HelpComponent} from './help/help.component';
+import { SimilarityResultComponent } from './similarity-result/similarity-result.component';
 // import { SearchComponent } from './view/search/search.component';
 // import {IndexComponent} from './view/index/index.component';
 // import {SearchComponent} from './view/search/search.component';
@@ -62,6 +63,11 @@ const routes: Routes = [
         path: 'search/rangeResult',
         // path: 'prediction/result/:index'配置动态路由
         component: RangeResultComponent
+      },
+      {
+        path: 'search/similarityResult',
+        // path: 'prediction/result/:index'配置动态路由
+        component: SimilarityResultComponent
       },
       {
         path: 'models',

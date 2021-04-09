@@ -1,0 +1,52 @@
+.breadcrumb{
+    /* font-size: 18px;
+    background-color:#e4dfdf; */
+    background-image: linear-gradient(to right, #e4afcb 0%, #b8cbb8 0%, #b8cbb8 0%, #e2c58b 30%, #c2ce9c 64%, #7edbdc 100%);
+}
+#divContainer{
+  background-color: white; 
+  color: rgb(79, 5, 153); 
+  margin-top: 25px;
+}
+.breadcrumb-item{
+  font-size: 24px;
+  font-family: Tahoma, sans-serif;
+  font-weight: lighter;
+}
+table{
+  vertical-align:middle;
+}
+tr th{
+  text-align: center;
+  font-size: 17px;
+  font-family: 'Times New Roman', Times, serif;
+}
+tr td{
+  text-align: center;
+  vertical-align: middle; 
+  padding: 0;
+}
+td img{
+  width: 250px;
+  height: 250px;
+}
+p{
+  color: black;
+}
+td a{
+  font-size: 19px;
+}
+/* tr td{
+  text-align: center !important;
+  vertical-align: middle !important; 
+  padding: 0 !important;
+}
+.rangeRes{
+  
+} */
+/* .table td{
+  text-align: center !important;
+  vertical-align: middle !important; 
+  padding: 0 !important;
+} */
+

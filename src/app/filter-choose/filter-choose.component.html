@@ -133,7 +133,7 @@
       <div class="form-group row">
         <div class="col-sm">
           <div class="row">
-            <div class="col-sm-7 offset-1" id="filtform3">
+            <div class="col-sm-4 offset-3" id="filtform3">
               <app-jsme
                 [elementId]="'structure-search'"
                 [width]="'450px'"
@@ -142,7 +142,7 @@
                 >loading JSME widget
               </app-jsme>
             </div>
-            <div class="col-sm-3 align-self-center">
+            <!-- <div class="col-sm-3 align-self-center">
               <textarea
                 name="jsme"
                 class="smile-container"
@@ -166,22 +166,20 @@
                 </div>
                 <div *ngIf="inputSmiles.errors.minlength">Smiles must be at least 2 characters long!</div>
               </div>
-            </div>
+            </div> -->
           </div>
           <br>
-          <small
+          <!-- <small
           id="drawStructureHelp"
           class="form-text text-muted col-sm-10 offset-1"
           style="font-size: 17px"
           >After you have finished drawing, please click the button:<i style="font-weight: bold;">Convert</i> or you can not submit your structure.
-          </small>
+          </small> -->
         </div>
       </div>
     </div>
-    <br />
-    <br />
     <div class="form-group row">
-      <button
+      <!-- <button
         type="button"
         class="btn btn-outline-primary col-sm-1 offset-3"
         [style.display]="
@@ -190,11 +188,12 @@
         (click)="getJsmeSmiles()"
       >
         Convert
-      </button>
+        [disabled]="!filterForm.form.valid"
+      </button> -->
       <button
         type="submit"
         class="btn btn-outline-primary col-sm-1 offset-5"
-        [disabled]="!filterForm.form.valid"
+        
         (click)="postData()"
       >
         Submit
@@ -217,6 +216,25 @@
       </div>
       <div class="modal-body" style="text-align: center; font-size: 19px; font-family: 'Times New Roman', Times, serif;">
        {{predictionError}}
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Comfirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="jsmeModal" tabindex="-1" role="dialog" aria-labelledby="jsmeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="jsmeModalLabel">Error</h5>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body" style="text-align: center; font-size: 19px; font-family: 'Times New Roman', Times, serif;">
+       Please draw a correct structure!
       </div>
       <div class="modal-footer">
          <button type="button" class="btn btn-secondary" data-dismiss="modal">Comfirm</button>
