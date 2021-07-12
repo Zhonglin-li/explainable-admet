@@ -2,7 +2,7 @@
 <div class="container" id="divContainer">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/InterpretableAdmet/home" title="home">Interpretable-Admet</a></li>
+          <li class="breadcrumb-item"><a href="/InterpretableAdmet/home" title="home">Interpretable-ADMET</a></li>
           <li class="breadcrumb-item"><a href="/InterpretableAdmet/optimization" title="optimization">optimization</a></li>
           <li class="breadcrumb-item active" aria-current="page">results</li>
         </ol>
@@ -41,17 +41,18 @@
             <div class="col-sm-7" >
               <div class="card-body">
                 <p class="card-text" style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">
-                  A analogue is a molecule resulting from the exchange of an atom or of a group of atoms with an alternative, broadly similar, atom or group of atoms. The replacement can attenuate toxicity, modify activity of lead, and/or alter pharmacokinetics or the toxicity of the lead. 
+                  Optimization function could generate a group of virtual analogues by changing one variable part of a query molecule to another based on matched molecular pair (MMP) algorithm. 
+                  The replacement is expected to alter pharmacokinetics or toxicity of the lead.
                 </p>
                 <p class="card-text" style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">
-                  Optimization function can convert the structure of the compound into a "constant" part and a "variable" part, by comparing the variable part with the structure in the database of your choice, the replacement of biological isosteres can be realized, and PAINS compounds will be removed.
+                  Retrosynthetic accessibility (RA) score and pan assay interference compounds (PAINS) filtering are performed on the novel compounds to eliminate undesirable molecules with nonsynthetic accessibility and problematic functional groups, respectively. 
                 </p>
                 <p class="card-text" style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">
-                  Retrosynthetic Accessibility (RA) score has been trained on 200,000 compounds from ChEMBL. It is intended to predict the retrosyntehtic accessibility of bioactive molecules.
+                  If you want to get the analogues of a query molecule on the left, please click optimize button to achieve it.
                 </p>
-                <p class="card-text" style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">
+                <!-- <p class="card-text" style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">
                   If you want to get the analogues of the compound on the left, please click on it to modify.
-                </p>
+                </p> -->
               
     
                 
@@ -133,17 +134,36 @@
                 </label>
 
                 <div class="col-sm-3">
-                  <select
+                  <nz-select
                     class="form-control form-control-lg"
                     id="DbSelect"
                     name="optDb"
                     [(ngModel)]="choice.db"
-                    style="color: rgb(79, 5, 153)"
+                    style="color: rgb(79, 5, 153),"
+                    nzBorderless
                   >
-                    <option [value]="item" *ngFor="let item of choice.dbs">
+                    <nz-option-group nzLabel='Basic physicochemical property'>
+                      <nz-option [nzValue]=item [nzLabel]=item *ngFor="let item of choice.BasicProperty"></nz-option>
+                    </nz-option-group>
+                    <nz-option-group nzLabel='Absorption'>
+                      <nz-option [nzValue]=item [nzLabel]=item *ngFor="let item of choice.Absorption"></nz-option>
+                    </nz-option-group>
+                    <nz-option-group nzLabel='Distribution'>
+                      <nz-option [nzValue]=item [nzLabel]=item *ngFor="let item of choice.Distribution"></nz-option>
+                    </nz-option-group>
+                    <nz-option-group nzLabel='Metabolism'>
+                      <nz-option [nzValue]=item [nzLabel]=item *ngFor="let item of choice.Metabolism"></nz-option>
+                    </nz-option-group>
+                    <nz-option-group nzLabel='Excretion'>
+                      <nz-option [nzValue]=item [nzLabel]=item *ngFor="let item of choice.Excretion"></nz-option>
+                    </nz-option-group>
+                    <nz-option-group nzLabel='Toxicity'>
+                      <nz-option [nzValue]=item [nzLabel]=item *ngFor="let item of choice.Toxicity"></nz-option>
+                    </nz-option-group>
+                    <!-- <option [value]="item" *ngFor="let item of choice.dbs">
                       {{ item }}
-                    </option>
-                  </select>
+                    </option> -->
+                  </nz-select>
                 </div>
                 
                 <label
@@ -152,10 +172,10 @@
                 style="font-size: 23px"
                 >Cutoff:</label>
 
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                   <select
                     *ngIf="choice.db1.includes(choice.db)"
-                    class="form-control form-control-lg"
+                    class="form-control"
                     id="cutoffSelect"
                     name="cutoffname"
                     [(ngModel)]="choice.threshold"
@@ -178,14 +198,16 @@
                       {{ i }}
                     </option>
                 </select>
-                  
-                </div>
+                
+              </div>
+              <div class="col-sm-2">
+                <button  type="button" class="btn btn-outline-primary" style="color: rgb(79, 5, 153);margin-top: 2px;" (click)="postData()"> Optimize</button>
+              </div>
                 <small
                     id="cutoffnameHelp"
                     class="form-text text-muted col-sm-10 offset-1"
                     style="font-size: 17px; margin-bottom: 5px;"
-                    >If you want to modify the database corresponding to the <em>attribute and cutoff</em>, please do it before the structure modification</small
-                  >
+                    >If you just want to modify the database corresponding to the <em>attribute and cutoff</em>, please click the <em>optimize</em> button or click the <em>comfirm</em> button after modifying the structure.</small>
                 <!-- <br>
                 <br>
                 <br>
@@ -219,7 +241,8 @@
               <th scope="col">Before Transformation</th>
               <th></th>
               <th scope="col">After Transformation</th>
-              <th scope="col">Value</th>
+              <th scope="col">GAT Value</th>
+              <th scope="col">GCN Value</th>
             </tr>
           </thead>
           <!-- |slice:0:10 -->
@@ -251,7 +274,11 @@
                 <img [src]="'data:image/png;base64,'+ data.to_img" alt="" width="200px" height="200px"/></td> -->
               <td>
                 <!-- {{data.label_avg}} -->
-                {{data.value}}
+                {{data.gat_value}}
+              </td>
+              <td>
+                <!-- {{data.label_avg}} -->
+                {{data.gcn_value}}
               </td>
             </tr>
             

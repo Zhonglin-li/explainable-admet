@@ -2,7 +2,7 @@
 <div class="container"  id="divContainer">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/InterpretableAdmet/home" title="home">Interpretable-Admet</a></li>
+      <li class="breadcrumb-item"><a href="/InterpretableAdmet/home" title="home">Interpretable-ADMET</a></li>
       <li class="breadcrumb-item"><a href="/InterpretableAdmet/prediction" title="prediction">prediction</a></li>
       <li class="breadcrumb-item active" aria-current="page">results</li> 
     </ol>
@@ -74,20 +74,22 @@
   </div>
   <br>
    <div class="row">
+     <h3>
+      <span class="badge badge-pill badge-info">GCN Results</span></h3>
     <div
       class="col-sm-12"
       style="border: 1px solid blueviolet; padding: 1px"
     >
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <ul class="nav nav-tabs" id="GCNTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#Classifications" role="tab" aria-controls="home" aria-selected="true">Classifications</a>
+        <a class="nav-link active" id="GCNCLS-tab" data-toggle="tab" href="#GCNClassifications" role="tab" aria-controls="home" aria-selected="true">Classifications</a>
       </li>
       <li class="nav-item" role="presentation">
-        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Regressions" role="tab" aria-controls="profile" aria-selected="false">Regressions</a>
+        <a class="nav-link" id="GCNRES-tab" data-toggle="tab" href="#GCNRegressions" role="tab" aria-controls="profile" aria-selected="false">Regressions</a>
       </li>
     </ul>
-    <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="Classifications" role="tabpanel" aria-labelledby="home-tab">
+    <div class="tab-content" id="GCNTabContent">
+      <div class="tab-pane fade show active" id="GCNClassifications" role="tabpanel" aria-labelledby="GCNCLS-tab">
         <table class="table table-striped table-hover">
           <thead>
             <tr>
@@ -105,31 +107,31 @@
             </tr>
           </thead>
 
-          <tbody class="accordion" id="accordionClassification">
+          <tbody class="accordion" id="GCNAccordionClassification">
               <tr>
                 <th scope="row" rowspan="6" style="vertical-align: middle">
                   Absorption
                 </th>
                   <td scope="row" >
-                    <a data-toggle="collapse" href=".multi1" aria-expanded="false" aria-controls="HIA Caco2">
+                    <a data-toggle="collapse" href=".multi1" aria-expanded="false" aria-controls="GCNHIA GCNCaco2">
                     Human Intestinal Absorption
                   </a></td>
-                  <td>{{result[0]["Prediction_value_A_HIA.csv"]}}</td>
-                  <td>{{result[0]["Probability_A_HIA.csv"]}}</td>
+                  <td>{{result[0]["GCN_data"]["Prediction_value_GCN_A_HIA"]}}</td>
+                  <td>{{result[0]["GCN_data"]["Probability_GCN_A_HIA"]}}</td>
                   <td scope="row" >
-                    <a data-toggle="collapse" href=".multi1" aria-expanded="false" aria-controls="HIA Caco2">
-                    Caco-2
+                    <a data-toggle="collapse" href=".multi1" aria-expanded="false" aria-controls="GCNHIA GCNCaco2">
+                    Caco2 permeability
                   </a></td>
-                  <td>{{result[0]["Prediction_value_A_caco2.csv"]}}</td>
-                  <td>{{result[0]["Probability_A_caco2.csv"]}}</td>
+                  <td>{{result[0]["GCN_data"]["Prediction_value_GCN_A_Caco2"]}}</td>
+                  <td>{{result[0]["GCN_data"]["Probability_GCN_A_Caco2"]}}</td>
               </tr>
               <tr>
                 <td colspan="3">
-                  <div class="collapse multi1" id="HIA" data-parent="#accordionClassification">
+                  <div class="collapse multi1" id="GCNHIA" data-parent="#GCNAccordionClassification">
                     <div class="card card-body" >
                       <div class="row">
                         <div class="col-sm-8 offset-1">
-                          <img [src]="'data:image/png;base64,'+ result[0]['ex_img_A_HIA.csv']" alt="Human Intestinal Absorption" />
+                          <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_A_HIA']" alt="GCNHIA" />
                           <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                         </div>
                       </div>
@@ -138,11 +140,11 @@
                   </div>
                 </td>
                 <td colspan="3">
-                  <div class="collapse multi1" id="Caco2" data-parent="#accordionClassification">
+                  <div class="collapse multi1" id="GCNCaco2" data-parent="#GCNAccordionClassification">
                     <div class="card card-body">
                       <div class="row">
                         <div class="col-sm-8 offset-1">
-                          <img [src]="'data:image/png;base64,'+ result[0]['ex_img_A_caco2.csv']" alt="Caco-2" />
+                          <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_A_Caco2']" alt="GCNCaco-2" />
                           <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                         </div>
                       </div>
@@ -155,27 +157,27 @@
 
               <tr>
                 <td scope="row">
-                  <a data-toggle="collapse" href=".multi2" aria-expanded="false" aria-controls="pgp pgp_subs">
+                  <a data-toggle="collapse" href=".multi2" aria-expanded="false" aria-controls="GCNPgp GCNPgp_subs">
                     P-glycoprotein inhibitior
                   </a>
                 </td>
-                <td>{{result[0]["Prediction_value_A_pgp.csv"]}}</td>
-                <td>{{result[0]["Probability_A_pgp.csv"]}}</td>
+                <td>{{result[0]['GCN_data']["Prediction_value_GCN_A_Pgp"]}}</td>
+                <td>{{result[0]['GCN_data']["Probability_GCN_A_Pgp"]}}</td>
                 <td scope="row">
-                  <a data-toggle="collapse" href=".multi2" aria-expanded="false" aria-controls="pgp pgp_subs">
+                  <a data-toggle="collapse" href=".multi2" aria-expanded="false" aria-controls="GCNPgp GCNPgp_subs">
                     P-glycoprotein substrate
                   </a>
                 </td>
-                <td>{{result[0]["Prediction_value_A_pgp_subs.csv"]}}</td>
-                <td>{{result[0]["Probability_A_pgp_subs.csv"]}}</td>
+                <td>{{result[0]['GCN_data']["Prediction_value_GCN_A_Pgp_subs"]}}</td>
+                <td>{{result[0]['GCN_data']["Probability_GCN_A_Pgp_subs"]}}</td>
               </tr> 
               <tr>
                 <td colspan="3">
-                  <div class="collapse multi2" id="pgp" data-parent="#accordionClassification">
+                  <div class="collapse multi2" id="GCNPgp" data-parent="#GCNAccordionClassification">
                     <div class="card card-body">
                       <div class="row">
                         <div class="col-sm-8 offset-1">
-                          <img [src]="'data:image/png;base64,'+ result[0]['ex_img_A_pgp.csv']" alt="P-glycoprotein inhibitior" />
+                          <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_A_Pgp']" alt="P-glycoprotein inhibitior" />
                           <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                         </div>
                       </div>
@@ -184,11 +186,11 @@
                   </div>
                 </td>
                 <td colspan="3">
-                  <div class="collapse multi2" id="pgp_subs" data-parent="#accordionClassification">
+                  <div class="collapse multi2" id="GCNPgp_subs" data-parent="#GCNAccordionClassification">
                     <div class="card card-body">
                       <div class="row">
                         <div class="col-sm-8 offset-1">
-                          <img [src]="'data:image/png;base64,'+ result[0]['ex_img_A_pgp_subs.csv']" alt="P-glycoprotein substrate" />
+                          <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_A_Pgp_subs']" alt="P-glycoprotein substrate" />
                           <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                         </div>
                       </div>
@@ -200,23 +202,23 @@
             
               <tr>
                 <td scope="row">
-                  <a data-toggle="collapse" href=".multi3" aria-expanded="false" aria-controls="OB">
+                  <a data-toggle="collapse" href=".multi3" aria-expanded="false" aria-controls="GCNOB">
                     Human oral bioavailability
                   </a>
                 </td>
-                <td>{{result[0]["Prediction_value_A_OB.csv"]}}</td>
-                <td>{{result[0]["Probability_A_OB.csv"]}}</td>
+                <td>{{result[0]['GCN_data']["Prediction_value_GCN_A_OB"]}}</td>
+                <td>{{result[0]['GCN_data']["Probability_GCN_A_OB"]}}</td>
                 <td scope="row"></td>
                 <td></td>
                 <td></td>
               </tr>
               <tr>
                 <td colspan="3">
-                  <div class="collapse multi3" id="OB" data-parent="#accordionClassification">
+                  <div class="collapse multi3" id="GCNOB" data-parent="#GCNAccordionClassification">
                     <div class="card card-body">
                       <div class="row">
                         <div class="col-sm-8 offset-1">
-                          <img [src]="'data:image/png;base64,'+ result[0]['ex_img_A_OB.csv']" alt="Human oral bioavailability" />
+                          <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_A_OB']" alt="Human oral bioavailability" />
                           <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                         </div>
                       </div>
@@ -225,7 +227,7 @@
                   </div>
                 </td>
                 <td colspan="3">
-                  <div class="collapse multi3 vihide" data-parent="#accordionClassification">
+                  <div class="collapse multi3 vihide" data-parent="#GCNAccordionClassification">
                     <div class="card card-body">
                     </div>
                   </div>
@@ -238,27 +240,27 @@
                 Metabolism
               </th>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi5" aria-expanded="false" aria-controls="BCRP OATP1B1">
+                <a data-toggle="collapse" href=".multi5" aria-expanded="false" aria-controls="GCNBCRP GCNOATP1B1">
                   BCRP
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_M_BCRP.csv"]}}</td>
-              <td>{{result[0]["Probability_M_BCRP.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_M_BCRP"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_M_BCRP"]}}</td>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi5" aria-expanded="false" aria-controls="BCRP OATP1B1">
-                  OATP1B1 inhibitior
+                <a data-toggle="collapse" href=".multi5" aria-expanded="false" aria-controls="GCNBCRP GCNOATP1B1">
+                  OATP1B1-inhibitor
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_M_OATP1B1_inhib.csv"]}}</td>
-              <td>{{result[0]["Probability_M_OATP1B1_inhib.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_M_OATP1B1_inhib"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_M_OATP1B1_inhib"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi5" id="BCRP" data-parent="#accordionClassification">
+                <div class="collapse multi5" id="GCNBCRP" data-parent="#GCNAccordionClassification">
                   <div class="card card-body" >
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_BCRP.csv']" alt="BCRP" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_M_BCRP']" alt="BCRP" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -267,11 +269,11 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi5" id="OATP1B1" data-parent="#accordionClassification">
+                <div class="collapse multi5" id="GCNOATP1B1" data-parent="#GCNAccordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_OATP1B1_inhib.csv']" alt="OATP1B1 inhibitior" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_M_OATP1B1_inhib']" alt="OATP1B1 inhibitior" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -283,27 +285,27 @@
 
             <tr>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi6" aria-expanded="false" aria-controls="OATP1B3 OCT2">
-                  OATP1B3 inhibitior
+                <a data-toggle="collapse" href=".multi6" aria-expanded="false" aria-controls="GCNOATP1B3 GCNOCT2">
+                  OATP1B3-inhibitor
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_M_OATP1B3_inhib.csv"]}}</td>
-              <td>{{result[0]["Probability_M_OATP1B3_inhib.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_M_OATP1B3_inhib"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_M_OATP1B3_inhib"]}}</td>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi6" aria-expanded="false" aria-controls="OATP1B3 OCT2">
-                  OCT2 inhibitior
+                <a data-toggle="collapse" href=".multi6" aria-expanded="false" aria-controls="GCNOATP1B3 GCNOCT2">
+                  OCT2 
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_M_OCT2.csv"]}}</td>
-              <td>{{result[0]["Probability_M_OCT2.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_M_OCT2"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_M_OCT2"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi6" id="OATP1B3" data-parent="#accordionClassification">
+                <div class="collapse multi6" id="GCNOATP1B3" data-parent="#GCNAccordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_OATP1B3_inhib.csv']" alt="OATP1B3 inhibitior" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_M_OATP1B3_inhib']" alt="OATP1B3 inhibitior" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -312,11 +314,11 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi6" id="OCT2" data-parent="#accordionClassification">
+                <div class="collapse multi6" id="GCNOCT2" data-parent="#GCNAccordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_OCT2.csv']" alt="OCT2 inhibitior" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_M_OCT2']" alt="OCT2 inhibitior" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -330,27 +332,27 @@
 
             <tr>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi7" aria-expanded="false" aria-controls="cyp3a4_subs cyp2C9_subs">
-                  CYP3A4 substrate
+                <a data-toggle="collapse" href=".multi7" aria-expanded="false" aria-controls="GCNCyp3a4_subs GCNCyp2c9_subs">
+                  CYP3A4-substrate
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_M_cyp3a4_substrates.csv"]}}</td>
-              <td>{{result[0]["Probability_M_cyp3a4_substrates.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_M_Cyp3a4_subs"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_M_Cyp3a4_subs"]}}</td>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi7" aria-expanded="false" aria-controls="cyp3a4_subs cyp2c9_subs">
-                  CYP2C9 substrate
+                <a data-toggle="collapse" href=".multi7" aria-expanded="false" aria-controls="GCNCyp3a4_subs GCNCyp2c9_subs">
+                  CYP2C9-substrate
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_M_cyp2C9_substrates.csv"]}}</td>
-              <td>{{result[0]["Probability_M_cyp2C9_substrates.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_M_Cyp2c9_subs"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_M_Cyp2c9_subs"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi7" id="cyp3a4_subs" data-parent="#accordionClassification">
+                <div class="collapse multi7" id="GCNCyp3a4_subs" data-parent="#GCNAccordionClassification">
                   <div class="card card-body" >
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_cyp3a4_substrates.csv']" alt="CYP3A4 substrate" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_M_Cyp3a4_subs']" alt="CYP3A4 substrate" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -359,11 +361,11 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi7" id="cyp2c9_subs" data-parent="#accordionClassification">
+                <div class="collapse multi7" id="GCNCyp2c9_subs" data-parent="#GCNAccordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_cyp2C9_substrates.csv']" alt="CYP2C9 substrate" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_M_Cyp2c9_subs']" alt="CYP2C9 substrate" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -375,27 +377,27 @@
 
             <tr>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi8" aria-expanded="false" aria-controls="cyp2d6_subs cyp3a4">
-                  CYP2D6 substrate
+                <a data-toggle="collapse" href=".multi8" aria-expanded="false" aria-controls="GCNcyp2d6_subs GCNCyp3a4">
+                  CYP2D6-substrate
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_M_cyp2d6subs.csv"]}}</td>
-              <td>{{result[0]["Probability_M_cyp2d6subs.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_M_Cyp2d6_subs"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_M_Cyp2d6_subs"]}}</td>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi8" aria-expanded="false" aria-controls="cyp2d6_subs cyp3a4">
-                  CYP3A4 inhibition
+                <a data-toggle="collapse" href=".multi8" aria-expanded="false" aria-controls="GCNCyp2d6_subs GCNCyp3a4">
+                  CYP3A4-inhibitor
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_M_cyp3a4.csv"]}}</td>
-              <td>{{result[0]["Probability_M_cyp3a4.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_M_Cyp3a4"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_M_Cyp3a4"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi8" id="cyp2d6_subs" data-parent="#accordionClassification">
+                <div class="collapse multi8" id="GCNCyp2d6_subs" data-parent="#GCNAccordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_cyp2d6subs.csv']" alt="CYP2D6 substrate" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_M_Cyp2d6_subs']" alt="CYP2D6 substrate" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -404,11 +406,11 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi8" id="cyp3a4" data-parent="#accordionClassification">
+                <div class="collapse multi8" id="GCNCyp3a4" data-parent="#GCNAccordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_cyp3a4.csv']" alt="CYP3A4 inhibition" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_M_Cyp3a4']" alt="CYP3A4 inhibition" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -420,27 +422,27 @@
 
             <tr>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi9" aria-expanded="false" aria-controls="cyp2c9 cyp2c19">
-                  CYP2C9 inhibition
+                <a data-toggle="collapse" href=".multi9" aria-expanded="false" aria-controls="GCNCyp2c9 GCNCyp2c19">
+                  CYP2C9-inhibitor
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_M_cyp2c9.csv"]}}</td>
-              <td>{{result[0]["Probability_M_cyp2c9.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_M_Cyp2c9"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_M_Cyp2c9"]}}</td>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi9" aria-expanded="false" aria-controls="cyp2c9 cyp2c19">
-                  CYP2C19 inhibition
+                <a data-toggle="collapse" href=".multi9" aria-expanded="false" aria-controls="GCNCyp2c9 GCNCyp2c19">
+                  CYP2C19-inhibitor
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_M_cyp2c19.csv"]}}</td>
-              <td>{{result[0]["Probability_M_cyp2c19.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_M_Cyp2c19"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_M_Cyp2c19"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi9" id="cyp2c9" data-parent="#accordionClassification">
+                <div class="collapse multi9" id="GCNCyp2c9" data-parent="#GCNAccordionClassification">
                   <div class="card card-body" >
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_cyp2c9.csv']" alt="CYP2C9 inhibition" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_M_Cyp2c9']" alt="CYP2C9 inhibition" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -449,11 +451,11 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi9" id="cyp2c19" data-parent="#accordionClassification">
+                <div class="collapse multi9" id="GCNCyp2c19" data-parent="#GCNAccordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_cyp2c19.csv']" alt="CYP2C19 inhibition" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_M_Cyp2c19']" alt="CYP2C19 inhibition" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -465,27 +467,27 @@
 
             <tr>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi10" aria-expanded="false" aria-controls="cyp2d6 cyp1a2">
-                  CYP2D6 inhibition
+                <a data-toggle="collapse" href=".multi10" aria-expanded="false" aria-controls="GCNCyp2d6 GCNCyp1a2">
+                  CYP2D6-inhibitor
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_M_cyp2d6.csv"]}}</td>
-              <td>{{result[0]["Probability_M_cyp2d6.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_M_Cyp2d6"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_M_Cyp2d6"]}}</td>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi10" aria-expanded="false" aria-controls="cyp2d6 cyp1a2">
-                  CYP1A2 inhibition
+                <a data-toggle="collapse" href=".multi10" aria-expanded="false" aria-controls="GCNCyp2d6 GCNCyp1a2">
+                  CYP1A2-inhibitor
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_M_cyp1a2.csv"]}}</td>
-              <td>{{result[0]["Probability_M_cyp1a2.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_M_Cyp1a2"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_M_Cyp1a2"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi10" id="cyp2d6" data-parent="#accordionClassification">
+                <div class="collapse multi10" id="GCNCyp2d6" data-parent="#GCNAccordionClassification">
                   <div class="card card-body" >
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_cyp2d6.csv']" alt="CYP2D6 inhibition" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_M_Cyp2d6']" alt="CYP2D6 inhibition" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -494,11 +496,11 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi10" id="cyp1a2" data-parent="#accordionClassification">
+                <div class="collapse multi10" id="GCNCyp1a2" data-parent="#GCNAccordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_M_cyp1a2.csv']" alt="CYP1A2 inhibition" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_M_Cyp1a2']" alt="CYP1A2 inhibition" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -514,23 +516,23 @@
                 Distribution
               </th>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi4" aria-expanded="false" aria-controls="BBB">
-                  Blood Brain Barrier
+                <a data-toggle="collapse" href=".multi4" aria-expanded="false" aria-controls="GCNBBB">
+                  Blood-Brain Barrier
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_D_BBB.csv"]}}</td>
-              <td>{{result[0]["Probability_D_BBB.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_D_BBB"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_D_BBB"]}}</td>
               <td scope="row"></td>
               <td></td>
               <td></td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi4" id="BBB" data-parent="#accordionClassification">
+                <div class="collapse multi4" id="GCNBBB" data-parent="#GCNAccordionClassification">
                   <div class="card card-body" >
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_D_BBB.csv']" alt="Blood Brain Barrier" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_D_BBB']" alt="Blood Brain Barrier" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -539,7 +541,7 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi4 vihide" data-parent="#accordionClassification">
+                <div class="collapse multi4 vihide" data-parent="#GCNAccordionClassification">
                   <div class="card card-body">
                   </div>
                 </div>
@@ -551,27 +553,27 @@
                 Toxicity
               </th>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi11" aria-expanded="false" aria-controls="carcinogenicity DILI">
+                <a data-toggle="collapse" href=".multi11" aria-expanded="false" aria-controls="GCNCarcinogenicity GCNDILI">
                   Carcinogenicity
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_T_Carcinogenicity.csv"]}}</td>
-              <td>{{result[0]["Probability_T_Carcinogenicity.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_T_Carcinogenicity"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_T_Carcinogenicity"]}}</td>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi11" aria-expanded="false" aria-controls="carcinogenicity DILI">
+                <a data-toggle="collapse" href=".multi11" aria-expanded="false" aria-controls="GCNCarcinogenicity GCNDILI">
                   DILI
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_T_DILI.csv"]}}</td>
-              <td>{{result[0]["Probability_T_DILI.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_T_DILI"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_T_DILI"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi11" id="carcinogenicity" data-parent="#accordionClassification">
+                <div class="collapse multi11" id="GCNCarcinogenicity" data-parent="#GCNAccordionClassification">
                   <div class="card card-body" >
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_Carcinogenicity.csv']" alt="Carcinogenicity" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_T_Carcinogenicity']" alt="Carcinogenicity" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -580,11 +582,11 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi11" id="DILI" data-parent="#accordionClassification">
+                <div class="collapse multi11" id="GCNDILI" data-parent="#GCNAccordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_DILI.csv']" alt="DILI" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_T_DILI']" alt="DILI" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -596,27 +598,27 @@
 
             <tr>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi12" aria-expanded="false" aria-controls="eye_corrossion eye_injury">
+                <a data-toggle="collapse" href=".multi12" aria-expanded="false" aria-controls="GCNEye_corrossion GCNEye_injury">
                   Eye corrosion
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_T_eye_corrossion.csv"]}}</td>
-              <td>{{result[0]["Probability_T_eye_corrossion.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_T_Eye_corrossion"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_T_Eye_corrossion"]}}</td>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi12" aria-expanded="false" aria-controls="eye_corrossion eye_injury">
-                  Eye irritation
+                <a data-toggle="collapse" href=".multi12" aria-expanded="false" aria-controls="GCNEye_corrossion GCNEye_injury">
+                  Eye injury
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_T_eye_injury.csv"]}}</td>
-              <td>{{result[0]["Probability_T_eye_injury.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_T_Eye_injury"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_T_Eye_injury"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi12" id="eye_corrossion" data-parent="#accordionClassification">
+                <div class="collapse multi12" id="GCNEye_corrossion" data-parent="#GCNAccordionClassification">
                   <div class="card card-body" >
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_eye_corrossion.csv']" alt="Eye corrosion" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_T_Eye_corrossion']" alt="Eye corrosion" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -625,11 +627,11 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi12" id="eye_injury" data-parent="#accordionClassification">
+                <div class="collapse multi12" id="GCNEye_injury" data-parent="#GCNAccordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_eye_injury.csv']" alt="Eye irritation" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_T_Eye_injury']" alt="Eye irritation" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -641,27 +643,27 @@
 
             <tr>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi13" aria-expanded="false" aria-controls="ames H_HT">
-                  Ames mutagenesis
+                <a data-toggle="collapse" href=".multi13" aria-expanded="false" aria-controls="GCNAmes GCNH_HT">
+                  AMES mutagenicity
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_T_Ames.csv"]}}</td>
-              <td>{{result[0]["Probability_T_Ames.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_T_Ames"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_T_Ames"]}}</td>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi13" aria-expanded="false" aria-controls="ames H_HT">
+                <a data-toggle="collapse" href=".multi13" aria-expanded="false" aria-controls="GCNAmes GCNH_HT">
                   H-HT
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_T_H_HT.csv"]}}</td>
-              <td>{{result[0]["Probability_T_H_HT.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_T_H_HT"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_T_H_HT"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi13" id="ames" data-parent="#accordionClassification">
+                <div class="collapse multi13" id="GCNAmes" data-parent="#GCNAccordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_Ames.csv']" alt="Ames mutagenesis" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_T_Ames']" alt="Ames mutagenesis" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -670,11 +672,11 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi13" id="H_HT" data-parent="#accordionClassification">
+                <div class="collapse multi13" id="GCNH_HT" data-parent="#GCNAccordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_H_HT.csv']" alt="H-HT" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_T_H_HT']" alt="H-HT" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -686,27 +688,27 @@
 
             <tr>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi14" aria-expanded="false" aria-controls="fdammd herg">
+                <a data-toggle="collapse" href=".multi14" aria-expanded="false" aria-controls="GCNFdammd GCNHerg">
                   FDAMDD
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_T_fdammd.csv"]}}</td>
-              <td>{{result[0]["Probability_T_fdammd.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_T_Fdammd"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_T_Fdammd"]}}</td>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi14" aria-expanded="false" aria-controls="fdammd herg">
-                  HERG
+                <a data-toggle="collapse" href=".multi14" aria-expanded="false" aria-controls="GCNFdammd GCNHerg">
+                  hERG
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_T_herg.csv"]}}</td>
-              <td>{{result[0]["Probability_T_herg.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_T_Herg"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_T_Herg"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi14" id="fdammd" data-parent="#accordionClassification">
+                <div class="collapse multi14" id="GCNFdammd" data-parent="#GCNAccordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_fdammd.csv']" alt="FDAMDD" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_T_Fdammd']" alt="FDAMDD" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -715,11 +717,11 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi14" id="herg" data-parent="#accordionClassification">
+                <div class="collapse multi14" id="GCNHerg" data-parent="#GCNAccordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_herg.csv']" alt="HERG" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_T_Herg']" alt="HERG" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -731,27 +733,27 @@
 
             <tr>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi15" aria-expanded="false" aria-controls="genotoxicity skin_sens">
+                <a data-toggle="collapse" href=".multi15" aria-expanded="false" aria-controls="GCNGenotoxicity GCNSkin_sens">
                   Genotoxicity
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_T_genotoxicity.csv"]}}</td>
-              <td>{{result[0]["Probability_T_herg.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_T_Genotoxicity"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_T_Genotoxicity"]}}</td>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi15" aria-expanded="false" aria-controls="genotoxicity skin_sens">
-                  Skin_sensitization
+                <a data-toggle="collapse" href=".multi15" aria-expanded="false" aria-controls="GCNGenotoxicity GCNSkin_sens">
+                  Skin sensitization
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_T_skin_sensitization.csv"]}}</td>
-              <td>{{result[0]["Probability_T_skin_sensitization.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_T_Skin_sensitization"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_T_Skin_sensitization"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi15" id="genotoxicity" data-parent="#accordionClassification">
+                <div class="collapse multi15" id="GCNGenotoxicity" data-parent="#GCNAccordionClassification">
                   <div class="card card-body" >
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_genotoxicity.csv']" alt="Genotoxicity" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_T_Genotoxicity']" alt="Genotoxicity" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -760,11 +762,11 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi15" id="skin_sens" data-parent="#accordionClassification">
+                <div class="collapse multi15" id="GCNSkin_sens" data-parent="#GCNAccordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_skin_sensitization.csv']" alt="Skin_sensitization" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_T_Skin_sensitization']" alt="Skin_sensitization" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -776,27 +778,27 @@
 
             <tr>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi16" aria-expanded="false" aria-controls="Beetoxic Biodegradation">
+                <a data-toggle="collapse" href=".multi16" aria-expanded="false" aria-controls="GCNBeetoxic GCNBiodegradation">
                   Honey bee toxicity
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_T_Beetoxic.csv"]}}</td>
-              <td>{{result[0]["Probability_T_Beetoxic.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_T_Beetoxic"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_T_Beetoxic"]}}</td>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi16" aria-expanded="false" aria-controls="Beetoxic Biodegradation">
+                <a data-toggle="collapse" href=".multi16" aria-expanded="false" aria-controls="GCNBeetoxic GCNBiodegradation">
                   Biodegradation
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_T_Biodegradation.csv"]}}</td>
-              <td>{{result[0]["Probability_T_Biodegradation.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_T_Biodegradation"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_T_Biodegradation"]}}</td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi16" id="Beetoxic" data-parent="#accordionClassification">
+                <div class="collapse multi16" id="GCNBeetoxic" data-parent="#GCNAccordionClassification">
                   <div class="card card-body" >
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_Beetoxic.csv']" alt="Honey bee toxicity" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_T_Beetoxic']" alt="Honey bee toxicity" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -805,11 +807,11 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi16" id="Biodegradation" data-parent="#accordionClassification">
+                <div class="collapse multi16" id="GCNBiodegradation" data-parent="#GCNAccordionClassification">
                   <div class="card card-body">
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_Biodegradation.csv']" alt="Biodegradation" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_T_Biodegradation']" alt="Biodegradation" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -821,23 +823,23 @@
 
             <tr>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi17" aria-expanded="false" aria-controls="Fishtoxic">
-                  Fish aquatic toxicity
+                <a data-toggle="collapse" href=".multi17" aria-expanded="false" aria-controls="GCNFishtoxic">
+                  Fish toxicity
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_T_Fishtoxic.csv"]}}</td>
-              <td>{{result[0]["Probability_T_Fishtoxic.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_T_Fishtoxic"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_T_Fishtoxic"]}}</td>
               <td scope="row"></td>
               <td></td>
               <td></td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi17" id="Fishtoxic" data-parent="#accordionClassification">
+                <div class="collapse multi17" id="GCNFishtoxic" data-parent="#GCNAccordionClassification">
                   <div class="card card-body" >
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_T_Fishtoxic.csv']" alt="Fish aquatic toxicity" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_T_Fishtoxic']" alt="Fish aquatic toxicity" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -846,7 +848,7 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi17 vihide" data-parent="#accordionClassification">
+                <div class="collapse multi17 vihide" data-parent="#GCNAccordionClassification">
                   <div class="card card-body">
                   </div>
                 </div>
@@ -859,23 +861,23 @@
                 Excretion
               </th>
               <td scope="row">
-                <a data-toggle="collapse" href=".multi18" aria-expanded="false" aria-controls="BBB">
-                  Log (T1/2)
+                <a data-toggle="collapse" href=".multi18" aria-expanded="false" aria-controls="GCNLogt12">
+                  LogT1/2
                 </a>
               </td>
-              <td>{{result[0]["Prediction_value_E_log_t12.csv"]}}</td>
-              <td>{{result[0]["Probability_E_log_t12.csv"]}}</td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_E_Log_T12"]}}</td>
+              <td>{{result[0]['GCN_data']["Probability_GCN_E_Log_T12"]}}</td>
               <td scope="row"></td>
               <td></td>
               <td></td>
             </tr>
             <tr>
               <td colspan="3">
-                <div class="collapse multi18" id="logt12" data-parent="#accordionClassification">
+                <div class="collapse multi18" id="GCNLogt12" data-parent="#GCNAccordionClassification">
                   <div class="card card-body" >
                     <div class="row">
                       <div class="col-sm-8 offset-1">
-                        <img [src]="'data:image/png;base64,'+ result[0]['ex_img_E_log_t12.csv']" alt="Fish aquatic toxicity" />
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_E_Log_T12']" alt="Log (T1/2)" />
                         <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
                       </div>
                     </div>
@@ -884,7 +886,7 @@
                 </div>
               </td>
               <td colspan="3">
-                <div class="collapse multi18 vihide" data-parent="#accordionClassification">
+                <div class="collapse multi18 vihide" data-parent="#GCNAccordionClassification">
                   <div class="card card-body">
                   </div>
                 </div>
@@ -893,7 +895,7 @@
           </tbody>
         </table>
       </div>
-      <div class="tab-pane fade" id="Regressions" role="tabpanel" aria-labelledby="profile-tab">
+      <div class="tab-pane fade" id="GCNRegressions" role="tabpanel" aria-labelledby="GCNRES-tab">
         <table class="table table-striped table-hover">
           <thead>
             <tr>
@@ -904,71 +906,270 @@
             </tr>
           </thead>
   
-          <tbody>
+          <tbody class="accordion" id="GCNAccordionRegresion">
             
             <tr>
-              <th scope="row" rowspan="9" style="vertical-align: middle">
+              <th scope="row" rowspan="18" style="vertical-align: middle">
                 Physicochemical property
               </th>
-              <td scope="row">Solubility</td>
-              <td>{{result[0]["Prediction_value_Solubility_AqSolDB.csv"]}}</td>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi19" aria-expanded="false" aria-controls="GCNSolubility">
+                  Solubility
+                </a>
+              </td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_Solubility"]}}</td>
               <td>log mol/L</td>
             </tr>
             <tr>
-              <td scope="row">LogD</td>
-              <td>{{result[0]["Prediction_value_B_small_mole_logd.csv"]}}</td>
+              <td colspan="1">
+                <div class="collapse multi19" id="GCNSolubility" data-parent="#GCNAccordionRegresion">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_Solubility']" alt="Solubility" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi20" aria-expanded="false" aria-controls="GCNLogD">
+                  LogD
+                </a>
+              </td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_B_Logd"]}}</td>
               <td></td>
             </tr>
             <tr>
-              <td scope="row">Boiling point</td>
-              <td>{{result[0]["Prediction_value_B_bp.csv"]}}</td>
+              <td colspan="1">
+                <div class="collapse multi20" id="GCNLogD" data-parent="#GCNAccordionRegresion">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_B_Logd']" alt="LogD" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi21" aria-expanded="false" aria-controls="GCNBP">
+                  Boiling point
+                </a>
+              </td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_B_BP"]}}</td>
               <td>℃</td>
             </tr>
             <tr>
-              <td scope="row">Logbcf</td>
-              <td>{{result[0]["Prediction_value_B_logbcf.csv"]}}</td>
+              <td colspan="1">
+                <div class="collapse multi21" id="GCNBP" data-parent="#GCNAccordionRegresion">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_B_BP']" alt="BP" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi22" aria-expanded="false" aria-controls="GCNLogbcf">
+                  LogBCF
+                </a></td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_B_Logbcf"]}}</td>
               <td></td>
             </tr>
             <tr>
-              <td scope="row">Logp</td>
-              <td>{{result[0]["Prediction_value_B_logp.csv"]}}</td>
+              <td colspan="1">
+                <div class="collapse multi22" id="GCNLogbcf" data-parent="#GCNAccordionRegresion">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_B_Logbcf']" alt="Logbcf" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi23" aria-expanded="false" aria-controls="GCNLogp">
+                  LogP
+                </a></td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_B_Logp"]}}</td>
               <td></td>
             </tr>
             <tr>
-              <td scope="row">Logvp</td>
-              <td>{{result[0]["Prediction_value_B_logvp.csv"]}}</td>
+              <td colspan="1">
+                <div class="collapse multi23" id="GCNLogp" data-parent="#GCNAccordionRegresion">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_B_Logp']" alt="Logp" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi24" aria-expanded="false" aria-controls="GCNLogvp">
+                  LogVP
+                </a></td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_B_Logvp"]}}</td>
               <td></td>
             </tr>
             <tr>
-              <td scope="row">Melting point</td>
-              <td>{{result[0]["Prediction_value_B_mp.csv"]}}</td>
+              <td colspan="1">
+                <div class="collapse multi24" id="GCNLogvp" data-parent="#GCNAccordionRegresion">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_B_Logvp']" alt="Logvp" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi25" aria-expanded="false" aria-controls="GCNMP">
+                  Melting point
+                </a></td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_B_Mp"]}}</td>
               <td>℃</td>
             </tr>
             <tr>
-              <td scope="row">Lipophilicity</td>
-              <td>{{result[0]["Prediction_value_Lipophilicity_AstraZeneca.csv"]}}</td>
+              <td colspan="1">
+                <div class="collapse multi25" id="GCNMP" data-parent="#GCNAccordionRegresion">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_B_Mp']" alt="mp" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi26" aria-expanded="false" aria-controls="GCNLipophilicity">
+                  Lipophilicity
+                </a></td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_Lipophilicity"]}}</td>
               <td></td>
             </tr>
             <tr>
-              <td scope="row">Hydration free energy</td>
-              <td>{{result[0]["Prediction_value_HydrationFreeEnergy_FreeSolv.csv"]}}</td>
+              <td colspan="1">
+                <div class="collapse multi26" id="GCNLipophilicity" data-parent="#GCNAccordionRegresion">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_Lipophilicity']" alt="Lipophilicity" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi27" aria-expanded="false" aria-controls="GCNEnergy">
+                  Hydration free energy
+                </a></td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_HydrationFreeEnergy"]}}</td>
               <td>Kcal/mol </td>
             </tr>
-            
             <tr>
-              <th scope="row" rowspan="2" style="vertical-align: middle">
+              <td colspan="1">
+                <div class="collapse multi27" id="GCNEnergy" data-parent="#GCNAccordionRegresion">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_HydrationFreeEnergy']" alt="energy" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" rowspan="4" style="vertical-align: middle">
                 Distribution
               </th>
-              <td scope="row">Plasma protein binding</td>
-              <td>{{result[0]["Prediction_value_D_PPB.csv"] | percent:'0.0-10'}}</td>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi28" aria-expanded="false" aria-controls="GCNPPB">
+                  Plasma protein binding
+                </a></td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_D_PPB"] | percent:'0.0-10'}}</td>
               <td></td>
             </tr>
             <tr>
-              <td scope="row">Volume of distribution</td>
-              <td>{{result[0]["Prediction_value_D_vd.csv"]}}</td>
+              <td colspan="1">
+                <div class="collapse multi28" id="GCNPPB" data-parent="#GCNAccordionRegresion">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_D_PPB']" alt="PPB" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi29" aria-expanded="false" aria-controls="GCNVD">
+                  VDss
+                </a></td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_D_Vd"]}}</td>
               <td>L/kg</td>
             </tr>
-
+            <tr>
+              <td colspan="1">
+                <div class="collapse multi29" id="GCNVD" data-parent="#GCNAccordionRegresion">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_D_Vd']" alt="VD" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
 
             <!-- <tr>
               <th scope="row" rowspan="3" style="vertical-align: middle">
@@ -990,22 +1191,76 @@
             </tr> -->
             
             <tr>
-              <th scope="row" rowspan="3" style="vertical-align: middle">
+              <th scope="row" rowspan="6" style="vertical-align: middle">
                 Toxicity
               </th>
-              <td scope="row">Acute Oral Toxicity</td>
-              <td>{{result[0]["Prediction_value_T_Acute_oral_toxicity.csv"]}}</td>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi30" aria-expanded="false" aria-controls="GCNAcute">
+                  Acute oral toxicity
+                </a></td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_T_Acute_oral_toxicity"]}}</td>
               <td>pLD50</td>
             </tr>
             <tr>
-              <td scope="row">Pyriformis</td>
-              <td>{{result[0]["Prediction_value_T_pyriformis.csv"]}}</td>
+              <td colspan="1">
+                <div class="collapse multi30" id="GCNAcute" data-parent="#GCNAccordionRegresion">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_T_Acute_oral_toxicity']" alt="Acute" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi31" aria-expanded="false" aria-controls="GCNPyriformis">
+                  Pyriformis toxicity
+                </a></td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_T_Pyriformis"]}}</td>
               <td>pIGC50</td>
             </tr>
             <tr>
-              <td scope="row">LD50</td>
-              <td>{{result[0]["Prediction_value_LD50_Zhu.csv"]}}</td>
+              <td colspan="1">
+                <div class="collapse multi31" id="GCNPyriformis" data-parent="#GCNAccordionRegresion">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_T_Pyriformis']" alt="Pyriformis" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi32" aria-expanded="false" aria-controls="GCNLD50">
+                  LD50
+                </a></td>
+              <td>{{result[0]['GCN_data']["Prediction_value_GCN_LD50"]}}</td>
               <td>-log mol/kg</td>
+            </tr>
+            <tr>
+              <td colspan="1">
+                <div class="collapse multi32" id="GCNLD50" data-parent="#GCNAccordionRegresion">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GCN_data']['ex_img_GCN_LD50']" alt="LD50" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
             </tr>
             <!-- -log mol/kg -->
           </tbody>
@@ -1015,6 +1270,1201 @@
     </div>
   </div>
   <br />
+  <br>
+  <h3><span class="badge badge-pill badge-info" >GAT Results</span></h3>
+    <div
+      class="col-sm-12"
+      style="border: 1px solid blueviolet; padding: 1px"
+    >
+    <ul class="nav nav-tabs" id="GATTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="GATCLS-tab" data-toggle="tab" href="#GATClassifications" role="tab" aria-controls="home" aria-selected="true">Classifications</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="GATRES-tab" data-toggle="tab" href="#GATRegressions" role="tab" aria-controls="profile" aria-selected="false">Regressions</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="GATTabContent">
+      <div class="tab-pane fade show active" id="GATClassifications" role="tabpanel" aria-labelledby="GATCLS-tab">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Category</th>
+              <th scope="col">
+                Property
+              </th>
+              <th scope="col">Value</th>
+              <th scope="col">Probability</th>
+              <th scope="col">
+                Property
+              </th>
+              <th scope="col">Value</th>
+              <th scope="col">Probability</th>
+            </tr>
+          </thead>
+
+          <tbody class="accordion" id="GATAccordionClassification">
+              <tr>
+                <th scope="row" rowspan="6" style="vertical-align: middle">
+                  Absorption
+                </th>
+                  <td scope="row" >
+                    <a data-toggle="collapse" href=".multi33" aria-expanded="false" aria-controls="GATHIA GATCaco2">
+                    Human Intestinal Absorption
+                  </a></td>
+                  <td>{{result[0]["GAT_data"]["Prediction_value_GAT_A_HIA"]}}</td>
+                  <td>{{result[0]["GAT_data"]["Probability_GAT_A_HIA"]}}</td>
+                  <td scope="row" >
+                    <a data-toggle="collapse" href=".multi33" aria-expanded="false" aria-controls="GATHIA GATCaco2">
+                    Caco2 permeability
+                  </a></td>
+                  <td>{{result[0]["GAT_data"]["Prediction_value_GAT_A_Caco2"]}}</td>
+                  <td>{{result[0]["GAT_data"]["Probability_GAT_A_Caco2"]}}</td>
+              </tr>
+              <tr>
+                <td colspan="3">
+                  <div class="collapse multi33" id="GATHIA" data-parent="#GATAccordionClassification">
+                    <div class="card card-body" >
+                      <div class="row">
+                        <div class="col-sm-8 offset-1">
+                          <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_A_HIA']" alt="HIA" />
+                          <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                        </div>
+                      </div>
+                       
+                    </div>
+                  </div>
+                </td>
+                <td colspan="3">
+                  <div class="collapse multi33" id="GATCaco2" data-parent="#GATAccordionClassification">
+                    <div class="card card-body">
+                      <div class="row">
+                        <div class="col-sm-8 offset-1">
+                          <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_A_Caco2']" alt="Caco-2" />
+                          <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+
+              <tr>
+                <td scope="row">
+                  <a data-toggle="collapse" href=".multi34" aria-expanded="false" aria-controls="GATPgp GATPgp_subs">
+                    P-glycoprotein inhibitior
+                  </a>
+                </td>
+                <td>{{result[0]['GAT_data']["Prediction_value_GAT_A_Pgp"]}}</td>
+                <td>{{result[0]['GAT_data']["Probability_GAT_A_Pgp"]}}</td>
+                <td scope="row">
+                  <a data-toggle="collapse" href=".multi34" aria-expanded="false" aria-controls="GATPgp GATPgp_subs">
+                    P-glycoprotein substrate
+                  </a>
+                </td>
+                <td>{{result[0]['GAT_data']["Prediction_value_GAT_A_Pgp_subs"]}}</td>
+                <td>{{result[0]['GAT_data']["Probability_GAT_A_Pgp_subs"]}}</td>
+              </tr> 
+              <tr>
+                <td colspan="3">
+                  <div class="collapse multi34" id="GATPgp" data-parent="#GATAccordionClassification">
+                    <div class="card card-body">
+                      <div class="row">
+                        <div class="col-sm-8 offset-1">
+                          <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_A_Pgp']" alt="P-glycoprotein inhibitior" />
+                          <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </td>
+                <td colspan="3">
+                  <div class="collapse multi34" id="GATPgp_subs" data-parent="#GATAccordionClassification">
+                    <div class="card card-body">
+                      <div class="row">
+                        <div class="col-sm-8 offset-1">
+                          <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_A_Pgp_subs']" alt="P-glycoprotein substrate" />
+                          <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td scope="row">
+                  <a data-toggle="collapse" href=".multi35" aria-expanded="false" aria-controls="GATOB">
+                    Human oral bioavailability
+                  </a>
+                </td>
+                <td>{{result[0]['GAT_data']["Prediction_value_GAT_A_OB"]}}</td>
+                <td>{{result[0]['GAT_data']["Probability_GAT_A_OB"]}}</td>
+                <td scope="row"></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td colspan="3">
+                  <div class="collapse multi35" id="GATOB" data-parent="#GATAccordionClassification">
+                    <div class="card card-body">
+                      <div class="row">
+                        <div class="col-sm-8 offset-1">
+                          <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_A_OB']" alt="Human oral bioavailability" />
+                          <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </td>
+                <td colspan="3">
+                  <div class="collapse multi35 vihide" data-parent="#GATAccordionClassification">
+                    <div class="card card-body">
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+
+            <tr>
+              <th scope="row" rowspan="12" style="vertical-align: middle">
+                Metabolism
+              </th>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi36" aria-expanded="false" aria-controls="GATBCRP GATOATP1B1">
+                  BCRP
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_M_BCRP"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_M_BCRP"]}}</td>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi36" aria-expanded="false" aria-controls="GATBCRP GATOATP1B1">
+                  OATP1B1-inhibitor
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_M_OATP1B1_inhib"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_M_OATP1B1_inhib"]}}</td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div class="collapse multi36" id="GATBCRP" data-parent="#GATAccordionClassification">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_M_BCRP']" alt="BCRP" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+              <td colspan="3">
+                <div class="collapse multi36" id="GATOATP1B1" data-parent="#GATAccordionClassification">
+                  <div class="card card-body">
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_M_OATP1B1_inhib']" alt="OATP1B1 inhibitior" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi37" aria-expanded="false" aria-controls="GATOATP1B3 GATOCT2">
+                  OATP1B3-inhibitor
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_M_OATP1B3_inhib"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_M_OATP1B3_inhib"]}}</td>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi37" aria-expanded="false" aria-controls="GATOATP1B3 GATOCT2">
+                  OCT2
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_M_OCT2"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_M_OCT2"]}}</td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div class="collapse multi37" id="GATOATP1B3" data-parent="#GATAccordionClassification">
+                  <div class="card card-body">
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_M_OATP1B3_inhib']" alt="OATP1B3 inhibitior" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+              <td colspan="3">
+                <div class="collapse multi37" id="GATOCT2" data-parent="#GATAccordionClassification">
+                  <div class="card card-body">
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_M_OCT2']" alt="OCT2 inhibitior" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            
+
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi38" aria-expanded="false" aria-controls="GATCyp3a4_subs GATCyp2c9_subs">
+                  CYP3A4-substrate
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_M_Cyp3a4_subs"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_M_Cyp3a4_subs"]}}</td>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi38" aria-expanded="false" aria-controls="GATCyp3a4_subs GATCyp2c9_subs">
+                  CYP2C9-substrate
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_M_Cyp2c9_subs"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_M_Cyp2c9_subs"]}}</td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div class="collapse multi38" id="GATCyp3a4_subs" data-parent="#GATAccordionClassification">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_M_Cyp3a4_subs']" alt="CYP3A4 substrate" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+              <td colspan="3">
+                <div class="collapse multi38" id="GATCyp2c9_subs" data-parent="#GATAccordionClassification">
+                  <div class="card card-body">
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_M_Cyp2c9_subs']" alt="CYP2C9 substrate" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi39" aria-expanded="false" aria-controls="GATcyp2d6_subs GATCyp3a4">
+                  CYP2D6-substrate
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_M_Cyp2d6_subs"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_M_Cyp2d6_subs"]}}</td>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi39" aria-expanded="false" aria-controls="GATCyp2d6_subs GATCyp3a4">
+                  CYP3A4-inhibitor
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_M_Cyp3a4"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_M_Cyp3a4"]}}</td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div class="collapse multi39" id="GATCyp2d6_subs" data-parent="#GATAccordionClassification">
+                  <div class="card card-body">
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_M_Cyp2d6_subs']" alt="CYP2D6 substrate" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+              <td colspan="3">
+                <div class="collapse multi39" id="GATCyp3a4" data-parent="#GATAccordionClassification">
+                  <div class="card card-body">
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_M_Cyp3a4']" alt="CYP3A4 inhibition" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi40" aria-expanded="false" aria-controls="GATCyp2c9 GATCyp2c19">
+                  CYP2C9-inhibitor
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_M_Cyp2c9"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_M_Cyp2c9"]}}</td>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi40" aria-expanded="false" aria-controls="GATCyp2c9 GATCyp2c19">
+                  CYP2C19-inhibitor
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_M_Cyp2c19"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_M_Cyp2c19"]}}</td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div class="collapse multi40" id="GATCyp2c9" data-parent="#GATAccordionClassification">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_M_Cyp2c9']" alt="CYP2C9 inhibition" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+              <td colspan="3">
+                <div class="collapse multi40" id="GATCyp2c19" data-parent="#GATAccordionClassification">
+                  <div class="card card-body">
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_M_Cyp2c19']" alt="CYP2C19 inhibition" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi41" aria-expanded="false" aria-controls="GATCyp2d6 GATCyp1a2">
+                  CYP2D6-inhibitor
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_M_Cyp2d6"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_M_Cyp2d6"]}}</td>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi41" aria-expanded="false" aria-controls="GATCyp2d6 GATCyp1a2">
+                  CYP1A2-inhibitor
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_M_Cyp1a2"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_M_Cyp1a2"]}}</td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div class="collapse multi41" id="GATCyp2d6" data-parent="#GATAccordionClassification">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_M_Cyp2d6']" alt="CYP2D6 inhibition" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+              <td colspan="3">
+                <div class="collapse multi41" id="GATCyp1a2" data-parent="#GATAccordionClassification">
+                  <div class="card card-body">
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_M_Cyp1a2']" alt="CYP1A2 inhibition" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+
+            <tr>
+              <th scope="row" rowspan="2" style="vertical-align: middle">
+                Distribution
+              </th>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi42" aria-expanded="false" aria-controls="GATBBB">
+                  Blood-Brain Barrier
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_D_BBB"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_D_BBB"]}}</td>
+              <td scope="row"></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div class="collapse multi42" id="GATBBB" data-parent="#GATAccordionClassification">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_D_BBB']" alt="Blood Brain Barrier" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+              <td colspan="3">
+                <div class="collapse multi42 vihide" data-parent="#GATAccordionClassification">
+                  <div class="card card-body">
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row" rowspan="14" style="vertical-align: middle">
+                Toxicity
+              </th>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi43" aria-expanded="false" aria-controls="GATCarcinogenicity GATDILI">
+                  Carcinogenicity
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_T_Carcinogenicity"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_T_Carcinogenicity"]}}</td>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi43" aria-expanded="false" aria-controls="GATCarcinogenicity GATDILI">
+                  DILI
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_T_DILI"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_T_DILI"]}}</td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div class="collapse multi43" id="GATCarcinogenicity" data-parent="#GATAccordionClassification">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_T_Carcinogenicity']" alt="Carcinogenicity" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+              <td colspan="3">
+                <div class="collapse multi43" id="GATDILI" data-parent="#GATAccordionClassification">
+                  <div class="card card-body">
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_T_DILI']" alt="DILI" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi44" aria-expanded="false" aria-controls="GATEye_corrossion GATEye_injury">
+                  Eye corrosion
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_T_Eye_corrossion"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_T_Eye_corrossion"]}}</td>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi44" aria-expanded="false" aria-controls="GATEye_corrossion GATEye_injury">
+                  Eye injury
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_T_Eye_injury"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_T_Eye_injury"]}}</td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div class="collapse multi44" id="GATEye_corrossion" data-parent="#GATAccordionClassification">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_T_Eye_corrossion']" alt="Eye corrosion" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+              <td colspan="3">
+                <div class="collapse multi44" id="GATEye_injury" data-parent="#GATAccordionClassification">
+                  <div class="card card-body">
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_T_Eye_injury']" alt="Eye irritation" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi45" aria-expanded="false" aria-controls="GATAmes GATH_HT">
+                  AMES mutagenicity
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_T_Ames"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_T_Ames"]}}</td>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi45" aria-expanded="false" aria-controls="GATAmes GATH_HT">
+                  H-HT
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_T_H_HT"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_T_H_HT"]}}</td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div class="collapse multi45" id="GATAmes" data-parent="#GATAccordionClassification">
+                  <div class="card card-body">
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_T_Ames']" alt="Ames mutagenesis" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+              <td colspan="3">
+                <div class="collapse multi45" id="GATH_HT" data-parent="#GATAccordionClassification">
+                  <div class="card card-body">
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_T_H_HT']" alt="H-HT" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi46" aria-expanded="false" aria-controls="GATFdammd GATHerg">
+                  FDAMDD
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_T_Fdammd"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_T_Fdammd"]}}</td>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi46" aria-expanded="false" aria-controls="GATFdammd GATHerg">
+                  hERG
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_T_Herg"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_T_Herg"]}}</td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div class="collapse multi46" id="GATFdammd" data-parent="#GATAccordionClassification">
+                  <div class="card card-body">
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_T_Fdammd']" alt="FDAMDD" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+              <td colspan="3">
+                <div class="collapse multi46" id="GATHerg" data-parent="#GATAccordionClassification">
+                  <div class="card card-body">
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_T_Herg']" alt="HERG" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi47" aria-expanded="false" aria-controls="GATGenotoxicity GATSkin_sens">
+                  Genotoxicity
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_T_Genotoxicity"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_T_Genotoxicity"]}}</td>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi47" aria-expanded="false" aria-controls="GATGenotoxicity GATSkin_sens">
+                  Skin sensitization
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_T_skin_sensitization"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_T_skin_sensitization"]}}</td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div class="collapse multi47" id="GATGenotoxicity" data-parent="#GATAccordionClassification">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_T_Genotoxicity']" alt="Genotoxicity" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+              <td colspan="3">
+                <div class="collapse multi47" id="GATSkin_sens" data-parent="#GATAccordionClassification">
+                  <div class="card card-body">
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_T_skin_sensitization']" alt="Skin_sensitization" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi48" aria-expanded="false" aria-controls="GATBeetoxic GATBiodegradation">
+                  Honey bee toxicity
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_T_Beetoxic"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_T_Beetoxic"]}}</td>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi48" aria-expanded="false" aria-controls="GATBeetoxic GATBiodegradation">
+                  Biodegradation
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_T_Biodegradation"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_T_Biodegradation"]}}</td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div class="collapse multi48" id="GATBeetoxic" data-parent="#GATAccordionClassification">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_T_Beetoxic']" alt="Honey bee toxicity" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+              <td colspan="3">
+                <div class="collapse multi48" id="GATBiodegradation" data-parent="#GATAccordionClassification">
+                  <div class="card card-body">
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_T_Biodegradation']" alt="Biodegradation" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi49" aria-expanded="false" aria-controls="GATFishtoxic">
+                  Fish toxicity
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_T_Fishtoxic"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_T_Fishtoxic"]}}</td>
+              <td scope="row"></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div class="collapse multi49" id="GATFishtoxic" data-parent="#GATAccordionClassification">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_T_Fishtoxic']" alt="Fish aquatic toxicity" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+              <td colspan="3">
+                <div class="collapse multi49 vihide" data-parent="#GATAccordionClassification">
+                  <div class="card card-body">
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+
+            <tr>
+              <th scope="row" rowspan="2" style="vertical-align: middle">
+                Excretion
+              </th>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi50" aria-expanded="false" aria-controls="GATLogt12">
+                  LogT1/2
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_E_Log_T12"]}}</td>
+              <td>{{result[0]['GAT_data']["Probability_GAT_E_Log_T12"]}}</td>
+              <td scope="row"></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div class="collapse multi50" id="GATLogt12" data-parent="#GATAccordionClassification">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_E_Log_T12']" alt="Log (T1/2)" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+              <td colspan="3">
+                <div class="collapse multi50 vihide" data-parent="#GATAccordionClassification">
+                  <div class="card card-body">
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-pane fade" id="GATRegressions" role="tabpanel" aria-labelledby="GATRES-tab">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Category</th>
+              <th scope="col">Property</th>
+              <th scope="col">Value</th>
+              <th scope="col">Unit</th>
+            </tr>
+          </thead>
+  
+          <tbody class="accordion" id="GATAccordionRegression">
+            
+            <tr>
+              <th scope="row" rowspan="18" style="vertical-align: middle">
+                Physicochemical property
+              </th>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi51" aria-expanded="false" aria-controls="GATSolubility">
+                  Solubility
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_Solubility"]}}</td>
+              <td>log mol/L</td>
+            </tr>
+            <tr>
+              <td colspan="1">
+                <div class="collapse multi51" id="GATSolubility" data-parent="#GATAccordionRegression">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_Solubility']" alt="Solubility" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi52" aria-expanded="false" aria-controls="GATLogD">
+                  LogD
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_B_Logd"]}}</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="1">
+                <div class="collapse multi52" id="GATLogD" data-parent="#GATAccordionRegression">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_B_Logd']" alt="LogD" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi53" aria-expanded="false" aria-controls="GATBP">
+                  Boiling point
+                </a>
+              </td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_B_BP"]}}</td>
+              <td>℃</td>
+            </tr>
+            <tr>
+              <td colspan="1">
+                <div class="collapse multi53" id="GATBP" data-parent="#GATAccordionRegression">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_B_BP']" alt="BP" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi54" aria-expanded="false" aria-controls="GATLogbcf">
+                  LogBCF
+                </a></td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_B_Logbcf"]}}</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="1">
+                <div class="collapse multi54" id="GATLogbcf" data-parent="#GATAccordionRegression">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_B_Logbcf']" alt="Logbcf" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi55" aria-expanded="false" aria-controls="GATLogp">
+                  LogP
+                </a></td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_B_Logp"]}}</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="1">
+                <div class="collapse multi55" id="GATLogp" data-parent="#GATAccordionRegression">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_B_Logp']" alt="Logp" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi56" aria-expanded="false" aria-controls="GATLogvp">
+                  LogVP
+                </a></td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_B_Logvp"]}}</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="1">
+                <div class="collapse multi56" id="GATLogvp" data-parent="#GATAccordionRegression">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_B_Logvp']" alt="Logvp" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi57" aria-expanded="false" aria-controls="GATMP">
+                  Melting point
+                </a></td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_B_Mp"]}}</td>
+              <td>℃</td>
+            </tr>
+            <tr>
+              <td colspan="1">
+                <div class="collapse multi57" id="GATMP" data-parent="#GATAccordionRegression">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_B_Mp']" alt="mp" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi58" aria-expanded="false" aria-controls="GATLipophilicity">
+                  Lipophilicity
+                </a></td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_Lipophilicity"]}}</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="1">
+                <div class="collapse multi58" id="GATLipophilicity" data-parent="#GATAccordionRegression">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_Lipophilicity']" alt="Lipophilicity" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi59" aria-expanded="false" aria-controls="GATEnergy">
+                  Hydration free energy
+                </a></td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_HydrationFreeEnergy"]}}</td>
+              <td>Kcal/mol </td>
+            </tr>
+            <tr>
+              <td colspan="1">
+                <div class="collapse multi59" id="GATEnergy" data-parent="#GATAccordionRegression">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_HydrationFreeEnergy']" alt="energy" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" rowspan="4" style="vertical-align: middle">
+                Distribution
+              </th>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi60" aria-expanded="false" aria-controls="GATPPB">
+                  Plasma protein binding
+                </a></td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_D_PPB"] | percent:'0.0-10'}}</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="1">
+                <div class="collapse multi60" id="GATPPB" data-parent="#GATAccordionRegression">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_D_PPB']" alt="PPB" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi61" aria-expanded="false" aria-controls="GATVD">
+                  VDss
+                </a></td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_D_Vd"]}}</td>
+              <td>L/kg</td>
+            </tr>
+            <tr>
+              <td colspan="1">
+                <div class="collapse multi61" id="GATVD" data-parent="#GATAccordionRegression">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_D_Vd']" alt="VD" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- <tr>
+              <th scope="row" rowspan="3" style="vertical-align: middle">
+                Excretion
+              </th>
+              <td scope="row">LogCL</td>
+              <td>{{result[0]["Prediction_value_E_logcl.csv"]}}</td>
+              <td>mL/min/kg</td>
+            </tr>
+            <tr>
+              <td scope="row">LogMRT(values of mean residence time)</td>
+              <td>{{result[0]["Prediction_value_E_logmrt.csv"]}}</td>
+              <td>h</td>
+            </tr>
+            <tr>
+              <td scope="row">log (T1/2)</td>
+              <td>{{result[0]["Prediction_value_E_logt12.csv"]}}</td>
+              <td>h</td>
+            </tr> -->
+            
+            <tr>
+              <th scope="row" rowspan="6" style="vertical-align: middle">
+                Toxicity
+              </th>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi62" aria-expanded="false" aria-controls="GATAcute">
+                  Acute oral toxicity
+                </a></td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_T_Acute_oral_toxicity"]}}</td>
+              <td>pLD50</td>
+            </tr>
+            <tr>
+              <td colspan="1">
+                <div class="collapse multi62" id="GATAcute" data-parent="#GATAccordionRegression">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_T_Acute_oral_toxicity']" alt="Acute" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi63" aria-expanded="false" aria-controls="GATPyriformis">
+                  Pyriformis toxicity 
+                </a></td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_T_Pyriformis"]}}</td>
+              <td>pIGC50</td>
+            </tr>
+            <tr>
+              <td colspan="1">
+                <div class="collapse multi63" id="GATPyriformis" data-parent="#GATAccordionRegression">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_T_Pyriformis']" alt="Pyriformis" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <a data-toggle="collapse" href=".multi64" aria-expanded="false" aria-controls="GATLD50">
+                  LD50
+                </a></td>
+              <td>{{result[0]['GAT_data']["Prediction_value_GAT_LD50"]}}</td>
+              <td>-log mol/kg</td>
+            </tr>
+            <tr>
+              <td colspan="1">
+                <div class="collapse multi64" id="GATLD50" data-parent="#GATAccordionRegression">
+                  <div class="card card-body" >
+                    <div class="row">
+                      <div class="col-sm-8 offset-1">
+                        <img [src]="'data:image/png;base64,'+ result[0]['GAT_data']['ex_img_GAT_LD50']" alt="LD50" />
+                        <img src="../../assets/img/explain.jpg" alt="explain" style="width: 200px;">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <!-- -log mol/kg -->
+          </tbody>
+        </table>
+      </div>
+      
+    </div>
+  </div>
 </div>
           
 

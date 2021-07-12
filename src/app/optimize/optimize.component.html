@@ -1,7 +1,7 @@
 <div class="container" id="divContainer">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/InterpretableAdmet/home" title="home">Interpretable-Admet</a></li>
+      <li class="breadcrumb-item"><a href="/InterpretableAdmet/home" title="home">Interpretable-ADMET</a></li>
       <li class="breadcrumb-item active" aria-current="page">optimization</li>
     </ol>
   </nav>
@@ -18,17 +18,36 @@
     >
 
       <div class="col-sm-3">
-        <select
+        <nz-select
           class="form-control form-control-lg"
           id="DbSelect"
           name="optDb"
           [(ngModel)]="choice.db"
           style="color: rgb(79, 5, 153)"
+          nzBorderless
         >
-          <option [value]="item" *ngFor="let item of choice.dbs">
+          <nz-option-group nzLabel='Basic physicochemical property'>
+            <nz-option [nzValue]=item [nzLabel]=item *ngFor="let item of choice.BasicProperty"></nz-option>
+          </nz-option-group>
+          <nz-option-group nzLabel='Absorption'>
+            <nz-option [nzValue]=item [nzLabel]=item *ngFor="let item of choice.Absorption"></nz-option>
+          </nz-option-group>
+          <nz-option-group nzLabel='Distribution'>
+            <nz-option [nzValue]=item [nzLabel]=item *ngFor="let item of choice.Distribution"></nz-option>
+          </nz-option-group>
+          <nz-option-group nzLabel='Metabolism'>
+            <nz-option [nzValue]=item [nzLabel]=item *ngFor="let item of choice.Metabolism"></nz-option>
+          </nz-option-group>
+          <nz-option-group nzLabel='Excretion'>
+            <nz-option [nzValue]=item [nzLabel]=item *ngFor="let item of choice.Excretion"></nz-option>
+          </nz-option-group>
+          <nz-option-group nzLabel='Toxicity'>
+            <nz-option [nzValue]=item [nzLabel]=item *ngFor="let item of choice.Toxicity"></nz-option>
+          </nz-option-group>
+          <!-- <option [value]="item" *ngFor="let item of choice.dbs">
             {{ item }}
-          </option>
-        </select>
+          </option> -->
+        </nz-select>
       </div>
     <br>
     <br>
@@ -42,7 +61,7 @@
       <div class="col-sm-3">
           <select
           *ngIf="choice.db1.includes(choice.db)"
-          class="form-control form-control-lg"
+          class="form-control"
           id="optCutoffSelect"
           name="optCutoff"
           [(ngModel)]="choice.threshold"
@@ -54,7 +73,7 @@
         </select>
         <select
           *ngIf="choice.db2.includes(choice.db)"
-          class="form-control form-control-lg"
+          class="form-control"
           id="optCutoffSelect"
           name="optCutoff"
           [(ngModel)]="choice.longThreshold"
@@ -81,7 +100,7 @@
         for="optimizeform"
         class="col-sm-2 col-form-label col-form-label-lg offset-1"
         style="font-size: 23px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; text-shadow: 0 0 2px rgb(9, 61, 54);"
-        >Smiles:</label
+        >SMILES:</label
       >
       <div class="col-sm-7">
         <input
@@ -102,8 +121,8 @@
           "
           class="alert alert-danger"
         >
-          <div *ngIf="inputSmiles.errors.required">Smiles is required!</div>
-          <div *ngIf="inputSmiles.errors.minlength">Smiles must be at least 2 characters long!</div>
+          <div *ngIf="inputSmiles.errors.required">SMILES is required!</div>
+          <div *ngIf="inputSmiles.errors.minlength">SMILES must be at least 2 characters long!</div>
         </div>
       </div>
       <br>

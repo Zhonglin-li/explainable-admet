@@ -34,16 +34,25 @@ export class SearchComponent implements OnInit {
   };
 
   public raSearch = {
-    mode: 'Plasma protein binding',
-    modes: ['Plasma protein binding', 'Solubility', 'LogD', 'Volume of distribution', 'Acute Oral Toxicity', 'Pyriformis', 'Human Intestinal Absorption', 'Blood Brain Barrier', 'BCRP', 'OATP1B3 inhibitior', 'P-glycoprotein inhibitior', 'CYP3A4 substrate', 'CYP2D6 substrate', 'CYP2C9 inhibition', 'CYP2D6 inhibition', 'Carcinogenicity', 'Eye corrosion', 'Ames mutagenesis', 'FDAMDD', 'Genotoxicity', 'Honey bee toxicity', 'Fish aquatic toxicity', 'Caco-2', 'Human oral bioavailability', 'OATP1B1 inhibitior', 'OCT2 inhibitior', 'P-glycoprotein substrate', 'CYP2C9 substrate', 'CYP3A4 inhibition', 'CYP2C19 inhibition', 'CYP1A2 inhibition', 'DILI', 'Eye irritation', 'H-HT', 'HERG', 'Skin_sensitization', 'Biodegradation', 'Boiling point', 'Bioconcentration factor', 'Logvp', 'Melting point', 'Logp', 'Hydration Free Energy', 'Lipophilicity', 'LD50', 'T 1/2(Half Life)'
+    mode: 'PPB',
+    BasicProperty: [
+      'Solubility', 'LogD', 'LogP', 'LogVP', 'LogBCF', 'BP', 'MP', 'Lipophilicity', 'Hydration free energy'],
+    Absorption: [
+      'HIA', 'Caco2 permeability', 'HOB', 'Pgp-substrate', 'Pgp-inhibitor'],
+    Distribution: ['BBB', 'PPB', 'VDss'],
+    Metabolism: ['BCRP', 'CYP1A2-inhibitor', 'CYP2C9-inhibitor', 'CYP2C9-substrate', 'CYP2C19-inhibitor', 'CYP2D6-inhibitor', 'CYP2D6-substrate', 'CYP3A4-inhibitor', 'CYP3A4-substrate', 'OATP1B3-inhibitor', 'OATP1B1-inhibitor', 'OCT2'],
+     Excretion: ['LogT1/2'],
+     Toxicity: ['AMES', 'Honey bee toxicity', 'Biodegradation', 'Carcinogenicity', 'DILI', 'Eye corrossion', 'Eye injury', 'FDAMDD', 'Fish toxicity', 'Genotoxicity', 'hERG', 'H-HT', 'Skin sensitization', 'Acute oral toxicity', 'LD50', 'Pyriformis toxicity'],
+    modes: ['Solubility', 'LogD', 'LogP', 'LogVP', 'LogBCF', 'BP', 'MP', 'Lipophilicity', 'Hydration free energy', 'HIA', 'Caco2 permeability', 'HOB', 'Pgp-substrate', 'Pgp-inhibitor', 'BBB', 'PPB', 'VDss', 'BCRP', 'CYP1A2-inhibitor', 'CYP2C9-inhibitor', 'CYP2C9-substrate', 'CYP2C19-inhibitor', 'CYP2D6-inhibitor', 'CYP2D6-substrate', 'CYP3A4-inhibitor', 'CYP3A4-substrate', 'OATP1B3-inhibitor', 'OATP1B1-inhibitor', 'OCT2', 'LogT1/2', 'AMES', 'Honey bee toxicity', 'Biodegradation', 'Carcinogenicity', 'DILI', 'Eye corrossion', 'Eye injury', 'FDAMDD', 'Fish toxicity', 'Genotoxicity', 'hERG', 'H-HT', 'Skin sensitization', 'Acute oral toxicity', 'LD50', 'Pyriformis toxicity'
     ]
   };
   public regression = [
-    'Solubility', 'LogD', 'Plasma protein binding', 'Volume of distribution',  'Acute Oral Toxicity', 'Pyriformis', 'Boiling point',
-    'Bioconcentration factor', 'Logvp', 'Melting point', 'Logp', 'Hydration Free Energy', 'Lipophilicity', 'LD50',
+    'Solubility', 'LogD', 'PPB', 'VDss',  'Acute oral toxicity', 'Pyriformis toxicity', 'BP', 'LogBCF', 'LogVP', 'MP', 'LogP', 'Hydration free energy', 'Lipophilicity', 'LD50',
   ];
   public classification = [
-    'Human Intestinal Absorption', 'Blood Brain Barrier', 'BCRP', 'OATP1B3 inhibitior', 'P-glycoprotein inhibitior', 'CYP3A4 substrate', 'CYP2D6 substrate', 'CYP2C9 inhibition', 'CYP2D6 inhibition', 'Carcinogenicity', 'Eye corrosion', 'Ames mutagenesis', 'FDAMDD', 'Genotoxicity', 'Honey bee toxicity', 'Fish aquatic toxicity', 'Caco-2', 'Human oral bioavailability', 'OATP1B1 inhibitior', 'OCT2 inhibitior', 'P-glycoprotein substrate', 'CYP2C9 substrate', 'CYP3A4 inhibition', 'CYP2C19 inhibition', 'CYP1A2 inhibition', 'DILI', 'Eye irritation', 'H-HT', 'HERG', 'Skin_sensitization', 'Biodegradation', 'T 1/2(Half Life)'
+    'HIA', 'BBB', 'BCRP', 'OATP1B3-inhibitor', 'Pgp-inhibitor', 'CYP3A4-substrate', 'CYP2D6-substrate', 'CYP2C9-inhibitor',
+     'CYP2D6-inhibitor', 'Carcinogenicity', 'Eye corrosion', 'AMES',
+     'FDAMDD', 'Genotoxicity', 'Honey bee toxicity', 'Fish toxicity', 'Caco2 permeability', 'HOB', 'OATP1B1-inhibitor', 'OCT2', 'Pgp-substrate', 'CYP2C9-substrate', 'CYP3A4-inhibitor', 'CYP2C19-inhibitor', 'CYP1A2-inhibitor', 'DILI', 'Eye injury', 'H-HT', 'hERG', 'Skin sensitization', 'Biodegradation', 'LogT1/2'
   ];
 
   constructor(private http: HttpClient, private router: Router, public storage: StorageService, ) { }

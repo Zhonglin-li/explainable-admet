@@ -1,5 +1,3 @@
-
-
 <div
   class="container"
   [style.height]="
@@ -10,7 +8,9 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="/InterpretableAdmet/home" title="home"><span>Interpretable-Admet</span></a>
+        <a href="/InterpretableAdmet/home" title="home"
+          ><span>Interpretable-ADMET</span></a
+        >
       </li>
       <li class="breadcrumb-item active" aria-current="page">
         <span>prediction</span>
@@ -23,7 +23,12 @@
       <label
         for="exampleSelect1"
         class="col-sm-3 col-form-label col-form-label-lg offset-1"
-        style="font-size: 23px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; text-shadow: 0 0 2px rgb(9, 61, 54);"
+        style="
+          font-size: 23px;
+          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+            'Lucida Sans', Arial, sans-serif;
+          text-shadow: 0 0 2px rgb(9, 61, 54);
+        "
         >Select the Data Source:</label
       >
 
@@ -44,8 +49,8 @@
         id="queryModeHelp"
         class="form-text text-muted col-sm-10 offset-1"
         style="font-size: 17px"
-        >Before calculation, users should prepare a <em>valid SMILES</em> in case of
-        errors. Users can use <em>ChemSAR</em> to do this.</small
+        >Before calculation, users should prepare a <em>valid SMILES</em> in
+        case of errors. Users can use <em>ChemSAR</em> to do this.</small
       >
     </div>
     <br />
@@ -58,8 +63,13 @@
         <label
           for="fliterform1"
           class="col-sm-2 col-form-label col-form-label-lg offset-1"
-          style="font-size: 23px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; text-shadow: 0 0 2px rgb(35, 110, 129);"
-          >Smiles:</label
+          style="
+            font-size: 23px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+              'Lucida Sans', Arial, sans-serif;
+            text-shadow: 0 0 2px rgb(35, 110, 129);
+          "
+          >SMILES:</label
         >
         <div class="col-sm-7">
           <input
@@ -74,15 +84,17 @@
             minlength="2"
             #inputSmiles="ngModel"
           />
-          <span style="color: red;"> {{ validation }}</span>
+          <span style="color: red"> {{ validation }}</span>
           <div
             *ngIf="
               inputSmiles.invalid && (inputSmiles.dirty || inputSmiles.touched)
             "
             class="alert alert-danger"
           >
-            <div *ngIf="inputSmiles.errors.required">Smiles is required!</div>
-            <div *ngIf="inputSmiles.errors.minlength">Smiles must be at least 2 characters long!</div>
+            <div *ngIf="inputSmiles.errors.required">SMILES is required!</div>
+            <div *ngIf="inputSmiles.errors.minlength">
+              SMILES must be at least 2 characters long!
+            </div>
           </div>
         </div>
         <small
@@ -92,6 +104,17 @@
           >Some <em>invalid input</em> will lead to errors.</small
         >
       </div>
+      <div class="form-group row">
+        <button
+        type="submit"
+        class="btn btn-outline-primary col-sm-1 offset-5"
+        (click)="postData()"
+        [disabled]="!filterForm.form.valid"
+      >
+        Submit
+        </button>
+      </div>
+      
     </div>
 
     <!-- 用户上传文件部分 -->
@@ -168,7 +191,7 @@
               </div>
             </div> -->
           </div>
-          <br>
+          <br />
           <!-- <small
           id="drawStructureHelp"
           class="form-text text-muted col-sm-10 offset-1"
@@ -177,87 +200,145 @@
           </small> -->
         </div>
       </div>
+      <div class="form-group row">
+        <!-- <button
+          type="button"
+          class="btn btn-outline-primary col-sm-1 offset-3"
+          [style.display]="
+            filter.mode == 'By Drawing Molecule from Editor' ? 'block' : 'none'
+          "
+          (click)="getJsmeSmiles()"
+        >
+          Convert
+          [disabled]="!filterForm.form.valid"
+        </button> -->
+        <button
+          type="submit"
+          class="btn btn-outline-primary col-sm-1 offset-5"
+          (click)="postData()"
+        >
+          Submit
+        </button>
+      </div>
     </div>
-    <div class="form-group row">
-      <!-- <button
-        type="button"
-        class="btn btn-outline-primary col-sm-1 offset-3"
-        [style.display]="
-          filter.mode == 'By Drawing Molecule from Editor' ? 'block' : 'none'
-        "
-        (click)="getJsmeSmiles()"
-      >
-        Convert
-        [disabled]="!filterForm.form.valid"
-      </button> -->
-      <button
-        type="submit"
-        class="btn btn-outline-primary col-sm-1 offset-5"
-        
-        (click)="postData()"
-      >
-        Submit
-      </button>
-
-    </div>
+    
   </form>
   <br />
   <br />
 
-
-<div class="modal fade" id="predictionModal" tabindex="-1" role="dialog" aria-labelledby="predictionModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="predictionModalLabel">Error</h5>
-        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  <div
+    class="modal fade"
+    id="predictionModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="predictionModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="predictionModalLabel">Error</h5>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button> -->
-      </div>
-      <div class="modal-body" style="text-align: center; font-size: 19px; font-family: 'Times New Roman', Times, serif;">
-       {{predictionError}}
-      </div>
-      <div class="modal-footer">
-         <button type="button" class="btn btn-secondary" data-dismiss="modal">Comfirm</button>
+        </div>
+        <div
+          class="modal-body"
+          style="
+            text-align: center;
+            font-size: 19px;
+            font-family: 'Times New Roman', Times, serif;
+          "
+        >
+          {{ predictionError }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Comfirm
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="modal fade" id="jsmeModal" tabindex="-1" role="dialog" aria-labelledby="jsmeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="jsmeModalLabel">Error</h5>
-        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  <div
+    class="modal fade"
+    id="jsmeModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="jsmeModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="jsmeModalLabel">Error</h5>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button> -->
-      </div>
-      <div class="modal-body" style="text-align: center; font-size: 19px; font-family: 'Times New Roman', Times, serif;">
-       Please draw a correct structure!
-      </div>
-      <div class="modal-footer">
-         <button type="button" class="btn btn-secondary" data-dismiss="modal">Comfirm</button>
+        </div>
+        <div
+          class="modal-body"
+          style="
+            text-align: center;
+            font-size: 19px;
+            font-family: 'Times New Roman', Times, serif;
+          "
+        >
+          Please draw a correct structure!
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Comfirm
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-
-<div class="modal fade" id="loadingModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" >
-    <span style="color: rgb(220, 247, 234); font-size: 20px; font-family: 'Times New Roman', Times, serif;">Calculating, please wait</span>
-    &nbsp;&nbsp;&nbsp;
-    <div class="spinner-grow text-info" role="status" style="width: 3rem; height: 3rem;">
-      <span class="sr-only">Loading...</span>
+  <div
+    class="modal fade"
+    id="loadingModal"
+    data-backdrop="static"
+    data-keyboard="false"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="loadingModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <span
+        style="
+          color: rgb(220, 247, 234);
+          font-size: 20px;
+          font-family: 'Times New Roman', Times, serif;
+        "
+        >Calculating, please wait</span
+      >
+      &nbsp;&nbsp;&nbsp;
+      <div
+        class="spinner-grow text-info"
+        role="status"
+        style="width: 3rem; height: 3rem"
+      >
+        <span class="sr-only">Loading...</span>
+      </div>
+      &nbsp;&nbsp;
+      <div
+        class="spinner-grow text-info"
+        role="status"
+        style="width: 2rem; height: 2rem"
+      >
+        <span class="sr-only">Loading...</span>
+      </div>
+      &nbsp;&nbsp;
+      <div
+        class="spinner-grow text-info"
+        role="status"
+        style="width: 1rem; height: 1rem"
+      >
+        <span class="sr-only">Loading...</span>
+      </div>
     </div>
-    &nbsp;&nbsp;
-    <div class="spinner-grow text-info" role="status" style="width: 2rem; height: 2rem;">
-      <span class="sr-only">Loading...</span>
-    </div>
-    &nbsp;&nbsp;
-    <div class="spinner-grow text-info" role="status" style="width: 1rem; height: 1rem;">
-      <span class="sr-only">Loading...</span>
-    </div>
-  </div> 
+  </div>
 </div>

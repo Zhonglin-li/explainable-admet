@@ -5,7 +5,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {StorageService} from '../service/storage/storage.service';
 import {environment} from '../../environments/environment';
-import { shallowEqual } from 'ng-zorro-antd';
 
 
 
@@ -33,7 +32,7 @@ export class FilterChooseComponent implements OnInit {
   private restHost = environment.REST_HOST;
   public api = this.restHost + '/InterpretableAdmet/prediction';
   public predictionData: any = {
-    Smiles: '',
+    Smiles: 'CC(NC1=CC=C(OCC)C=C1)=O',
     // File: '',
   };
   public filter: any = {
@@ -78,12 +77,15 @@ export class FilterChooseComponent implements OnInit {
         // console.log(error.error);
         if (error.error.msg){
           this.predictionError = error.error.msg;
+          ($('#loadingModal')as any).modal('hide');
+          alert('There are SMILES that can not be standardized!');
         }
         else{
           this.predictionError = 'Server Not Found ';
+          ($('#loadingModal')as any).modal('hide');
+          alert('Server Not Found ');
         }
-        ($('#loadingModal')as any).modal('hide');
-        ($('#predictionModal')as any).modal('show');
+        // ($('#predictionModal')as any).modal('show');
       }
       );
     }

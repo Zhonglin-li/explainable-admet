@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -19,6 +20,7 @@ import {DataTablesModule} from 'angular-datatables';
 // import {ElModule} from 'element-angular';
 import * as bootstrap from 'bootstrap';
 import * as $ from 'jquery';
+import {NzSelectModule} from 'ng-zorro-antd/select';
 
 
 import {StorageService} from './service/storage/storage.service';
@@ -76,6 +78,9 @@ import { SimilarityResultComponent } from './similarity-result/similarity-result
     FileUploadModule,
     DataTablesModule,
     CommonModule,
+    NzSelectModule,
+    BrowserAnimationsModule,
+
     // ElModule.forRoot(),
   ],
   providers: [GlobalService,

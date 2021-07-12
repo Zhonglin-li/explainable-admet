@@ -47,9 +47,9 @@ export class ProdictionResultComponent implements OnInit {
   opt(){
     const formdata = new FormData();
     ($('#loadingModal')as any).modal('show');
-    formdata.append('smiles', this.result[0]["input_smiles"]);
-    formdata.append('cutoff', '1');
-    formdata.append('dbname', 'logvd');
+    formdata.append('smiles', this.result[0]['input_smiles']);
+    formdata.append('cutoff', '3');
+    formdata.append('dbname', 'VDss');
     const httpOptions = {headers: new HttpHeaders(), withCredentails: true};
     const api = this.restHost + '/InterpretableAdmet/optimization';
     this.http.post(api, formdata, httpOptions).subscribe((response: any) => {
